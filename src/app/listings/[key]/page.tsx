@@ -4,14 +4,15 @@ import Link from "next/link";
 import { MOCK_LISTINGS } from "@/lib/trestle";
 import LeadForm from "@/components/LeadForm";
 
-interface Props { params: { key: string } }
+interface Props { params: Promise<{ key: string }> }
 
 function getListing(key: string) {
   return MOCK_LISTINGS.find(l => l.ListingKey === key) ?? null;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const listing = getListing(params.key);
+  const { key } = await params;
+  const listing = getListing(key);
   if (!listing) return { title: "Listing Not Found | Dayton Relo" };
   return {
     title: `${listing.StreetNumber} ${listing.StreetName}, ${listing.City} | Dayton Relo`,
@@ -23,8 +24,9 @@ function formatPrice(n: number) {
   return "$" + n.toLocaleString("en-US");
 }
 
-export default function ListingDetailPage({ params }: Props) {
-  const listing = getListing(params.key);
+export default async function ListingDetailPage({ params }: Props) {
+  const { key } = await params;
+  const listing = getListing(key);
 
   if (!listing) {
     return (

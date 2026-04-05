@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import Link from "next/link";
-import PropertyCard from "@/components/PropertyCard";
 import ListingsClient from "./ListingsClient";
 import { MOCK_LISTINGS } from "@/lib/trestle";
 
@@ -22,7 +22,9 @@ export default function ListingsPage() {
       </section>
 
       {/* Listings with client-side filters */}
-      <ListingsClient initialListings={MOCK_LISTINGS} />
+      <Suspense fallback={<div className="max-w-7xl mx-auto px-4 sm:px-6 py-16 text-center text-gray-400">Loading listings…</div>}>
+        <ListingsClient initialListings={MOCK_LISTINGS} />
+      </Suspense>
 
       {/* CTA Strip */}
       <section className="bg-charcoal py-12">
