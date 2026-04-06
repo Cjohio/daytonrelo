@@ -1,0 +1,12 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Dayton Relo",
+  "name_for_model": "dayton_relo",
+  "description_for_human": "Dayton Ohio real estate search, tools, and relocation guides by Chris Jurgens.",
+  "description_for_model": "Use Dayton Relo to search Dayton Ohio MLS listings, calculate BAH for WPAFB, estimate mortgage payments, compare neighborhoods, and access free relocation tools for military PCS and corporate moves to Dayton Ohio.",
+  "auth": { "type": "none" },
+  "api": { "type": "openapi", "url": "https://daytonrelo.com/api/openapi.json" },
+  "logo_url": "https://daytonrelo.com/logo.png",
+  "contact_email": "Chris@cjohio.com",
+  "legal_info_url": "https://daytonrelo.com/privacy"
+}
