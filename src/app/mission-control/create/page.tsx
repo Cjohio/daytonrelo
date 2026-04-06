@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { Suspense, useState, useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useContentItems } from '@/lib/mission-control/use-content'
 import type { ContentType, Platform } from '@/lib/mission-control/types'
@@ -66,7 +66,7 @@ function generateContentId() {
   return `DR-${year}-${num}`
 }
 
-export default function CreateContentPage() {
+function CreateContentInner() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const { createItem } = useContentItems()
@@ -509,5 +509,13 @@ export default function CreateContentPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function CreateContentPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#070F1E]" />}>
+      <CreateContentInner />
+    </Suspense>
   )
 }
