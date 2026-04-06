@@ -120,7 +120,7 @@ export default function Header() {
                   <div className="grid gap-8" style={{ gridTemplateColumns: `repeat(${dropdown.columns.length}, minmax(200px, auto))` }}>
                     {dropdown.columns.map((col, idx) => (
                       <div key={idx}>
-                        {col.title && (
+                        {'title' in col && col.title && (
                           <p className="text-gold text-xs font-bold uppercase tracking-widest mb-3">{col.title}</p>
                         )}
                         <div className="flex flex-col gap-2">
@@ -203,7 +203,7 @@ export default function Header() {
                 <div className="pl-4 py-2 flex flex-col gap-2">
                   {dropdown.columns.map((col, idx) => (
                     <div key={idx}>
-                      {col.title && (
+                      {'title' in col && col.title && (
                         <p className="text-gold text-xs font-bold uppercase tracking-widest mb-2 pl-3">{col.title}</p>
                       )}
                       {col.items.map((item) => (

@@ -21,7 +21,7 @@ export default function MortgageCalculator() {
   const [payTerm, setPayTerm] = useState(30);
 
   // Calculations
-  const calculateMonthlyPayment = (principal, rate, years) => {
+  const calculateMonthlyPayment = (principal: number, rate: number, years: number) => {
     const monthlyRate = rate / 100 / 12;
     const numPayments = years * 12;
     if (monthlyRate === 0) return principal / numPayments;

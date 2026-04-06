@@ -38,7 +38,7 @@ export default function BAHCalculator() {
   const [selectedGrade, setSelectedGrade] = useState('E-4');
   const [withDependents, setWithDependents] = useState(true);
 
-  const rate = BAH_RATES[selectedGrade];
+  const rate = BAH_RATES[selectedGrade as keyof typeof BAH_RATES];
   const monthlyBAH = withDependents ? rate.withDep : rate.withoutDep;
   const annualBAH = monthlyBAH * 12;
   const estimatedMaxPrice = (annualBAH / 0.28).toFixed(0);

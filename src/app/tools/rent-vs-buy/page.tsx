@@ -17,7 +17,7 @@ export default function RentVsBuy() {
   const downPayment = homePrice * (downPercent / 100);
   const loanAmount = homePrice - downPayment;
 
-  const calculateMonthlyPayment = (principal, rate, years) => {
+  const calculateMonthlyPayment = (principal: number, rate: number, years: number) => {
     const monthlyRate = rate / 100 / 12;
     const numPayments = years * 12;
     if (monthlyRate === 0) return principal / numPayments;

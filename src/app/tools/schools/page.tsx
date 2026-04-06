@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 export const metadata = {
   title: 'School Guide | Dayton Relocation',
   description: 'Comprehensive guide to Dayton-area schools: public districts, private schools, Catholic, Montessori, and more.',

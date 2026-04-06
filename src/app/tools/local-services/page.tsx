@@ -22,7 +22,7 @@ const SERVICES: Service[] = [
     phone: '(937) 291-7161',
     website: 'https://www.twomenandatruck.com',
     neighborhood: 'Citywide',
-    description: 'Full-service moving. Chris's go-to for PCS and corporate moves.',
+    description: "Full-service moving. Chris's go-to for PCS and corporate moves.",
     featured: true,
   },
   {

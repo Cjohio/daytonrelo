@@ -30,7 +30,7 @@ export default function TLECalculator() {
   }
 
   // Calculate costs
-  const calculateTLE = (days) => {
+  const calculateTLE = (days: number) => {
     let cost = 0;
     for (let i = 1; i <= days; i++) {
       cost += i <= 5 ? rate1to5 : rate6to10;

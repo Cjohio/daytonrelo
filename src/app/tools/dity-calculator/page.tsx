@@ -32,7 +32,7 @@ export default function DITYCalculator() {
   const ppmIncentive = govCost * 0.95;
   const federalTax = ppmIncentive * 0.22;
   const netAfterTax = ppmIncentive - federalTax;
-  const weightAllowance = WEIGHT_ALLOWANCES[grade] || 10000;
+  const weightAllowance = WEIGHT_ALLOWANCES[grade as keyof typeof WEIGHT_ALLOWANCES] || 10000;
 
   return (
     <div className="min-h-screen bg-cream">

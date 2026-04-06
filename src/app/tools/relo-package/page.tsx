@@ -111,7 +111,7 @@ export default function ReloPackagePage() {
                 {cat.items.map((item, i) => (
                   <div key={i} className="p-6 flex gap-4">
                     <div className="min-w-fit">
-                      <PriorityBadge priority={item.priority} />
+                      <PriorityBadge priority={item.priority as 'high' | 'medium' | 'low'} />
                     </div>
                     <div className="flex-1">
                       <p className="font-semibold text-charcoal mb-1">{item.text}</p>

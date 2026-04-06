@@ -38,7 +38,7 @@ const cityNames = Object.keys(CITIES).sort();
 export default function CostOfLiving() {
   const [selectedCity, setSelectedCity] = useState('Chicago, IL');
 
-  const city = CITIES[selectedCity];
+  const city = CITIES[selectedCity as keyof typeof CITIES];
   const homePriceSavings = city.homePrice - DAYTON.homePrice;
   const monthlySavings = city.rent - DAYTON.rent;
   const annualRentSavings = monthlySavings * 12;
