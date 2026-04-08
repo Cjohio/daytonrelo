@@ -50,6 +50,7 @@ const NAV = [
         {
           items: [
             { label: "Parks & Recreation", href: "/explore/parks" },
+            { label: "Local Restaurants", href: "/explore/restaurants" },
             { label: "Local Breweries", href: "/explore/breweries" },
             { label: "Golf Courses", href: "/explore/golf" },
             { label: "Things To Do", href: "/explore/things-to-do" },
