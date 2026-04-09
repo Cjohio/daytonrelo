@@ -67,8 +67,8 @@ export default function LeadForm({
               onChange={e => setForm(f => ({ ...f, name: e.target.value }))} />
           </div>
           <div>
-            <label className={labelCls}>Phone</label>
-            <input type="tel" className={inputCls} placeholder="(937) 555-0000" value={form.phone}
+            <label className={labelCls}>Phone *</label>
+            <input required type="tel" className={inputCls} placeholder="(937) 555-0000" value={form.phone}
               onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} />
           </div>
         </div>
