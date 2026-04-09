@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { UtensilsCrossed, Landmark, Star, Phone, MapPin } from 'lucide-react';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface Restaurant {
@@ -20,7 +21,7 @@ const STAPLES: Restaurant[] = [
   {
     id: 'pine-club',
     name: 'The Pine Club',
-    cuisine: '🥩 Steakhouse',
+    cuisine: 'Steakhouse',
     hood: 'Oakwood',
     since: 'Since 1947',
     price: '$$$',
@@ -32,7 +33,7 @@ const STAPLES: Restaurant[] = [
   {
     id: 'marions-piazza',
     name: "Marion's Piazza",
-    cuisine: '🍕 Pizza',
+    cuisine: 'Pizza',
     hood: 'Multiple Locations',
     since: 'Since 1965',
     price: '$',
@@ -44,7 +45,7 @@ const STAPLES: Restaurant[] = [
   {
     id: 'slyders',
     name: "Slyder's Tavern",
-    cuisine: '🍔 Burgers & Bar',
+    cuisine: 'Burgers & Bar',
     hood: 'Belmont',
     since: 'Since 1948',
     price: '$',
@@ -56,7 +57,7 @@ const STAPLES: Restaurant[] = [
   {
     id: 'jays-seafood',
     name: "Jay's Seafood",
-    cuisine: '🦞 Seafood',
+    cuisine: 'Seafood',
     hood: 'Oregon District',
     since: 'Since 1976',
     price: '$$$',
@@ -68,7 +69,7 @@ const STAPLES: Restaurant[] = [
   {
     id: 'amber-rose',
     name: 'The Amber Rose',
-    cuisine: '🥟 Eastern European',
+    cuisine: 'Eastern European',
     hood: 'North Dayton',
     since: 'Since 1968',
     price: '$$',
@@ -80,7 +81,7 @@ const STAPLES: Restaurant[] = [
   {
     id: 'root-beer-stand',
     name: 'Root Beer Stand',
-    cuisine: '🌭 American Drive-In',
+    cuisine: 'American Drive-In',
     hood: 'Sharonville / Dayton',
     since: 'Since 1928',
     price: '$',
@@ -92,7 +93,7 @@ const STAPLES: Restaurant[] = [
   {
     id: 'flying-pizza',
     name: 'Flying Pizza',
-    cuisine: '🍕 New York Pizza',
+    cuisine: 'New York Pizza',
     hood: 'Dayton',
     since: 'Since 1971',
     price: '$',
@@ -104,7 +105,7 @@ const STAPLES: Restaurant[] = [
   {
     id: 'oakwood-club',
     name: 'The Oakwood Club',
-    cuisine: '🥩 Surf & Turf',
+    cuisine: 'Surf & Turf',
     hood: 'Oakwood',
     since: 'Since 1962',
     price: '$$$',
@@ -120,7 +121,7 @@ const BEST: Restaurant[] = [
   {
     id: 'salar',
     name: 'Salar Restaurant & Lounge',
-    cuisine: '🌮 Peruvian / Mediterranean',
+    cuisine: 'Peruvian / Mediterranean',
     hood: 'Oregon District',
     price: '$$$',
     description:
@@ -131,7 +132,7 @@ const BEST: Restaurant[] = [
   {
     id: 'wheat-penny',
     name: 'Wheat Penny Oven and Bar',
-    cuisine: '🍕 Wood-Fired Pizza',
+    cuisine: 'Wood-Fired Pizza',
     hood: 'South Park',
     price: '$$',
     description:
@@ -142,7 +143,7 @@ const BEST: Restaurant[] = [
   {
     id: 'thai-9',
     name: 'Thai 9',
-    cuisine: '🍜 Thai & Sushi',
+    cuisine: 'Thai & Sushi',
     hood: 'Oregon District',
     price: '$$',
     description:
@@ -153,7 +154,7 @@ const BEST: Restaurant[] = [
   {
     id: 'lilys',
     name: "Lily's Dayton",
-    cuisine: '🌺 Southern / Tiki',
+    cuisine: 'Southern / Tiki',
     hood: 'Oregon District',
     price: '$$',
     description:
@@ -164,7 +165,7 @@ const BEST: Restaurant[] = [
   {
     id: 'luckys',
     name: "Lucky's Taproom & Eatery",
-    cuisine: '🍺 American / Craft Beer',
+    cuisine: 'American / Craft Beer',
     hood: 'Downtown Dayton',
     price: '$$',
     description:
@@ -175,7 +176,7 @@ const BEST: Restaurant[] = [
   {
     id: 'sonora-grill',
     name: 'Sonora Grill',
-    cuisine: '🌮 Mexican / Latin',
+    cuisine: 'Mexican / Latin',
     hood: 'Beavercreek',
     price: '$$',
     description:
@@ -186,7 +187,7 @@ const BEST: Restaurant[] = [
   {
     id: 'meefs',
     name: "Meef's Pasteria",
-    cuisine: '🍝 Italian',
+    cuisine: 'Italian',
     hood: 'Beavercreek',
     price: '$$',
     description:
@@ -197,7 +198,7 @@ const BEST: Restaurant[] = [
   {
     id: 'flemings',
     name: "Fleming's Prime Steakhouse",
-    cuisine: '🥩 Steakhouse',
+    cuisine: 'Steakhouse',
     hood: 'The Greene, Beavercreek',
     price: '$$$$',
     description:
@@ -208,7 +209,7 @@ const BEST: Restaurant[] = [
   {
     id: 'manna',
     name: 'Manna Uptown',
-    cuisine: '🍽 European / South American',
+    cuisine: 'European / South American',
     hood: 'Centerville',
     price: '$$$',
     description:
@@ -219,7 +220,7 @@ const BEST: Restaurant[] = [
   {
     id: 'grist',
     name: 'Grist',
-    cuisine: '🌾 American / Upscale',
+    cuisine: 'American / Upscale',
     hood: 'Beavercreek',
     price: '$$$',
     description:
@@ -301,25 +302,7 @@ function RestaurantCard({ r }: { r: Restaurant }) {
 
           {/* Hood */}
           <div className="flex items-center gap-1 text-xs text-gray-500 mb-2">
-            <svg
-              className="w-3 h-3 flex-shrink-0"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-              />
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-              />
-            </svg>
+            <MapPin className="w-3 h-3 flex-shrink-0" />
             <span>{r.hood}</span>
           </div>
         </div>
@@ -355,14 +338,7 @@ function RestaurantCard({ r }: { r: Restaurant }) {
         rel="noopener noreferrer"
         className="flex items-center justify-center gap-2 bg-gold hover:bg-gold/90 text-charcoal text-sm font-bold py-2.5 rounded-lg transition-colors"
       >
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-1.447-.894L15 9m0 8V9m0 0L9 7"
-          />
-        </svg>
+        <MapPin className="w-4 h-4" />
         Get Directions
       </a>
     </div>
@@ -406,7 +382,10 @@ export default function RestaurantsClient() {
                 : 'border-transparent text-gray-400 hover:text-gray-600'
             }`}
           >
-            <div className="text-sm sm:text-base font-bold">🏛 Dayton Staples</div>
+            <div className="text-sm sm:text-base font-bold flex items-center justify-center gap-2">
+              <Landmark className="w-4 h-4" />
+              Dayton Staples
+            </div>
             <div className="text-[10px] sm:text-xs opacity-80 mt-0.5">
               Iconic & Historic
             </div>
@@ -419,7 +398,10 @@ export default function RestaurantsClient() {
                 : 'border-transparent text-gray-400 hover:text-gray-600'
             }`}
           >
-            <div className="text-sm sm:text-base font-bold">⭐ Best of Dayton</div>
+            <div className="text-sm sm:text-base font-bold flex items-center justify-center gap-2">
+              <Star className="w-4 h-4" />
+              Best of Dayton
+            </div>
             <div className="text-[10px] sm:text-xs opacity-80 mt-0.5">
               Top Picks by Neighborhood
             </div>
@@ -450,7 +432,8 @@ export default function RestaurantsClient() {
             home.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <a href="tel:+19372413484" className="btn-gold">
+            <a href="tel:+19372413484" className="btn-gold flex items-center justify-center gap-2">
+              <Phone className="w-4 h-4" />
               Call (937) 241-3484
             </a>
             <a

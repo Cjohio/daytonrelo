@@ -3,6 +3,7 @@ import Link from "next/link";
 import PropertyCard from "@/components/PropertyCard";
 import OpenHouseSignupForm from "@/components/OpenHouseSignupForm";
 import { MOCK_LISTINGS } from "@/lib/trestle";
+import { Zap, MapPin, DollarSign, Award, Calendar } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: "Open Houses in Dayton, Ohio | Dayton Relo",
@@ -14,22 +15,22 @@ const ALL_UPCOMING = MOCK_LISTINGS; // In production: filter by OpenHouseDate >=
 
 const BENEFITS = [
   {
-    icon: "⚡",
+    icon: Zap,
     title: "Instant Alerts",
     desc: "Get notified the same day a new open house is added to the MLS — before most people even know about it.",
   },
   {
-    icon: "📍",
+    icon: MapPin,
     title: "Area-Specific",
     desc: "Choose your target neighborhoods. Only get alerts for homes in the areas that matter to you.",
   },
   {
-    icon: "💰",
+    icon: DollarSign,
     title: "Price-Filtered",
     desc: "Set a max price so you only hear about homes within your budget. No noise.",
   },
   {
-    icon: "🎖️",
+    icon: Award,
     title: "Military-First",
     desc: "Chris highlights open houses near WPAFB with VA loan-eligible properties for PCS families.",
   },
@@ -70,7 +71,7 @@ export default function OpenHousesPage() {
               </div>
             ) : (
               <div className="bg-cream rounded-2xl p-8 text-center mb-8">
-                <p className="text-3xl mb-3">🗓</p>
+                <Calendar className="w-12 h-12 mx-auto mb-3 text-charcoal" />
                 <h3 className="font-black mb-2">No open houses this weekend</h3>
                 <p className="text-gray-500 text-sm">Sign up for alerts and we&apos;ll notify you as soon as one is scheduled in your area.</p>
               </div>
@@ -100,9 +101,9 @@ export default function OpenHousesPage() {
               <div className="card">
                 <h3 className="text-base font-black mb-4">Why sign up?</h3>
                 <div className="flex flex-col gap-4">
-                  {BENEFITS.map(({ icon, title, desc }) => (
+                  {BENEFITS.map(({ icon: Icon, title, desc }) => (
                     <div key={title} className="flex gap-3">
-                      <span className="text-2xl flex-shrink-0">{icon}</span>
+                      <Icon className="w-6 h-6 flex-shrink-0 text-gold" />
                       <div>
                         <p className="text-sm font-black mb-0.5">{title}</p>
                         <p className="text-xs text-gray-500 leading-relaxed">{desc}</p>

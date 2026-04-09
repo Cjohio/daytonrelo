@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { Home, Calendar, Bed, Bath, Ruler, Car } from "lucide-react";
 import { MOCK_LISTINGS } from "@/lib/trestle";
 import LeadForm from "@/components/LeadForm";
 
@@ -31,7 +32,7 @@ export default async function ListingDetailPage({ params }: Props) {
   if (!listing) {
     return (
       <div className="max-w-3xl mx-auto px-4 py-24 text-center">
-        <p className="text-5xl mb-4">🏠</p>
+        <div className="flex justify-center mb-4"><Home className="w-16 h-16 text-charcoal" /></div>
         <h1 className="text-2xl font-black mb-3">Listing Not Found</h1>
         <p className="text-gray-500 mb-6">This listing may have sold or been removed from the MLS.</p>
         <Link href="/listings" className="btn-gold">Back to Listings</Link>
@@ -72,8 +73,8 @@ export default async function ListingDetailPage({ params }: Props) {
                 priority
               />
               {listing.OpenHouseDate && (
-                <div className="absolute top-4 left-4 bg-gold text-white text-sm font-black px-4 py-2 rounded-full shadow-lg">
-                  🗓 Open House: {listing.OpenHouseDate} · {listing.OpenHouseStartTime}–{listing.OpenHouseEndTime}
+                <div className="absolute top-4 left-4 bg-gold text-white text-sm font-black px-4 py-2 rounded-full shadow-lg flex items-center gap-2">
+                  <Calendar className="w-4 h-4" /> Open House: {listing.OpenHouseDate} · {listing.OpenHouseStartTime}–{listing.OpenHouseEndTime}
                 </div>
               )}
               {listing.StandardStatus === "Pending" && (
@@ -103,13 +104,13 @@ export default async function ListingDetailPage({ params }: Props) {
             {/* Key stats */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
               {[
-                { icon: "🛏", label: "Bedrooms",  value: listing.BedroomsTotal },
-                { icon: "🛁", label: "Bathrooms", value: listing.BathroomsTotalInteger },
-                { icon: "📐", label: "Sq Ft",     value: listing.LivingArea.toLocaleString() },
-                { icon: "🚗", label: "Garage",    value: listing.GarageSpaces ? `${listing.GarageSpaces}-car` : "—" },
-              ].map(({ icon, label, value }) => (
+                { icon: Bed, label: "Bedrooms",  value: listing.BedroomsTotal },
+                { icon: Bath, label: "Bathrooms", value: listing.BathroomsTotalInteger },
+                { icon: Ruler, label: "Sq Ft",     value: listing.LivingArea.toLocaleString() },
+                { icon: Car, label: "Garage",    value: listing.GarageSpaces ? `${listing.GarageSpaces}-car` : "—" },
+              ].map(({ icon: IconComponent, label, value }) => (
                 <div key={label} className="bg-cream rounded-xl p-4 text-center">
-                  <div className="text-2xl mb-1">{icon}</div>
+                  <div className="flex justify-center mb-1"><IconComponent className="w-6 h-6 text-charcoal" /></div>
                   <p className="text-lg font-black">{value}</p>
                   <p className="text-xs text-gray-500">{label}</p>
                 </div>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import LeadForm from "@/components/LeadForm";
+import { MapPin } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: "Dayton Ohio Neighborhood Guide | Chris Jurgens Realtor",
@@ -122,7 +123,7 @@ export default function NeighborhoodsPage() {
                 </div>
                 <p className="text-gray-500 text-sm leading-relaxed mb-4">{vibe}</p>
                 <div className="flex flex-col gap-2 pt-3 border-t border-gray-100">
-                  <p className="text-xs text-gray-400">📍 {commute}</p>
+                  <p className="text-xs text-gray-400 flex items-center gap-2"><MapPin className="w-4 h-4" /> {commute}</p>
                   <div className="flex flex-wrap gap-2">
                     {best.map(b => (
                       <span key={b} className="text-xs bg-gold/10 text-gold-dark font-semibold px-2 py-1 rounded-full">{b}</span>

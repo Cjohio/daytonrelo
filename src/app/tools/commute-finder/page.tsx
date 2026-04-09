@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { School, Home, Key, Check } from 'lucide-react';
 
 const EMPLOYERS = [
   { id: 'wpafb', name: 'Wright-Patterson AFB', location: 'Fairborn / Riverside', sector: 'Military / Govt' },
@@ -193,7 +194,7 @@ export default function CommuteFinderPage() {
                       {emp.location} · {emp.sector}
                     </p>
                   </div>
-                  {selected === emp.id && <span className="text-gold text-xl">✓</span>}
+                  {selected === emp.id && <Check className="w-5 h-5 text-gold" />}
                 </div>
               </button>
             ))}
@@ -267,9 +268,9 @@ export default function CommuteFinderPage() {
                             </span>
                           </div>
                           <div className="text-xs text-gray-600 space-y-1">
-                            <p>🏫 Schools: {n.schools}</p>
-                            <p>🏠 Buy: {n.medPrice}</p>
-                            <p>🔑 Rent: {n.medRent}/mo</p>
+                            <p className="flex items-center gap-1"><School className="w-3 h-3" /> Schools: {n.schools}</p>
+                            <p className="flex items-center gap-1"><Home className="w-3 h-3" /> Buy: {n.medPrice}</p>
+                            <p className="flex items-center gap-1"><Key className="w-3 h-3" /> Rent: {n.medRent}/mo</p>
                           </div>
                         </div>
                       </div>

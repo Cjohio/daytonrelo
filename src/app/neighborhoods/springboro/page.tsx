@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import { Phone, Check } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: "Springboro Homes for Sale | Springboro OH Real Estate | Dayton Relo",
@@ -131,11 +132,11 @@ export default function SpringboroPage() {
                 Why Buyers Choose Springboro
               </h3>
               <ul className="space-y-2 text-sm text-gray-600">
-                <li>✓ #1-ranked schools in Ohio (nationally top-rated)</li>
-                <li>✓ Fastest-growing, most vibrant community</li>
-                <li>✓ Newer homes (1998+) with modern finishes</li>
-                <li>✓ Growing restaurant, retail, and entertainment scene</li>
-                <li>✓ Strong sense of pride and community investment</li>
+                <li className="flex items-center gap-2"><Check className="w-4 h-4" /> #1-ranked schools in Ohio (nationally top-rated)</li>
+                <li className="flex items-center gap-2"><Check className="w-4 h-4" /> Fastest-growing, most vibrant community</li>
+                <li className="flex items-center gap-2"><Check className="w-4 h-4" /> Newer homes (1998+) with modern finishes</li>
+                <li className="flex items-center gap-2"><Check className="w-4 h-4" /> Growing restaurant, retail, and entertainment scene</li>
+                <li className="flex items-center gap-2"><Check className="w-4 h-4" /> Strong sense of pride and community investment</li>
               </ul>
             </div>
             <div className="bg-gray-50 rounded-xl p-5">
@@ -170,9 +171,9 @@ export default function SpringboroPage() {
             </Link>
             <a
               href="tel:+19372413484"
-              className="inline-block border-2 border-gray-500 text-white font-black px-6 py-3 rounded-lg hover:border-gold transition"
+              className="inline-block border-2 border-gray-500 text-white font-black px-6 py-3 rounded-lg hover:border-gold transition flex items-center gap-2"
             >
-              📞 (937) 241-3484
+              <Phone className="w-4 h-4" /> (937) 241-3484
             </a>
           </div>
         </div>

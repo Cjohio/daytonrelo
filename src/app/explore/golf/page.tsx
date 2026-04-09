@@ -1,6 +1,21 @@
 'use client';
 
 import { useState } from 'react';
+import {
+  Target,
+  UtensilsCrossed,
+  Monitor,
+  GraduationCap,
+  Trophy,
+  Users,
+  Crown,
+  Star,
+  Smile,
+  PartyPopper,
+  MapPin,
+  Lightbulb,
+  AlertCircle,
+} from 'lucide-react';
 
 type AccessType = 'public' | 'municipal' | 'semi_private' | 'private';
 type Feature =
@@ -40,27 +55,27 @@ const ACCESS_CONFIG: Record<AccessType, { label: string; color: string }> = {
 
 const FEATURE_CONFIG: Record<
   Feature,
-  { label: string; emoji: string; color: string }
+  { label: string; icon: React.ReactNode; color: string }
 > = {
   driving_range: {
     label: 'Driving Range',
-    emoji: '🎯',
+    icon: <Target className="w-4 h-4" />,
     color: '#84CC16',
   },
-  restaurant: { label: 'Restaurant', emoji: '🍽️', color: '#F59E0B' },
-  simulator: { label: 'Indoor Simulator', emoji: '📺', color: '#6366F1' },
-  lessons: { label: 'Lessons', emoji: '🎓', color: '#0EA5E9' },
-  championship: { label: 'Championship', emoji: '🏆', color: '#C9A84C' },
-  walking: { label: 'Walkable', emoji: '🚶', color: '#84CC16' },
-  donald_ross: { label: 'Donald Ross Design', emoji: '👑', color: '#92400E' },
-  nicklaus: { label: 'Nicklaus Design', emoji: '⭐', color: '#C9A84C' },
-  top_rated: { label: 'Top Rated', emoji: '⭐', color: '#F59E0B' },
+  restaurant: { label: 'Restaurant', icon: <UtensilsCrossed className="w-4 h-4" />, color: '#F59E0B' },
+  simulator: { label: 'Indoor Simulator', icon: <Monitor className="w-4 h-4" />, color: '#6366F1' },
+  lessons: { label: 'Lessons', icon: <GraduationCap className="w-4 h-4" />, color: '#0EA5E9' },
+  championship: { label: 'Championship', icon: <Trophy className="w-4 h-4" />, color: '#C9A84C' },
+  walking: { label: 'Walkable', icon: <Users className="w-4 h-4" />, color: '#84CC16' },
+  donald_ross: { label: 'Donald Ross Design', icon: <Crown className="w-4 h-4" />, color: '#92400E' },
+  nicklaus: { label: 'Nicklaus Design', icon: <Star className="w-4 h-4" />, color: '#C9A84C' },
+  top_rated: { label: 'Top Rated', icon: <Star className="w-4 h-4" />, color: '#F59E0B' },
   beginner_friendly: {
     label: 'Beginner Friendly',
-    emoji: '😊',
+    icon: <Smile className="w-4 h-4" />,
     color: '#10B981',
   },
-  banquets: { label: 'Banquets/Events', emoji: '🎉', color: '#A78BFA' },
+  banquets: { label: 'Banquets/Events', icon: <PartyPopper className="w-4 h-4" />, color: '#A78BFA' },
 };
 
 const COURSES: Course[] = [
@@ -308,7 +323,7 @@ function FeatureBadge({ feature }: { feature: Feature }) {
       className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium"
       style={{ backgroundColor: `${cfg.color}20`, color: cfg.color }}
     >
-      <span>{cfg.emoji}</span>
+      <span>{cfg.icon}</span>
       <span>{cfg.label}</span>
     </div>
   );
@@ -410,7 +425,7 @@ export default function GolfPage() {
                         {course.name}
                       </h3>
                       <p className="text-sm text-charcoal/60 flex items-center gap-1">
-                        📍 {course.address}
+                        <MapPin className="w-4 h-4" /> {course.address}
                       </p>
                     </div>
                     <AccessBadge type={course.access} />
@@ -474,7 +489,7 @@ export default function GolfPage() {
                   {course.tip && (
                     <div className="bg-yellow-50 border-l-4 border-gold p-3 mb-4 rounded">
                       <p className="text-sm text-yellow-900">
-                        <span className="font-semibold">💡 Insider tip:</span>{' '}
+                        <span className="font-semibold"><Lightbulb className="w-4 h-4 inline mr-1" />Insider tip:</span>{' '}
                         {course.tip}
                       </p>
                     </div>
@@ -508,7 +523,7 @@ export default function GolfPage() {
       <section className="bg-charcoal/5 py-8 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           <p className="text-charcoal/60 text-sm">
-            <span className="font-semibold">📌 Note:</span> Green fees and hours
+            <span className="font-semibold"><AlertCircle className="w-4 h-4 inline mr-1" />Note:</span> Green fees and hours
             vary by season. Always check the course website before heading out.
           </p>
         </div>

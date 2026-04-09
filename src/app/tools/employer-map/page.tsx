@@ -1,3 +1,5 @@
+import { Building2, MapPin, Car, Home } from 'lucide-react';
+
 export const metadata = {
   title: 'Dayton Employer Directory | Dayton Relocation',
   description: 'Major employers in Dayton by industry with locations, contact info, and nearest neighborhoods.',
@@ -131,7 +133,7 @@ export default function EmployerMapPage() {
                   <div key={emp.id} className="card bg-white border border-gray-200">
                     <div className="flex items-start gap-4 mb-4">
                       <div className="w-12 h-12 rounded-lg bg-charcoal flex items-center justify-center flex-shrink-0">
-                        <span className="text-gold text-xl">🏢</span>
+                        <Building2 className="w-5 h-5 text-gold" />
                       </div>
                       <div className="flex-1">
                         <h3 className="text-lg font-bold text-charcoal">{emp.name}</h3>
@@ -141,21 +143,21 @@ export default function EmployerMapPage() {
 
                     <div className="space-y-3 mb-4 pb-4 border-t border-gray-200 pt-4">
                       <div className="flex items-start gap-3">
-                        <span className="text-gold text-lg">📍</span>
+                        <MapPin className="w-5 h-5 text-gold flex-shrink-0 mt-0.5" />
                         <div>
                           <p className="text-sm font-semibold text-charcoal">{emp.address}</p>
                         </div>
                       </div>
 
                       <div className="flex items-start gap-3">
-                        <span className="text-gold text-lg">🚗</span>
+                        <Car className="w-5 h-5 text-gold flex-shrink-0 mt-0.5" />
                         <div>
                           <p className="text-sm font-semibold text-charcoal">Avg Commute: {emp.avgCommute}</p>
                         </div>
                       </div>
 
                       <div className="flex items-start gap-3">
-                        <span className="text-gold text-lg">🏘️</span>
+                        <Home className="w-5 h-5 text-gold flex-shrink-0 mt-0.5" />
                         <div>
                           <p className="text-sm font-semibold text-charcoal mb-1">Nearby: {emp.nearestNeighborhoods.join(', ')}</p>
                         </div>

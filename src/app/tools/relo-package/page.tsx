@@ -1,3 +1,5 @@
+import { Package, Home, Users, DollarSign, Lightbulb } from 'lucide-react';
+
 export const metadata = {
   title: 'Relocation Package Negotiation Guide | Dayton Relocation',
   description: 'Comprehensive guide to negotiating corporate relocation packages, from moving costs to housing assistance.',
@@ -6,7 +8,7 @@ export const metadata = {
 const CATEGORIES = [
   {
     id: 'moving',
-    icon: '📦',
+    icon: Package,
     title: 'Moving Expenses',
     items: [
       { text: 'Full pack-and-move service (door to door)', value: '$3,000–$12,000', priority: 'high' },
@@ -18,7 +20,7 @@ const CATEGORIES = [
   },
   {
     id: 'housing',
-    icon: '🏠',
+    icon: Home,
     title: 'Housing Assistance',
     items: [
       { text: 'Temporary housing stipend (30–90 days)', value: '$2,000–$8,000', priority: 'high' },
@@ -31,7 +33,7 @@ const CATEGORIES = [
   },
   {
     id: 'lifestyle',
-    icon: '👨‍👩‍👧‍👦',
+    icon: Users,
     title: 'Family & Lifestyle',
     items: [
       { text: 'Spouse career transition support or job placement', value: 'Service', priority: 'high' },
@@ -42,7 +44,7 @@ const CATEGORIES = [
   },
   {
     id: 'financial',
-    icon: '💰',
+    icon: DollarSign,
     title: 'Financial & Tax',
     items: [
       { text: 'Lump-sum relocation allowance (instead of managed move)', value: '$5,000–$25,000', priority: 'high' },
@@ -93,35 +95,39 @@ export default function ReloPackagePage() {
 
           <div className="bg-blue-50 border-l-4 border-blue-600 p-6 rounded-r-lg">
             <p className="text-blue-900">
-              💡 <strong>Pro tip:</strong> Most companies offer more than they initially present. This checklist shows everything you can reasonably negotiate — know your number before you sign.
+              <Lightbulb className="w-4 h-4 inline mr-2" />
+              <strong>Pro tip:</strong> Most companies offer more than they initially present. This checklist shows everything you can reasonably negotiate — know your number before you sign.
             </p>
           </div>
         </div>
 
         {/* Categories */}
         <div className="space-y-6 mb-16">
-          {CATEGORIES.map((cat) => (
-            <div key={cat.id} className="bg-white border border-gray-200 rounded-lg overflow-hidden">
-              <div className="bg-gray-50 p-6 flex items-center gap-4 border-b border-gray-200">
-                <span className="text-3xl">{cat.icon}</span>
-                <h2 className="text-xl font-bold text-charcoal">{cat.title}</h2>
-              </div>
+          {CATEGORIES.map((cat) => {
+            const CategoryIcon = cat.icon;
+            return (
+              <div key={cat.id} className="bg-white border border-gray-200 rounded-lg overflow-hidden">
+                <div className="bg-gray-50 p-6 flex items-center gap-4 border-b border-gray-200">
+                  <CategoryIcon className="w-6 h-6" />
+                  <h2 className="text-xl font-bold text-charcoal">{cat.title}</h2>
+                </div>
 
-              <div className="divide-y divide-gray-200">
-                {cat.items.map((item, i) => (
-                  <div key={i} className="p-6 flex gap-4">
-                    <div className="min-w-fit">
-                      <PriorityBadge priority={item.priority as 'high' | 'medium' | 'low'} />
+                <div className="divide-y divide-gray-200">
+                  {cat.items.map((item, i) => (
+                    <div key={i} className="p-6 flex gap-4">
+                      <div className="min-w-fit">
+                        <PriorityBadge priority={item.priority as 'high' | 'medium' | 'low'} />
+                      </div>
+                      <div className="flex-1">
+                        <p className="font-semibold text-charcoal mb-1">{item.text}</p>
+                        <p className="text-gold font-bold text-sm">{item.value}</p>
+                      </div>
                     </div>
-                    <div className="flex-1">
-                      <p className="font-semibold text-charcoal mb-1">{item.text}</p>
-                      <p className="text-gold font-bold text-sm">{item.value}</p>
-                    </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Tips */}

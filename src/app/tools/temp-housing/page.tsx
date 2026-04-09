@@ -1,3 +1,5 @@
+import { Lightbulb, Star } from 'lucide-react';
+
 export const metadata = {
   title: 'Temporary Housing Guide | Dayton Relocation',
   description: 'Guide to temporary housing options in Dayton: extended stay hotels, furnished apartments, and corporate housing.',
@@ -74,8 +76,9 @@ export default function TempHousingPage() {
           </p>
 
           <div className="bg-blue-50 border-l-4 border-blue-600 p-6 rounded-r-lg">
-            <p className="text-blue-900">
-              💡 <strong>Pro tip:</strong> Chris has preferred extended-stay contacts and can sometimes negotiate corporate rates for clients in transition.
+            <p className="text-blue-900 flex items-start gap-2">
+              <Lightbulb className="w-5 h-5 flex-shrink-0 mt-0.5 text-blue-600" />
+              <span><strong>Pro tip:</strong> Chris has preferred extended-stay contacts and can sometimes negotiate corporate rates for clients in transition.</span>
             </p>
           </div>
         </div>
@@ -90,7 +93,10 @@ export default function TempHousingPage() {
                 className={`card border-2 p-6 ${housing.featured ? 'border-gold bg-yellow-50' : 'border-gray-200'}`}
               >
                 {housing.featured && (
-                  <p className="text-gold font-bold text-sm mb-3">⭐ Chris Recommends</p>
+                  <p className="text-gold font-bold text-sm mb-3 flex items-center gap-2">
+                    <Star className="w-4 h-4 fill-gold text-gold" />
+                    Chris Recommends
+                  </p>
                 )}
                 <h3 className="text-xl font-bold text-charcoal mb-1">{housing.name}</h3>
                 <p className="text-sm text-gray-600 mb-3">{housing.address}</p>

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { Trophy, Check, ArrowRight } from 'lucide-react';
 
 interface Question {
   id: string;
@@ -132,7 +133,7 @@ export default function NeighborhoodQuizPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
           {/* Results Hero */}
           <div className="text-center mb-12">
-            <div className="text-5xl mb-4">🏆</div>
+            <Trophy className="w-16 h-16 mx-auto mb-4 text-gold" />
             <h1 className="text-4xl font-bold text-charcoal mb-3">Your Top Matches</h1>
             <p className="text-lg text-gray-600">
               Based on your answers, here are your best-fit Dayton neighborhoods.
@@ -144,7 +145,7 @@ export default function NeighborhoodQuizPage() {
             {ranked.map(({ id, name, tagline, score }, i) => (
               <div
                 key={id}
-                className={`card border-2 p-6 flex items-start gap-6 ${
+                className={`card border-2 p-6 flex items-start gap-6 relative ${
                   i === 0 ? 'border-gold bg-blue-50' : 'border-gray-200'
                 }`}
               >
@@ -164,7 +165,7 @@ export default function NeighborhoodQuizPage() {
                     />
                   </div>
                 </div>
-                <div className="text-gold text-xl">→</div>
+                <ArrowRight className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
               </div>
             ))}
           </div>
@@ -229,7 +230,7 @@ export default function NeighborhoodQuizPage() {
               >
                 <div className="flex items-center justify-between">
                   <span className="font-semibold">{label}</span>
-                  {answers[q.id] === value && <span className="text-gold text-xl">✓</span>}
+                  {answers[q.id] === value && <Check className="w-5 h-5 text-gold" />}
                 </div>
               </button>
             ))}

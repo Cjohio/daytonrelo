@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { Home, Medal, TrendingUp, Hammer } from "lucide-react";
 import LeadForm from "@/components/LeadForm";
 
 export const metadata: Metadata = {
@@ -9,10 +10,10 @@ export const metadata: Metadata = {
 };
 
 const PILLARS = [
-  { icon: "🏡", label: "15 Years Real Estate Experience" },
-  { icon: "🎖️", label: "U.S. Army · Iraq War Veteran · 9 Years" },
-  { icon: "📈", label: "7-Figure Entrepreneur & Sales Strategist" },
-  { icon: "🔨", label: "Construction & Operations Background" },
+  { icon: Home, label: "15 Years Real Estate Experience" },
+  { icon: Medal, label: "U.S. Army · Iraq War Veteran · 9 Years" },
+  { icon: TrendingUp, label: "7-Figure Entrepreneur & Sales Strategist" },
+  { icon: Hammer, label: "Construction & Operations Background" },
 ];
 
 const MENTORS = ["Gary Vaynerchuk", "Daymond John", "Matt Higgins"];
@@ -54,9 +55,9 @@ export default function AboutPage() {
       {/* Pillars */}
       <section className="bg-gold py-8">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-2 md:grid-cols-4 gap-4">
-          {PILLARS.map(({ icon, label }) => (
+          {PILLARS.map(({ icon: IconComponent, label }) => (
             <div key={label} className="flex items-center gap-3">
-              <span className="text-2xl">{icon}</span>
+              <IconComponent className="w-6 h-6 text-charcoal flex-shrink-0" />
               <span className="text-charcoal text-xs font-bold leading-tight">{label}</span>
             </div>
           ))}

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import LeadForm from "@/components/LeadForm";
+import { Check } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Corporate Relocation to Dayton Ohio | Chris Jurgens Realtor",
@@ -57,7 +59,7 @@ export default function RelocationPage() {
       <section className="bg-gold py-5">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 flex flex-wrap gap-6 justify-center">
           {["Fast Timelines", "Virtual Tours Available", "Relo Package Coordination", "15 Years Local Experience"].map(t => (
-            <span key={t} className="text-charcoal font-bold text-sm">✓ {t}</span>
+            <span key={t} className="text-charcoal font-bold text-sm flex items-center gap-2"><Check className="w-4 h-4" /> {t}</span>
           ))}
         </div>
       </section>

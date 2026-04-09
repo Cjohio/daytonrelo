@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
+import { Award, Briefcase, Home } from 'lucide-react'
 
 export default function SignupPage() {
   const [formData, setFormData] = useState({
@@ -212,9 +213,9 @@ export default function SignupPage() {
             </label>
             <div className="space-y-2">
               {[
-                { value: 'military', label: 'Military/PCS', icon: '🎖️' },
-                { value: 'relocation', label: 'Corporate Relocation', icon: '💼' },
-                { value: 'discover', label: 'Local Buyer', icon: '🏡' },
+                { value: 'military', label: 'Military/PCS', Icon: Award },
+                { value: 'relocation', label: 'Corporate Relocation', Icon: Briefcase },
+                { value: 'discover', label: 'Local Buyer', Icon: Home },
               ].map((option) => (
                 <label
                   key={option.value}
@@ -228,8 +229,8 @@ export default function SignupPage() {
                     onChange={(e) => handlePersonaChange(e.target.value)}
                     className="w-4 h-4 text-amber-600"
                   />
-                  <span className="ml-3 text-white">
-                    <span className="mr-2">{option.icon}</span>
+                  <span className="ml-3 text-white flex items-center gap-2">
+                    <option.Icon className="w-4 h-4" />
                     {option.label}
                   </span>
                 </label>

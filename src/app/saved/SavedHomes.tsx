@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { Phone, Search, Heart } from "lucide-react";
 import PropertyCard from "@/components/PropertyCard";
 import { MOCK_LISTINGS, type MLSListing } from "@/lib/trestle";
 
@@ -74,8 +75,8 @@ export default function SavedHomes() {
                 </p>
               </div>
               <div className="flex flex-col gap-3 flex-shrink-0 w-full md:w-auto">
-                <a href="tel:+19372413484" className="btn-gold justify-center text-base">
-                  📞 (937) 241-3484
+                <a href="tel:+19372413484" className="btn-gold justify-center text-base flex items-center gap-2">
+                  <Phone className="w-4 h-4" /> (937) 241-3484
                 </a>
                 <Link href="/contact" className="btn-outline text-white border-white/30 hover:bg-white hover:text-charcoal justify-center">
                   Send My List to Chris
@@ -93,7 +94,7 @@ export default function SavedHomes() {
             </div>
             <h2 className="text-2xl font-black mb-3">No saved homes yet</h2>
             <p className="text-gray-500 max-w-sm mb-8">
-              Tap the ❤️ on any listing to save it here. Browse the MLS and start building your list.
+              Tap the heart icon on any listing to save it here. Browse the MLS and start building your list.
             </p>
             <div className="flex flex-wrap gap-3 justify-center">
               <Link href="/listings" className="btn-gold">Browse Listings</Link>
@@ -103,12 +104,12 @@ export default function SavedHomes() {
             {/* Tips */}
             <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-5 w-full max-w-2xl">
               {[
-                { icon: "🔍", title: "Search by area", desc: "Filter by city, price, beds, and more to find your perfect match." },
-                { icon: "❤️",  title: "Save your favorites", desc: "Heart listings you love. No account needed — saved right in your browser." },
-                { icon: "📞", title: "Call Chris",    desc: "Ready to see them in person? Chris will arrange showings on your schedule." },
-              ].map(({ icon, title, desc }) => (
+                { icon: Search, title: "Search by area", desc: "Filter by city, price, beds, and more to find your perfect match." },
+                { icon: Heart,  title: "Save your favorites", desc: "Heart listings you love. No account needed — saved right in your browser." },
+                { icon: Phone, title: "Call Chris",    desc: "Ready to see them in person? Chris will arrange showings on your schedule." },
+              ].map(({ icon: IconComponent, title, desc }) => (
                 <div key={title} className="bg-cream rounded-2xl p-5 text-center">
-                  <div className="text-3xl mb-2">{icon}</div>
+                  <div className="flex justify-center mb-2"><IconComponent className="w-8 h-8 text-charcoal" /></div>
                   <p className="font-black text-sm mb-1">{title}</p>
                   <p className="text-gray-500 text-xs">{desc}</p>
                 </div>

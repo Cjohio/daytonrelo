@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Car, Building2, Check, X } from 'lucide-react';
 
 export const metadata = {
   title: 'On-Base vs Off-Base Housing at WPAFB | Dayton Relo',
@@ -184,7 +185,7 @@ export default function OnBaseVsOffPage() {
                 <ul className="space-y-2">
                   {ON_PROS.map((pro) => (
                     <li key={pro} className="text-green-700 text-sm flex gap-2">
-                      <span>✓</span>
+                      <Check className="w-4 h-4 flex-shrink-0" />
                       <span>{pro}</span>
                     </li>
                   ))}
@@ -196,7 +197,7 @@ export default function OnBaseVsOffPage() {
                 <ul className="space-y-2">
                   {ON_CONS.map((con) => (
                     <li key={con} className="text-red-700 text-sm flex gap-2">
-                      <span>✗</span>
+                      <X className="w-4 h-4 flex-shrink-0" />
                       <span>{con}</span>
                     </li>
                   ))}
@@ -216,7 +217,7 @@ export default function OnBaseVsOffPage() {
                 <ul className="space-y-2">
                   {OFF_PROS.map((pro) => (
                     <li key={pro} className="text-green-700 text-sm flex gap-2">
-                      <span>✓</span>
+                      <Check className="w-4 h-4 flex-shrink-0" />
                       <span>{pro}</span>
                     </li>
                   ))}
@@ -228,7 +229,7 @@ export default function OnBaseVsOffPage() {
                 <ul className="space-y-2">
                   {OFF_CONS.map((con) => (
                     <li key={con} className="text-red-700 text-sm flex gap-2">
-                      <span>✗</span>
+                      <X className="w-4 h-4 flex-shrink-0" />
                       <span>{con}</span>
                     </li>
                   ))}
@@ -251,8 +252,8 @@ export default function OnBaseVsOffPage() {
                   </div>
                   <div className="md:text-right">
                     <div className="space-y-1 text-sm font-semibold text-charcoal">
-                      <p>🚗 {neighborhood.drive} commute</p>
-                      <p>🏫 Schools: {neighborhood.schools}</p>
+                      <p className="flex items-center gap-1"><Car className="w-4 h-4" /> {neighborhood.drive} commute</p>
+                      <p className="flex items-center gap-1"><Building2 className="w-4 h-4" /> Schools: {neighborhood.schools}</p>
                     </div>
                   </div>
                 </div>

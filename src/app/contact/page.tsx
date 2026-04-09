@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Phone, Mail, Camera } from "lucide-react";
 import LeadForm from "@/components/LeadForm";
 
 export const metadata: Metadata = {
@@ -7,9 +8,9 @@ export const metadata: Metadata = {
 };
 
 const METHODS = [
-  { icon: "📞", label: "Call or Text", value: "(937) 241-3484", href: "tel:+19372413484" },
-  { icon: "✉️", label: "Email", value: "Chris@cjohio.com", href: "mailto:Chris@cjohio.com" },
-  { icon: "📸", label: "Instagram", value: "@daytonrelo", href: "https://instagram.com/daytonrelo" },
+  { icon: Phone, label: "Call or Text", value: "(937) 241-3484", href: "tel:+19372413484" },
+  { icon: Mail, label: "Email", value: "Chris@cjohio.com", href: "mailto:Chris@cjohio.com" },
+  { icon: Camera, label: "Instagram", value: "@daytonrelo", href: "https://instagram.com/daytonrelo" },
 ];
 
 export default function ContactPage() {
@@ -34,11 +35,11 @@ export default function ContactPage() {
       {/* Contact methods */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-16">
-          {METHODS.map(({ icon, label, value, href }) => (
+          {METHODS.map(({ icon: IconComponent, label, value, href }) => (
             <a key={label} href={href} target={href.startsWith("http") ? "_blank" : undefined}
               rel="noopener noreferrer"
               className="card text-center hover:border-gold hover:shadow-md transition-all duration-200 group">
-              <div className="text-4xl mb-3">{icon}</div>
+              <div className="mb-3"><IconComponent className="w-10 h-10 mx-auto text-charcoal group-hover:text-gold transition-colors" /></div>
               <p className="text-xs text-gray-400 font-bold uppercase tracking-wide mb-1">{label}</p>
               <p className="font-black group-hover:text-gold transition-colors">{value}</p>
             </a>
@@ -52,21 +53,21 @@ export default function ContactPage() {
           </div>
           <div className="lg:col-span-2 flex flex-col gap-5">
             <div className="card">
-              <h3 className="font-black mb-2">🎖️ Military PCS?</h3>
+              <h3 className="font-black mb-2 flex items-center gap-2"><Medal className="w-5 h-5" /> Military PCS?</h3>
               <p className="text-gray-500 text-sm leading-relaxed mb-3">
                 Share your report date and orders. Chris will build a housing plan around your timeline.
               </p>
               <a href="/military" className="text-gold text-sm font-bold hover:underline">Military PCS Guide →</a>
             </div>
             <div className="card">
-              <h3 className="font-black mb-2">💼 Corporate Relo?</h3>
+              <h3 className="font-black mb-2 flex items-center gap-2"><Briefcase className="w-5 h-5" /> Corporate Relo?</h3>
               <p className="text-gray-500 text-sm leading-relaxed mb-3">
                 Chris works with relocation packages and tight timelines. Tell him your move date.
               </p>
               <a href="/relocation" className="text-gold text-sm font-bold hover:underline">Relocation Guide →</a>
             </div>
             <div className="card">
-              <h3 className="font-black mb-2">🏡 Not sure where to start?</h3>
+              <h3 className="font-black mb-2 flex items-center gap-2"><Home className="w-5 h-5" /> Not sure where to start?</h3>
               <p className="text-gray-500 text-sm leading-relaxed mb-3">
                 Browse the neighborhood guide to figure out which areas match your lifestyle and budget.
               </p>
@@ -78,3 +79,5 @@ export default function ContactPage() {
     </>
   );
 }
+
+import { Medal, Briefcase, Home } from "lucide-react";

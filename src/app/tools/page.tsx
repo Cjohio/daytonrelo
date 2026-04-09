@@ -1,14 +1,12 @@
-import Link from 'next/link';
+'use client';
 
-export const metadata = {
-  title: 'Relocation Tools & Calculators',
-  description: 'Free tools for military PCS, home buying, and relocating to Dayton, Ohio',
-};
+import Link from 'next/link';
+import { DollarSign, Award, Home, Beer, Package } from 'lucide-react';
 
 const categories = [
   {
     name: 'Finance & Buying',
-    icon: '💰',
+    icon: DollarSign,
     tools: [
       { name: 'Mortgage Calculator', href: '/tools/mortgage-calculator', desc: 'What can you afford? Monthly payment breakdown.' },
       { name: 'BAH Calculator', href: '/tools/bah-calculator', desc: 'Estimate your buying power from BAH.' },
@@ -19,7 +17,7 @@ const categories = [
   },
   {
     name: 'Military & PCS',
-    icon: '🎖️',
+    icon: Award,
     tools: [
       { name: 'DITY / PPM Calculator', href: '/tools/dity-calculator', desc: 'Estimate your PPM incentive pay.' },
       { name: 'TLE Calculator', href: '/tools/tle-calculator', desc: 'Temporary lodging expense limits.' },
@@ -30,7 +28,7 @@ const categories = [
   },
   {
     name: 'Neighborhoods',
-    icon: '🏘️',
+    icon: Home,
     tools: [
       { name: 'Coming Soon: Compare Neighborhoods', href: '#', desc: 'Demographics, walkability, amenities.' },
       { name: 'Coming Soon: Neighborhood Quiz', href: '#', desc: 'Find your ideal Dayton neighborhood.' },
@@ -41,7 +39,7 @@ const categories = [
   },
   {
     name: 'Explore Dayton',
-    icon: '🍺',
+    icon: Beer,
     tools: [
       { name: 'Coming Soon: Parks & Recreation', href: '#', desc: 'Trails, parks, and outdoor activities.' },
       { name: 'Coming Soon: Local Breweries', href: '#', desc: 'Dayton\'s craft beer scene.' },
@@ -52,7 +50,7 @@ const categories = [
   },
   {
     name: 'Relocation',
-    icon: '📦',
+    icon: Package,
     tools: [
       { name: 'Coming Soon: Relo Package Guide', href: '#', desc: 'Maximize your military relocation allowance.' },
       { name: 'Coming Soon: Temp Housing Guide', href: '#', desc: 'Extended stay and housing options.' },
@@ -61,6 +59,11 @@ const categories = [
     ],
   },
 ];
+
+export const metadata = {
+  title: 'Relocation Tools & Calculators',
+  description: 'Free tools for military PCS, home buying, and relocating to Dayton, Ohio',
+};
 
 export default function ToolsHub() {
   const availableTools = categories.map((cat) => ({
@@ -85,6 +88,7 @@ export default function ToolsHub() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="space-y-16">
             {categories.map((category) => {
+              const CategoryIcon = category.icon;
               const availableInCategory = category.tools.filter((t) => t.href !== '#');
               const hasAvailable = availableInCategory.length > 0;
 
@@ -92,7 +96,7 @@ export default function ToolsHub() {
                 <div key={category.name}>
                   <div className="mb-8">
                     <h2 className="text-3xl font-bold text-charcoal mb-2">
-                      <span className="text-4xl mr-3">{category.icon}</span>
+                      <CategoryIcon className="w-8 h-8 inline mr-3" />
                       {category.name}
                     </h2>
                   </div>

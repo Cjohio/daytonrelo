@@ -1,6 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import { UtensilsCrossed, Truck, PartyPopper, Sun, Landmark, Handshake, Bike, Wine, Coffee } from 'lucide-react';
+import { Dog, Music } from 'lucide-react';
 
 type FoodType = 'full_kitchen' | 'food_trucks' | 'snacks' | 'no_food';
 type Feature =
@@ -26,26 +28,26 @@ interface Brewery {
 
 const FOOD_CONFIG: Record<
   FoodType,
-  { label: string; color: string; emoji: string }
+  { label: string; color: string; icon: React.ReactNode }
 > = {
-  full_kitchen: { label: 'Full Kitchen', color: '#10B981', emoji: '🍽️' },
-  food_trucks: { label: 'Food Trucks', color: '#F97316', emoji: '🚚' },
-  snacks: { label: 'Snacks Only', color: '#F59E0B', emoji: '🍿' },
-  no_food: { label: 'Taproom Only', color: '#6B6B6B', emoji: '🍺' },
+  full_kitchen: { label: 'Full Kitchen', color: '#10B981', icon: <UtensilsCrossed className="w-4 h-4" /> },
+  food_trucks: { label: 'Food Trucks', color: '#F97316', icon: <Truck className="w-4 h-4" /> },
+  snacks: { label: 'Snacks Only', color: '#F59E0B', icon: <PartyPopper className="w-4 h-4" /> },
+  no_food: { label: 'Taproom Only', color: '#6B6B6B', icon: <UtensilsCrossed className="w-4 h-4" /> },
 };
 
 const FEATURE_CONFIG: Record<
   Feature,
-  { label: string; color: string; emoji: string }
+  { label: string; color: string; icon: React.ReactNode }
 > = {
-  dog_friendly: { label: 'Dog Friendly', color: '#A78BFA', emoji: '🐕' },
-  live_music: { label: 'Live Music', color: '#EC4899', emoji: '🎵' },
-  patio: { label: 'Patio', color: '#84CC16', emoji: '☀️' },
-  historic: { label: 'Historic Bldg', color: '#92400E', emoji: '🏛️' },
-  coop: { label: 'Co-op Owned', color: '#0EA5E9', emoji: '🤝' },
-  bike_trail: { label: 'Bike Trail', color: '#65A30D', emoji: '🚴' },
-  cocktails: { label: 'Cocktails', color: '#C084FC', emoji: '🍸' },
-  coffee: { label: 'Coffee Bar', color: '#78350F', emoji: '☕' },
+  dog_friendly: { label: 'Dog Friendly', color: '#A78BFA', icon: <Dog className="w-4 h-4" /> },
+  live_music: { label: 'Live Music', color: '#EC4899', icon: <Music className="w-4 h-4" /> },
+  patio: { label: 'Patio', color: '#84CC16', icon: <Sun className="w-4 h-4" /> },
+  historic: { label: 'Historic Bldg', color: '#92400E', icon: <Landmark className="w-4 h-4" /> },
+  coop: { label: 'Co-op Owned', color: '#0EA5E9', icon: <Handshake className="w-4 h-4" /> },
+  bike_trail: { label: 'Bike Trail', color: '#65A30D', icon: <Bike className="w-4 h-4" /> },
+  cocktails: { label: 'Cocktails', color: '#C084FC', icon: <Wine className="w-4 h-4" /> },
+  coffee: { label: 'Coffee Bar', color: '#78350F', icon: <Coffee className="w-4 h-4" /> },
 };
 
 const BREWERIES: Brewery[] = [
@@ -276,7 +278,7 @@ function FoodBadge({ type }: { type: FoodType }) {
       className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium"
       style={{ backgroundColor: `${cfg.color}20`, color: cfg.color }}
     >
-      <span>{cfg.emoji}</span>
+      {cfg.icon}
       <span>{cfg.label}</span>
     </div>
   );
@@ -289,7 +291,7 @@ function FeatureBadge({ feature }: { feature: Feature }) {
       className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium"
       style={{ backgroundColor: `${cfg.color}20`, color: cfg.color }}
     >
-      <span>{cfg.emoji}</span>
+      {cfg.icon}
       <span>{cfg.label}</span>
     </div>
   );
@@ -402,7 +404,7 @@ export default function BreweriesPage() {
                       {brewery.name}
                     </h3>
                     <p className="text-sm text-charcoal/60 flex items-center gap-1">
-                      📍 {brewery.address}
+                      <MapPin className="w-4 h-4 inline mr-1" /> {brewery.address}
                     </p>
                   </div>
 
@@ -421,7 +423,7 @@ export default function BreweriesPage() {
                   {brewery.tip && (
                     <div className="bg-yellow-50 border-l-4 border-gold p-3 mb-4 rounded">
                       <p className="text-sm text-yellow-900">
-                        <span className="font-semibold">💡 Pro tip:</span>{' '}
+                        <span className="font-semibold"><LightbulbIcon className="w-4 h-4 inline mr-1" />Pro tip:</span>{' '}
                         {brewery.tip}
                       </p>
                     </div>
@@ -447,7 +449,7 @@ export default function BreweriesPage() {
       <section className="bg-charcoal/5 py-8 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           <p className="text-charcoal/60 text-sm">
-            <span className="font-semibold">📌 Note:</span> Hours and food
+            <span className="font-semibold"><AlertCircle className="w-4 h-4 inline mr-1" />Note:</span> Hours and food
             offerings change seasonally. Always check the brewery's website
             before visiting.
           </p>

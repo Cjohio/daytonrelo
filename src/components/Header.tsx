@@ -3,6 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { Phone } from "lucide-react";
 import AuthButton from "./AuthButton";
 
 const NAV = [
@@ -149,8 +150,8 @@ export default function Header() {
         {/* CTA */}
         <div className="hidden lg:flex items-center gap-4 flex-shrink-0">
           <AuthButton />
-          <a href="tel:+19372413484" className="btn-gold text-sm py-2 px-5 whitespace-nowrap">
-            📞 (937) 241-3484
+          <a href="tel:+19372413484" className="btn-gold text-sm py-2 px-5 whitespace-nowrap flex items-center gap-2">
+            <Phone className="w-4 h-4" /> (937) 241-3484
           </a>
         </div>
 

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import { Phone, Check } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: "Beavercreek Homes for Sale | Beavercreek OH Real Estate | Dayton Relo",
@@ -131,11 +132,11 @@ export default function BeavercreekPage() {
                 Why Buyers Choose Beavercreek
               </h3>
               <ul className="space-y-2 text-sm text-gray-600">
-                <li>✓ Closest suburb to WPAFB—8-minute base commute</li>
-                <li>✓ Top-10 school district in Ohio (Beavercreek City Schools)</li>
-                <li>✓ Strong resale value and stable pricing</li>
-                <li>✓ Large military community—ready-made social network</li>
-                <li>✓ Safe neighborhoods, low crime rates</li>
+                <li className="flex items-center gap-2"><Check className="w-4 h-4" /> Closest suburb to WPAFB—8-minute base commute</li>
+                <li className="flex items-center gap-2"><Check className="w-4 h-4" /> Top-10 school district in Ohio (Beavercreek City Schools)</li>
+                <li className="flex items-center gap-2"><Check className="w-4 h-4" /> Strong resale value and stable pricing</li>
+                <li className="flex items-center gap-2"><Check className="w-4 h-4" /> Large military community—ready-made social network</li>
+                <li className="flex items-center gap-2"><Check className="w-4 h-4" /> Safe neighborhoods, low crime rates</li>
               </ul>
             </div>
             <div className="bg-gray-50 rounded-xl p-5">
@@ -170,9 +171,9 @@ export default function BeavercreekPage() {
             </Link>
             <a
               href="tel:+19372413484"
-              className="inline-block border-2 border-gray-500 text-white font-black px-6 py-3 rounded-lg hover:border-gold transition"
+              className="inline-block border-2 border-gray-500 text-white font-black px-6 py-3 rounded-lg hover:border-gold transition flex items-center gap-2"
             >
-              📞 (937) 241-3484
+              <Phone className="w-4 h-4" /> (937) 241-3484
             </a>
           </div>
         </div>

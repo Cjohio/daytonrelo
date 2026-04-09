@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Check } from 'lucide-react';
 import LeadForm from "@/components/LeadForm";
 
 export const metadata: Metadata = {
@@ -106,7 +107,7 @@ export default function MilitaryPage() {
       <section className="bg-gold py-5">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 flex flex-wrap gap-6 justify-center items-center">
           {["U.S. Army Iraq War Veteran · 9 Years", "VA Loan Specialist", "Remote & Virtual Closings", "WPAFB Area Expert"].map(t => (
-            <span key={t} className="text-charcoal font-bold text-sm">✓ {t}</span>
+            <span key={t} className="text-charcoal font-bold text-sm flex items-center gap-2"><Check className="w-4 h-4" /> {t}</span>
           ))}
         </div>
       </section>

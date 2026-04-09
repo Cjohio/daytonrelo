@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Link2, Award } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: "Military Home Buying Benefits | Dayton Relo",
@@ -186,7 +187,7 @@ export default function MilitaryBenefitsPage() {
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 bg-white p-4 rounded-xl border border-gray-100 hover:border-gold transition-colors group"
               >
-                <span className="text-gold text-lg">🔗</span>
+                <Link2 className="w-4 h-4 text-gold flex-shrink-0" />
                 <span className="text-sm font-medium text-charcoal group-hover:text-gold transition-colors flex-1">{label}</span>
                 <span className="text-gray-400 text-xs">↗</span>
               </a>
@@ -198,7 +199,7 @@ export default function MilitaryBenefitsPage() {
       {/* Bottom CTA */}
       <section className="bg-charcoal text-white py-16">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 text-center">
-          <div className="text-4xl mb-4">🎖️</div>
+          <Award className="w-10 h-10 mx-auto mb-4 text-gold" />
           <h2 className="text-2xl font-black mb-3">Questions About Your Benefits?</h2>
           <p className="text-gray-300 mb-8">
             Chris is a U.S. Army Iraq War veteran and licensed Ohio Realtor. He can walk you through

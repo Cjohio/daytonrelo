@@ -2,6 +2,15 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import {
+  Mountain,
+  Leaf,
+  Building2,
+  Zap,
+  Car,
+  MapPin,
+  Lightbulb,
+} from 'lucide-react';
 
 interface Trip {
   name: string;
@@ -108,6 +117,21 @@ const TRIPS: Trip[] = [
 
 const CATEGORIES = ["All", "Nature & Outdoors", "City Day Trip", "Family / Thrills", "Nature & Quirky"];
 
+function getCategoryIcon(category: string) {
+  switch (category) {
+    case "Nature & Outdoors":
+      return <Mountain className="w-6 h-6" />;
+    case "Nature & Quirky":
+      return <Leaf className="w-6 h-6" />;
+    case "City Day Trip":
+      return <Building2 className="w-6 h-6" />;
+    case "Family / Thrills":
+      return <Zap className="w-6 h-6" />;
+    default:
+      return null;
+  }
+}
+
 export default function DayTripsPage() {
   const [activeFilter, setActiveFilter] = useState("All");
 
@@ -161,19 +185,20 @@ export default function DayTripsPage() {
                 {/* Header with Icon and Category */}
                 <div className="flex gap-4 mb-4">
                   <div
-                    className="w-14 h-14 rounded-lg flex items-center justify-center flex-shrink-0 text-2xl"
-                    style={{ backgroundColor: `${trip.color}20` }}
+                    className="w-14 h-14 rounded-lg flex items-center justify-center flex-shrink-0"
+                    style={{ backgroundColor: `${trip.color}20`, color: trip.color }}
                   >
-                    {trip.category === "Nature & Outdoors" && "🏞️"}
-                    {trip.category === "Nature & Quirky" && "🍃"}
-                    {trip.category === "City Day Trip" && "🏙️"}
-                    {trip.category === "Family / Thrills" && "🎢"}
+                    {getCategoryIcon(trip.category)}
                   </div>
                   <div className="flex-1">
                     <h2 className="text-2xl font-bold text-charcoal mb-2">{trip.name}</h2>
                     <div className="flex gap-4 text-sm text-charcoal/70">
-                      <span className="flex items-center gap-1">🚗 {trip.drive}</span>
-                      <span className="flex items-center gap-1">📍 {trip.distance}</span>
+                      <span className="flex items-center gap-1">
+                        <Car className="w-4 h-4" /> {trip.drive}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <MapPin className="w-4 h-4" /> {trip.distance}
+                      </span>
                     </div>
                   </div>
                   <div
@@ -202,7 +227,7 @@ export default function DayTripsPage() {
 
                 {/* Insider Tip */}
                 <div className="bg-gold/10 border border-gold/30 rounded-lg p-4 mb-4 flex gap-3">
-                  <span className="text-xl">💡</span>
+                  <Lightbulb className="w-5 h-5 flex-shrink-0 text-gold" />
                   <p className="text-charcoal text-sm">{trip.tip}</p>
                 </div>
 

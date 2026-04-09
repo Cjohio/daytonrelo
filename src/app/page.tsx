@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import { Medal, Briefcase, Home, School, Trees, Rocket, Plane, Star, Phone, Camera } from "lucide-react";
 import SearchBar from "@/components/SearchBar";
 import PropertyCard from "@/components/PropertyCard";
 import LeadForm from "@/components/LeadForm";
@@ -51,7 +52,7 @@ const SITE_FEATURES = [
   {
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0110.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     ),
     title: "Explore Dayton",
@@ -85,7 +86,7 @@ const SITE_FEATURES = [
 
 const PATHS = [
   {
-    icon: "🎖️",
+    icon: Medal,
     title: "Military / PCS",
     sub: "WPAFB · VA Loans · BAH",
     desc: "PCS orders to Wright-Patterson? Chris knows the base, the zip codes, and the VA loan process inside and out.",
@@ -93,7 +94,7 @@ const PATHS = [
     cta: "Military PCS Guide →",
   },
   {
-    icon: "💼",
+    icon: Briefcase,
     title: "Corporate Relocation",
     sub: "Job Move · Relo Package",
     desc: "Relocating for work? Get settled fast with a realtor who understands your timeline, your budget, and your needs.",
@@ -101,7 +102,7 @@ const PATHS = [
     cta: "Relocation Guide →",
   },
   {
-    icon: "🏡",
+    icon: Home,
     title: "Dayton Resident",
     sub: "Buying Local · Investing",
     desc: "Already in Dayton and ready to buy, sell, or invest? Chris brings 15 years of local market expertise.",
@@ -111,12 +112,12 @@ const PATHS = [
 ];
 
 const NEIGHBORHOODS = [
-  { name: "Beavercreek", tag: "Top-rated schools · WPAFB close",  icon: "🏫" },
-  { name: "Centerville",  tag: "Family-friendly · Quiet suburbs",  icon: "🌳" },
-  { name: "Kettering",   tag: "Established · Affordable",          icon: "🏘️" },
-  { name: "Springboro",  tag: "Growing fast · Great schools",       icon: "🚀" },
-  { name: "Fairborn",    tag: "Near WPAFB · Budget-friendly",      icon: "✈️" },
-  { name: "Oakwood",     tag: "Luxury · Historic · Walkable",      icon: "⭐" },
+  { name: "Beavercreek", tag: "Top-rated schools · WPAFB close",  icon: School },
+  { name: "Centerville",  tag: "Family-friendly · Quiet suburbs",  icon: Trees },
+  { name: "Kettering",   tag: "Established · Affordable",          icon: Home },
+  { name: "Springboro",  tag: "Growing fast · Great schools",       icon: Rocket },
+  { name: "Fairborn",    tag: "Near WPAFB · Budget-friendly",      icon: Plane },
+  { name: "Oakwood",     tag: "Luxury · Historic · Walkable",      icon: Star },
 ];
 
 const STATS = [
@@ -222,13 +223,13 @@ export default function HomePage() {
             <h2 className="text-3xl md:text-4xl font-black">Which path describes you?</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {PATHS.map(({ icon, title, sub, desc, href, cta }) => (
+            {PATHS.map(({ icon: IconComponent, title, sub, desc, href, cta }) => (
               <Link
                 key={href + title}
                 href={href}
                 className="group bg-charcoal border border-white/10 hover:border-gold rounded-2xl p-7 transition-all duration-200"
               >
-                <div className="text-4xl mb-4">{icon}</div>
+                <div className="text-4xl mb-4"><IconComponent className="w-8 h-8 text-white" /></div>
                 <h3 className="text-xl font-black text-white mb-1 group-hover:text-gold transition-colors">{title}</h3>
                 <p className="text-gold text-xs font-bold mb-3">{sub}</p>
                 <p className="text-gray-400 text-sm leading-relaxed mb-5">{desc}</p>
@@ -295,13 +296,13 @@ export default function HomePage() {
             </p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
-            {NEIGHBORHOODS.map(({ name, tag, icon }) => (
+            {NEIGHBORHOODS.map(({ name, tag, icon: IconComponent }) => (
               <Link
                 key={name}
                 href={`/listings?city=${name}`}
                 className="group bg-white rounded-2xl p-6 border border-gray-100 hover:border-gold hover:shadow-md transition-all duration-200"
               >
-                <div className="text-3xl mb-3">{icon}</div>
+                <div className="text-3xl mb-3"><IconComponent className="w-8 h-8" /></div>
                 <h3 className="font-black text-base group-hover:text-gold transition-colors mb-1">{name}</h3>
                 <p className="text-gray-400 text-xs">{tag}</p>
                 <p className="text-gold text-xs font-bold mt-3">View listings →</p>
@@ -357,7 +358,7 @@ export default function HomePage() {
               </div>
 
               <div className="flex flex-wrap gap-3">
-                <a href="tel:+19372413484" className="btn-gold">📞 Call or Text Chris</a>
+                <a href="tel:+19372413484" className="btn-gold flex items-center gap-2"><Phone className="w-4 h-4" /> Call or Text Chris</a>
                 <Link href="/about" className="btn-outline text-white border-white/30 hover:bg-white hover:text-charcoal">My Story →</Link>
               </div>
             </div>

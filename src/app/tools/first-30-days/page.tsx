@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
+import { Home, Shield } from 'lucide-react';
 
 interface ChecklistItem {
   id: string;
@@ -16,7 +17,7 @@ interface Category {
 interface Section {
   id: string;
   title: string;
-  icon: string;
+  icon: React.ReactNode;
   color: string;
   categories: Category[];
 }
@@ -25,7 +26,7 @@ const SECTIONS: Section[] = [
   {
     id: 'general',
     title: 'General Move-In',
-    icon: '🏠',
+    icon: <Home className="w-5 h-5" />,
     color: '#C9A84C',
     categories: [
       {
@@ -88,7 +89,7 @@ const SECTIONS: Section[] = [
   {
     id: 'military',
     title: 'Military / WPAFB',
-    icon: '🛡️',
+    icon: <Shield className="w-5 h-5" />,
     color: '#4A90D9',
     categories: [
       {
@@ -217,7 +218,7 @@ export default function First30DaysPage() {
           </div>
           {pct === 100 && (
             <div className="mt-4 text-center">
-              <p className="text-lg font-semibold text-gold">🎉 You're all settled in — welcome to Dayton!</p>
+              <p className="text-lg font-semibold text-gold">You're all settled in — welcome to Dayton!</p>
             </div>
           )}
         </div>
@@ -240,7 +241,7 @@ export default function First30DaysPage() {
                 }`}
                 style={isActive ? { borderColor: section.color } : {}}
               >
-                <span className="text-2xl">{section.icon}</span>
+                <span className="w-5 h-5" style={{ color: section.color }}>{section.icon}</span>
                 <div className="text-left">
                   <div className="text-charcoal">{section.title}</div>
                   <div

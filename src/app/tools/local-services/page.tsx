@@ -1,3 +1,8 @@
+'use client';
+
+import { useState } from 'react';
+import { Phone, Globe, Star } from 'lucide-react';
+
 export const metadata = {
   title: 'Local Services Directory | Dayton Relocation',
   description: 'Chris-curated local services for new Dayton residents: movers, plumbing, electrical, HVAC, and more.',
@@ -80,6 +85,9 @@ const SERVICES: Service[] = [
 const CATEGORIES = ['All', 'Movers', 'Plumbing', 'HVAC', 'Cleaning', 'Electrical'];
 
 export default function LocalServicesPage() {
+  const [activeCategory, setActiveCategory] = useState('All');
+  const filteredServices = activeCategory === 'All' ? SERVICES : SERVICES.filter(s => s.category === activeCategory);
+
   return (
     <main className="min-h-screen bg-cream">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12">
@@ -92,29 +100,34 @@ export default function LocalServicesPage() {
 
           <div className="bg-yellow-50 border-l-4 border-gold p-6 rounded-r-lg">
             <p className="text-charcoal">
-              ⭐ <strong>Note from Chris:</strong> These are businesses I've personally vetted or received feedback from clients about. I don't receive referral fees — these recommendations are based on real experience.
+              <Star className="w-4 h-4 inline mr-2" />
+              <strong>Note from Chris:</strong> These are businesses I've personally vetted or received feedback from clients about. I don't receive referral fees — these recommendations are based on real experience.
             </p>
           </div>
         </div>
 
         {/* Featured Section */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold text-charcoal mb-8 border-l-4 border-gold pl-4">Chris-Recommended Movers</h2>
+          <h2 className="text-2xl font-bold text-charcoal mb-8 border-l-4 border-gold pl-4">Chris Recommends</h2>
           <div className="space-y-6">
-            {SERVICES.filter((s) => s.featured).map((service) => (
-              <div key={service.id} className="card bg-white border-2 border-gold p-6">
-                <p className="text-gold font-bold text-sm mb-2">⭐ Chris Recommends</p>
-                <h3 className="text-xl font-bold text-charcoal mb-1">{service.name}</h3>
-                <p className="text-gray-600 text-sm mb-3">{service.description}</p>
-                <div className="flex gap-3">
-                  <a
-                    href={`tel:${service.phone.replace(/\D/g, '')}`}
-                    className="btn-gold text-sm py-2 px-4 inline-flex items-center gap-2"
-                  >
-                    📞 {service.phone}
+            {SERVICES.filter(s => s.featured).map(service => (
+              <div key={service.id} className="bg-white border-2 border-gold rounded-lg p-6">
+                <div className="flex items-start justify-between mb-4">
+                  <div>
+                    <h3 className="text-xl font-bold text-charcoal">{service.name}</h3>
+                    <p className="text-sm text-gray-600">{service.neighborhood}</p>
+                  </div>
+                  <Star className="w-5 h-5 text-gold flex-shrink-0" />
+                </div>
+                <p className="text-charcoal mb-4">{service.description}</p>
+                <div className="flex flex-wrap gap-4">
+                  <a href={`tel:${service.phone}`} className="flex items-center gap-2 text-blue-600 hover:underline">
+                    <Phone className="w-4 h-4" />
+                    {service.phone}
                   </a>
-                  <a href={service.website} target="_blank" rel="noopener noreferrer" className="btn-outline text-sm py-2 px-4 inline-block">
-                    Website
+                  <a href={service.website} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-blue-600 hover:underline">
+                    <Globe className="w-4 h-4" />
+                    Visit Website
                   </a>
                 </div>
               </div>
@@ -123,53 +136,51 @@ export default function LocalServicesPage() {
         </section>
 
         {/* All Services */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold text-charcoal mb-8">All Services</h2>
+        <section>
+          <h2 className="text-2xl font-bold text-charcoal mb-6">All Services</h2>
+          
+          {/* Category Filter */}
+          <div className="mb-8 flex flex-wrap gap-2">
+            {CATEGORIES.map(cat => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`px-4 py-2 rounded-full transition ${
+                  activeCategory === cat
+                    ? 'bg-gold text-charcoal font-semibold'
+                    : 'bg-white border border-gray-300 text-charcoal hover:border-gold'
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
 
-          {CATEGORIES.filter((c) => c !== 'All').map((category) => {
-            const services = SERVICES.filter((s) => s.category === category);
-            if (services.length === 0) return null;
-
-            return (
-              <div key={category} className="mb-10">
-                <h3 className="text-lg font-bold text-charcoal mb-6 border-l-4 border-gold pl-4">{category}</h3>
-                <div className="space-y-4">
-                  {services.map((service) => (
-                    <div key={service.id} className="card bg-white border border-gray-200 p-4">
-                      <div className="flex items-start justify-between mb-3">
-                        <h4 className="font-bold text-charcoal">{service.name}</h4>
-                        <span className="text-xs bg-gray-100 text-gray-600 font-semibold px-2 py-1 rounded">
-                          {service.neighborhood}
-                        </span>
-                      </div>
-                      <p className="text-gray-600 text-sm mb-3">{service.description}</p>
-                      <div className="flex gap-2">
-                        <a
-                          href={`tel:${service.phone.replace(/\D/g, '')}`}
-                          className="text-gold hover:text-gold/80 text-sm font-semibold"
-                        >
-                          {service.phone}
-                        </a>
-                        <span className="text-gray-300">·</span>
-                        <a href={service.website} target="_blank" rel="noopener noreferrer" className="text-gold hover:text-gold/80 text-sm font-semibold">
-                          Website
-                        </a>
-                      </div>
-                    </div>
-                  ))}
+          {/* Services Grid */}
+          <div className="space-y-4">
+            {filteredServices.map(service => (
+              <div key={service.id} className="bg-white border border-gray-200 rounded-lg p-6">
+                <div className="flex items-start justify-between mb-3">
+                  <div>
+                    <h3 className="font-bold text-charcoal">{service.name}</h3>
+                    <p className="text-sm text-gray-600">{service.neighborhood}</p>
+                  </div>
+                  <span className="text-xs font-semibold text-gray-600 bg-gray-100 px-2 py-1 rounded">{service.category}</span>
+                </div>
+                <p className="text-charcoal text-sm mb-3">{service.description}</p>
+                <div className="flex flex-wrap gap-4 text-sm">
+                  <a href={`tel:${service.phone}`} className="flex items-center gap-2 text-blue-600 hover:underline">
+                    <Phone className="w-3 h-3" />
+                    {service.phone}
+                  </a>
+                  <a href={service.website} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-blue-600 hover:underline">
+                    <Globe className="w-3 h-3" />
+                    Visit Website
+                  </a>
                 </div>
               </div>
-            );
-          })}
-        </section>
-
-        {/* CTA */}
-        <section className="bg-charcoal text-white rounded-lg p-8 text-center">
-          <h2 className="text-2xl font-bold text-gold mb-3">Know a Great Local Service?</h2>
-          <p className="text-gray-300 mb-6">Contact Chris to recommend a business for this list.</p>
-          <a href="/contact" className="btn-gold inline-block">
-            Send a Recommendation
-          </a>
+            ))}
+          </div>
         </section>
       </div>
     </main>

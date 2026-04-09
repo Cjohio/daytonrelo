@@ -2,6 +2,27 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import {
+  Drill,
+  Tennis,
+  TableTennis,
+  Droplets,
+  Footprints,
+  Fish,
+  Disc3,
+  Dog,
+  Dumbbell,
+  Snowflake,
+  Tractor,
+  Flower2,
+  Waves,
+  Tent,
+  Snowflake as IceSkate,
+  VolleyballIcon,
+  Boat,
+  MapPin,
+  Lightbulb,
+} from 'lucide-react';
 
 interface Park {
   name: string;
@@ -33,29 +54,29 @@ type Amenity =
 
 const AMENITY_CONFIG: Record<
   Amenity,
-  { label: string; color: string; emoji: string }
+  { label: string; color: string; icon: React.ReactNode }
 > = {
-  playground: { label: 'Playground', color: '#F59E0B', emoji: '🛝' },
-  tennis: { label: 'Tennis', color: '#10B981', emoji: '🎾' },
-  pickleball: { label: 'Pickleball', color: '#6366F1', emoji: '🏓' },
-  splash_pad: { label: 'Splash Pad', color: '#0EA5E9', emoji: '💦' },
-  trails: { label: 'Trails', color: '#84CC16', emoji: '🥾' },
-  fishing: { label: 'Fishing', color: '#06B6D4', emoji: '🎣' },
-  disc_golf: { label: 'Disc Golf', color: '#F97316', emoji: '🥏' },
-  dog_park: { label: 'Dog Park', color: '#A78BFA', emoji: '🐕' },
+  playground: { label: 'Playground', color: '#F59E0B', icon: <Drill className="w-4 h-4" /> },
+  tennis: { label: 'Tennis', color: '#10B981', icon: <Tennis className="w-4 h-4" /> },
+  pickleball: { label: 'Pickleball', color: '#6366F1', icon: <TableTennis className="w-4 h-4" /> },
+  splash_pad: { label: 'Splash Pad', color: '#0EA5E9', icon: <Droplets className="w-4 h-4" /> },
+  trails: { label: 'Trails', color: '#84CC16', icon: <Footprints className="w-4 h-4" /> },
+  fishing: { label: 'Fishing', color: '#06B6D4', icon: <Fish className="w-4 h-4" /> },
+  disc_golf: { label: 'Disc Golf', color: '#F97316', icon: <Disc3 className="w-4 h-4" /> },
+  dog_park: { label: 'Dog Park', color: '#A78BFA', icon: <Dog className="w-4 h-4" /> },
   sports_fields: {
     label: 'Sports Fields',
     color: '#EF4444',
-    emoji: '⚾',
+    icon: <Dumbbell className="w-4 h-4" />,
   },
-  sledding: { label: 'Sledding', color: '#93C5FD', emoji: '🛷' },
-  farm: { label: 'Working Farm', color: '#65A30D', emoji: '🚜' },
-  gardens: { label: 'Gardens', color: '#EC4899', emoji: '🌸' },
-  swimming: { label: 'Swimming', color: '#0284C7', emoji: '🏊' },
-  camping: { label: 'Camping', color: '#92400E', emoji: '⛺' },
-  ice_skating: { label: 'Ice Skating', color: '#BAE6FD', emoji: '⛸️' },
-  volleyball: { label: 'Volleyball', color: '#F59E0B', emoji: '🏐' },
-  boat_launch: { label: 'Boat Launch', color: '#1D4ED8', emoji: '🚤' },
+  sledding: { label: 'Sledding', color: '#93C5FD', icon: <Snowflake className="w-4 h-4" /> },
+  farm: { label: 'Working Farm', color: '#65A30D', icon: <Tractor className="w-4 h-4" /> },
+  gardens: { label: 'Gardens', color: '#EC4899', icon: <Flower2 className="w-4 h-4" /> },
+  swimming: { label: 'Swimming', color: '#0284C7', icon: <Waves className="w-4 h-4" /> },
+  camping: { label: 'Camping', color: '#92400E', icon: <Tent className="w-4 h-4" /> },
+  ice_skating: { label: 'Ice Skating', color: '#BAE6FD', icon: <IceSkate className="w-4 h-4" /> },
+  volleyball: { label: 'Volleyball', color: '#F59E0B', icon: <VolleyballIcon className="w-4 h-4" /> },
+  boat_launch: { label: 'Boat Launch', color: '#1D4ED8', icon: <Boat className="w-4 h-4" /> },
 };
 
 const ALL_PARKS: Park[] = [
@@ -427,7 +448,7 @@ function AmenityBadge({ amenity }: { amenity: Amenity }) {
       style={{ backgroundColor: `${cfg.color}20`, color: cfg.color }}
       title={cfg.label}
     >
-      <span>{cfg.emoji}</span>
+      <span>{cfg.icon}</span>
       <span className="hidden sm:inline">{cfg.label}</span>
     </div>
   );
@@ -498,7 +519,7 @@ export default function ParksPage() {
                       {park.name}
                     </h3>
                     <p className="text-sm text-charcoal/60 flex items-center gap-1">
-                      📍 {park.city}
+                      <MapPin className="w-4 h-4" /> {park.city}
                     </p>
                   </div>
 
@@ -516,7 +537,7 @@ export default function ParksPage() {
                   {park.tip && (
                     <div className="bg-yellow-50 border-l-4 border-gold p-3 mb-4 rounded">
                       <p className="text-sm text-yellow-900">
-                        <span className="font-semibold">💡 Insider tip:</span>{' '}
+                        <span className="font-semibold"><Lightbulb className="w-4 h-4 inline mr-1" />Insider tip:</span>{' '}
                         {park.tip}
                       </p>
                     </div>

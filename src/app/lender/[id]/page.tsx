@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { User, Phone, MessageCircle, Mail, Globe, CheckCircle } from "lucide-react";
 import { LENDERS } from "../page";
 
 export function generateStaticParams() {
@@ -30,7 +31,7 @@ export default function LenderDetailPage({ params }: { params: { id: string } })
             {lender.photo ? (
               <img src={lender.photo} alt={lender.name} className="w-full h-full rounded-full object-cover" />
             ) : (
-              <span className="text-5xl">👤</span>
+              <User className="w-16 h-16 text-gold" />
             )}
           </div>
 
@@ -41,10 +42,10 @@ export default function LenderDetailPage({ params }: { params: { id: string } })
 
           {/* Contact buttons */}
           <div className="flex flex-wrap gap-3 justify-center">
-            <a href={`tel:${lender.phone}`} className="btn-gold">📞 Call</a>
-            <a href={`sms:${lender.phone}`} className="btn-gold">💬 Text</a>
-            <a href={`mailto:${lender.email}`} className="btn-outline">✉️ Email</a>
-            <a href={lender.website} target="_blank" rel="noopener noreferrer" className="btn-outline">🌐 Website</a>
+            <a href={`tel:${lender.phone}`} className="btn-gold flex items-center gap-2"><Phone className="w-4 h-4" /> Call</a>
+            <a href={`sms:${lender.phone}`} className="btn-gold flex items-center gap-2"><MessageCircle className="w-4 h-4" /> Text</a>
+            <a href={`mailto:${lender.email}`} className="btn-outline flex items-center gap-2"><Mail className="w-4 h-4" /> Email</a>
+            <a href={lender.website} target="_blank" rel="noopener noreferrer" className="btn-outline flex items-center gap-2"><Globe className="w-4 h-4" /> Website</a>
           </div>
         </div>
       </section>
@@ -73,9 +74,9 @@ export default function LenderDetailPage({ params }: { params: { id: string } })
           <section>
             <h2 className="text-2xl font-black text-charcoal mb-6 border-l-4 border-gold pl-4">Why {lender.name}?</h2>
             <div className="grid gap-5 md:grid-cols-3">
-              {lender.why.map(({ icon, title, body }) => (
+              {lender.why.map(({ icon: IconComponent, title, body }) => (
                 <div key={title} className="bg-cream rounded-xl p-5 border border-gray-100">
-                  <div className="text-3xl mb-3">{icon}</div>
+                  <div className="mb-3"><IconComponent className="w-8 h-8 text-charcoal" /></div>
                   <h3 className="font-bold text-charcoal mb-2">{title}</h3>
                   <p className="text-gray-600 text-sm leading-relaxed">{body}</p>
                 </div>
@@ -89,7 +90,7 @@ export default function LenderDetailPage({ params }: { params: { id: string } })
             <div className="divide-y divide-gray-100 border border-gray-100 rounded-xl overflow-hidden">
               {lender.loanTypes.map(({ label, note }) => (
                 <div key={label} className="flex items-start gap-4 p-4 bg-white">
-                  <span className="text-gold font-black text-lg flex-shrink-0 mt-0.5">✓</span>
+                  <CheckCircle className="w-5 h-5 text-gold flex-shrink-0 mt-0.5" />
                   <div>
                     <p className="font-bold text-charcoal text-sm">{label}</p>
                     <p className="text-gray-500 text-sm mt-0.5">{note}</p>
@@ -106,7 +107,7 @@ export default function LenderDetailPage({ params }: { params: { id: string } })
               Reach out to {lender.name} directly, or connect through Chris for a warm introduction.
             </p>
             <div className="flex flex-wrap gap-3 justify-center">
-              <a href={`tel:${lender.phone}`} className="btn-gold">📞 Call {lender.name}</a>
+              <a href={`tel:${lender.phone}`} className="btn-gold flex items-center gap-2"><Phone className="w-4 h-4" /> Call {lender.name}</a>
               <Link href="/contact" className="btn-outline">Connect Through Chris</Link>
             </div>
           </section>

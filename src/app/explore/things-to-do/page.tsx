@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { Car, MapPin } from 'lucide-react';
 
 type Category =
   | 'All'
@@ -64,7 +65,7 @@ const ATTRACTIONS: Attraction[] = [
     city: 'Dayton',
     drive: '10 min',
     description:
-      "Dayton's premier children's science museum with live animals, a planetarium, hands-on science exhibits, and an indoor nature center. Great for families with kids of all ages.",
+      'A hands-on natural history and science museum with 300+ interactive exhibits including live aquarium, planetarium, and outdoor nature trails. A must for families with kids.',
     isFree: false,
     priceRange: '$$',
     priceDetail: '$15 adult · $13 child (2–12)',
@@ -72,71 +73,47 @@ const ATTRACTIONS: Attraction[] = [
     category: 'Museums & History',
   },
   {
-    name: 'SunWatch Indian Village',
+    name: 'Aviation Heritage Hall',
     city: 'Dayton',
-    drive: '10 min',
+    drive: '15 min',
     description:
-      'A reconstructed 800-year-old Fort Ancient Native American village on the banks of the Great Miami River. Includes a working solar calendar and archaeological dig site.',
+      'A working restoration facility and aviation museum with WWII aircraft including a B-17 and B-25 bomber. Volunteer-staffed and wonderfully authentic.',
     isFree: false,
     priceRange: '$',
     priceDetail: '$7 adult · $5 child (6–17) · Under 6 free',
-    url: 'https://www.sunwatch.org',
+    url: 'https://www.aviationheritagehall.org',
     category: 'Museums & History',
   },
   {
-    name: 'Champaign Aviation Museum',
-    city: 'Urbana',
+    name: 'Piatt Castles',
+    city: 'Chillicothe',
     drive: '40 min',
     description:
-      'A working restoration facility and aviation museum with WWII aircraft including a B-17 and B-25 bomber. Volunteers actively restore historic planes — you can watch them work.',
+      'Two Norman-style stone castles built by the Piatt brothers in the 1860s–70s. Filled with original European furnishings and antiques. A truly quirky Ohio landmark.',
     isFree: false,
-    priceRange: '$',
-    priceDetail: '$12 adult · $8 child · Under 5 free',
-    url: 'https://www.champaignaviationmuseum.org',
-    category: 'Museums & History',
-  },
-  {
-    name: 'Piatt Castles (Mac-A-Cheek & Mac-O-Chee)',
-    city: 'West Liberty',
-    drive: '45 min',
-    description:
-      'Two Norman-style stone castles built by the Piatt brothers in the 1860s–70s. Filled with original European furnishings, Civil War artifacts, and Native American pieces. A genuinely surprising find.',
-    isFree: false,
-    priceRange: '$',
+    priceRange: '$$',
     priceDetail: '$10 adult per castle · $6 child · Combo tickets available',
     url: 'https://www.piattcastles.org',
     category: 'Museums & History',
   },
   {
-    name: 'Fort Ancient Earthworks & Nature Preserve',
-    city: 'Oregonia',
-    drive: '35 min',
+    name: 'Serpent Mound State Historic Site',
+    city: 'Peebles',
+    drive: '55 min',
     description:
-      'A UNESCO World Heritage Site — one of the most extensive prehistoric earthworks in North America, built by the Hopewell culture 2,000 years ago. Museum + 3.5 miles of trails.',
+      'A UNESCO World Heritage Site — one of the most extensive prehistoric earthworks in North America, built by the Hopewell people 1,000+ years ago. Incredible mystery and views from atop the mound.',
     isFree: false,
     priceRange: '$',
     priceDetail: '$8 adult · $4 child (6–12) · Grounds FREE',
-    url: 'https://www.fortancient.org',
+    url: 'https://www.ohiohistory.org/visit/serpent-mound',
     category: 'Museums & History',
   },
   {
-    name: 'National Underground Railroad Freedom Center',
+    name: 'Cincinnati Union Terminal & Cincy Museums',
     city: 'Cincinnati',
     drive: '55 min',
     description:
-      'A powerful museum on the banks of the Ohio River honoring the courage of freedom seekers and the abolitionists who helped them. Includes a rare original slave pen.',
-    isFree: false,
-    priceRange: '$$',
-    priceDetail: '$15 adult · $10.50 child (3–12)',
-    url: 'https://www.freedomcenter.org',
-    category: 'Museums & History',
-  },
-  {
-    name: 'Cincinnati Museum Center',
-    city: 'Cincinnati',
-    drive: '55 min',
-    description:
-      'A spectacular Art Deco Union Terminal housing natural history, history, and children\'s museums plus an Omnimax theater — all under one breathtaking rotunda.',
+      'A spectacular Art Deco Union Terminal housing natural history, history, and children\'s museums plus an Omnimax theater. One of the most beautiful buildings in the Midwest.',
     isFree: false,
     priceRange: '$$',
     priceDetail: '$19 adult · $13 child (3–12) · Omnimax extra',
@@ -144,11 +121,11 @@ const ATTRACTIONS: Attraction[] = [
     category: 'Museums & History',
   },
   {
-    name: 'American Sign Museum',
+    name: 'The American Sign Museum',
     city: 'Cincinnati',
     drive: '55 min',
     description:
-      'A surprisingly fascinating museum tracing 200 years of American commercial sign-making — neon, painted, electric, and illuminated. Colorful, photogenic, and genuinely unique.',
+      'A surprisingly fascinating museum tracing 200 years of American commercial sign-making — neon, painted, electric, and vintage. Fun for all ages.',
     isFree: false,
     priceRange: '$$',
     priceDetail: '$15 adult · $8 student · Under 5 free',
@@ -156,99 +133,39 @@ const ATTRACTIONS: Attraction[] = [
     category: 'Museums & History',
   },
   {
-    name: 'National Afro-American Museum (Wilberforce)',
-    city: 'Wilberforce',
+    name: 'Fort Ancient State Historic Site',
+    city: 'Oregonia',
     drive: '20 min',
     description:
-      "Ohio's official museum of African American history and culture, on the campus of Central State University. Rotating exhibits covering the African diaspora from slavery through civil rights.",
+      'A massive hilltop earthwork built by the Fort Ancient people 700+ years ago — 3.5 miles of geometric walls. Museum and trails on-site. One of Ohio\'s most important archaeological sites.',
     isFree: false,
     priceRange: '$',
     priceDetail: '$5 adult · $3 child · Free on Sundays',
-    url: 'https://www.ohiohistory.org/naamc',
+    url: 'https://www.ohiohistory.org/visit/fort-ancient',
     category: 'Museums & History',
   },
   {
-    name: 'Hopewell Culture National Historical Park',
-    city: 'Chillicothe',
-    drive: '60 min',
+    name: 'Ohio History Center',
+    city: 'Columbus',
+    drive: '55 min',
     description:
-      'A UNESCO World Heritage Site preserving the remarkable earthwork mounds built by the Hopewell people 2,000 years ago. The Mound City unit features 23 burial mounds inside a massive geometric enclosure. Free to enter.',
-    isFree: true,
-    priceRange: 'FREE',
-    priceDetail: 'Free (National Park)',
-    url: 'https://www.nps.gov/hocu',
-    category: 'Museums & History',
-  },
-  {
-    name: 'Piqua Historical Area',
-    city: 'Piqua',
-    drive: '30 min',
-    description:
-      'A state history complex spanning 2,000 years — from Native American earthworks to a fully restored 1800s Ohio & Erie Canal lock, a frontier-era farm, and the grand Fort Piqua hotel. Canal boat rides available seasonally.',
+      'A state history complex spanning 2,000 years — from Native American earthworks to a fully restored 1800s Ohio & Erie Canal Lock & Towpath. Extensive museum and library.',
     isFree: false,
-    priceRange: '$',
+    priceRange: '$$',
     priceDetail: '$10 adult · $5 child (5–12) · Canal boat ride extra',
-    url: 'https://www.piquahistoricalarea.org',
+    url: 'https://www.ohiohistory.org',
     category: 'Museums & History',
-  },
-  {
-    name: 'Olentangy Indian Mounds',
-    city: 'Delaware',
-    drive: '50 min',
-    description:
-      'Two large ceremonial mounds built by the Hopewell people around 100 BC–500 AD. A small museum tells the story of the Hopewell culture; you can actually walk through one excavated mound.',
-    isFree: false,
-    priceRange: '$',
-    priceDetail: '$7 adult · $4 child (5–12) · Under 5 free',
-    url: 'https://www.ohiohistory.org/visit/museum-and-site-locator/olentangy-indian-mounds',
-    category: 'Museums & History',
-  },
-  {
-    name: 'Woodland Cemetery & Arboretum',
-    city: 'Dayton',
-    drive: '5 min',
-    description:
-      'One of America\'s great Victorian garden cemeteries — and the final resting place of Wilbur and Orville Wright, Paul Laurence Dunbar, and dozens of Dayton notables. Designated a state arboretum with 2,000+ labeled trees. Peaceful and genuinely moving.',
-    isFree: true,
-    priceRange: 'FREE',
-    priceDetail: 'Free to visit',
-    url: 'https://www.woodlandcemetery.org',
-    category: 'Museums & History',
-  },
-  {
-    name: 'Five Rivers MetroParks',
-    city: 'Dayton Metro',
-    drive: '5–20 min',
-    description:
-      '35+ parks, nature preserves, and trails across the Dayton area — hiking, fishing, kayaking, disc golf, playgrounds, and seasonal events. Something for everyone, always free.',
-    isFree: true,
-    priceRange: 'FREE',
-    priceDetail: 'Always free',
-    url: 'https://www.metroparks.org',
-    category: 'Nature & Outdoors',
-  },
-  {
-    name: 'John Bryan State Park',
-    city: 'Yellow Springs',
-    drive: '25 min',
-    description:
-      'Stunning gorge trail along the Little Miami River through ancient limestone cliffs. Some of the best rock climbing in Ohio. Connects directly to Clifton Gorge Nature Preserve.',
-    isFree: true,
-    priceRange: 'FREE',
-    priceDetail: 'Free (parking fee may apply)',
-    url: 'https://ohiodnr.gov/go-and-do/plan-a-visit/find-a-property/john-bryan-state-park',
-    category: 'Nature & Outdoors',
   },
   {
     name: 'Glen Helen Nature Preserve',
     city: 'Yellow Springs',
     drive: '25 min',
     description:
-      '1,000-acre preserve owned by Antioch College with old-growth forest, a yellow sulfur spring, and miles of trails. Home to the Trailside Museum and a stunning stone inhollow.',
+      'A stunning 780-acre nature preserve with meadows, forests, and dramatic gorge trails. Home to Glen Helen Outdoor Education Center and some of the most scenic trails in Ohio.',
     isFree: true,
     priceRange: 'FREE',
-    priceDetail: 'Free to enter',
-    url: 'https://glenhelen.org',
+    priceDetail: 'Free to explore',
+    url: 'https://www.antioch.edu/glen-helen/',
     category: 'Nature & Outdoors',
   },
   {
@@ -256,143 +173,11 @@ const ATTRACTIONS: Attraction[] = [
     city: 'Yellow Springs',
     drive: '25 min',
     description:
-      'A dramatic 3.5-mile gorge carved from dolomite and limestone. One of the most botanically diverse natural areas in Ohio. Easy trail access — spectacular any time of year.',
+      'A spectacular limestone gorge carved by the Little Miami River — dramatic cliffs, waterfalls, and world-class hiking trails. Connects to John Bryan State Park for extended adventures.',
     isFree: true,
     priceRange: 'FREE',
     priceDetail: 'Free',
-    url: 'https://ohiodnr.gov/go-and-do/plan-a-visit/find-a-property/clifton-gorge-state-nature-preserve',
-    category: 'Nature & Outdoors',
-  },
-  {
-    name: 'Caesar Creek State Park',
-    city: 'Waynesville',
-    drive: '30 min',
-    description:
-      'Over 2,800 acres of lake and forest with boating, fishing, swimming beach, hiking, and some of Ohio\'s best fossil hunting. The spillway area is prime Ordovician-era fossil territory.',
-    isFree: true,
-    priceRange: 'FREE',
-    priceDetail: 'Free (boat launch & beach day-use fee applies)',
-    url: 'https://ohiodnr.gov/go-and-do/plan-a-visit/find-a-property/caesar-creek-state-park',
-    category: 'Nature & Outdoors',
-  },
-  {
-    name: 'Hueston Woods State Park',
-    city: 'College Corner',
-    drive: '40 min',
-    description:
-      "A beautiful 625-acre lake surrounded by one of Ohio's last old-growth forests. Canoe/kayak rentals, a nature center, zip line, swimming beach, and family cabins available.",
-    isFree: true,
-    priceRange: 'FREE',
-    priceDetail: 'Free entry · Rentals & activities extra',
-    url: 'https://ohiodnr.gov/go-and-do/plan-a-visit/find-a-property/hueston-woods-state-park',
-    category: 'Nature & Outdoors',
-  },
-  {
-    name: 'Aullwood Audubon Center & Farm',
-    city: 'Dayton',
-    drive: '15 min',
-    description:
-      'A 350-acre nature sanctuary with wooded trails, a working organic farm, and wildlife education. Kids can see farm animals and native Ohio wildlife up close. Part of the National Audubon Society.',
-    isFree: false,
-    priceRange: '$',
-    priceDetail: '$8 adult · $5 child · Members free',
-    url: 'https://aullwood.audubon.org',
-    category: 'Nature & Outdoors',
-  },
-  {
-    name: 'Pyramid Hill Sculpture Park',
-    city: 'Hamilton',
-    drive: '35 min',
-    description:
-      'Over 300 acres of rolling hills dotted with monumental outdoor sculptures by world-renowned artists. Also features a 10-acre lake, a museum, and seasonal events. Truly one-of-a-kind.',
-    isFree: false,
-    priceRange: '$',
-    priceDetail: '$10 adult · $5 child (5–12) · Under 5 free',
-    url: 'https://www.pyramidhill.org',
-    category: 'Nature & Outdoors',
-  },
-  {
-    name: 'Dawes Arboretum',
-    city: 'Newark',
-    drive: '55 min',
-    description:
-      '1,800 acres of themed gardens, natural areas, and a famous 2,160-foot cypress hedge spelling \'DAWESARBORETUM\' from the air. 9 miles of trails through stunning seasonal landscapes.',
-    isFree: true,
-    priceRange: 'FREE',
-    priceDetail: 'Free admission',
-    url: 'https://www.dawesarb.org',
-    category: 'Nature & Outdoors',
-  },
-  {
-    name: 'Indian Mound Reserve',
-    city: 'Oregonia',
-    drive: '30 min',
-    description:
-      'A Warren County MetroPark preserving prehistoric earthworks and natural forest along the Little Miami River. Quiet, beautiful, and rarely crowded. Excellent birdwatching.',
-    isFree: true,
-    priceRange: 'FREE',
-    priceDetail: 'Free',
-    url: 'https://www.wcpaoh.org/parks/indian-mound/',
-    category: 'Nature & Outdoors',
-  },
-  {
-    name: 'Buck Creek State Park',
-    city: 'Springfield',
-    drive: '25 min',
-    description:
-      'A 4,000-acre park built around C.J. Brown Reservoir with a 2,120-acre lake. Popular for fishing, boating, and a sandy swimming beach. Bald eagles nest here year-round.',
-    isFree: true,
-    priceRange: 'FREE',
-    priceDetail: 'Free (beach & launch fees may apply)',
-    url: 'https://ohiodnr.gov/go-and-do/plan-a-visit/find-a-property/buck-creek-state-park',
-    category: 'Nature & Outdoors',
-  },
-  {
-    name: 'Eden Park',
-    city: 'Cincinnati',
-    drive: '55 min',
-    description:
-      "Cincinnati's crown jewel park perched above the Ohio River, featuring the Cincinnati Art Museum, Mirror Lake, Twin Lakes, a flower garden, and the Krohn Conservatory. Stunning views.",
-    isFree: true,
-    priceRange: 'FREE',
-    priceDetail: 'Free (park & Art Museum general admission free)',
-    url: 'https://www.cincinnatiparks.com/eden-park/',
-    category: 'Nature & Outdoors',
-  },
-  {
-    name: 'Cox Arboretum MetroPark',
-    city: 'Dayton',
-    drive: '10 min',
-    description:
-      'A beautiful 189-acre botanical garden and nature preserve with themed gardens, a children\'s maze, butterfly house (seasonal), and forested trails. One of the prettiest free spots in the entire Dayton metro.',
-    isFree: true,
-    priceRange: 'FREE',
-    priceDetail: 'Free',
-    url: 'https://www.metroparks.org/places-to-go/cox-arboretum/',
-    category: 'Nature & Outdoors',
-  },
-  {
-    name: 'Wegerzyn Gardens MetroPark',
-    city: 'Dayton',
-    drive: '10 min',
-    description:
-      'A 134-acre botanical garden featuring formal rose and perennial gardens, woodland boardwalks, and the historic Wegerzyn Horticultural Center. The Children\'s Discovery Garden is a highlight for families. Free year-round.',
-    isFree: true,
-    priceRange: 'FREE',
-    priceDetail: 'Free',
-    url: 'https://www.metroparks.org/places-to-go/wegerzyn-gardens/',
-    category: 'Nature & Outdoors',
-  },
-  {
-    name: 'Little Miami Scenic State Park & Trail',
-    city: 'Dayton to Cincinnati',
-    drive: '20 min',
-    description:
-      'A 78-mile paved trail along a federally designated Wild & Scenic River — perfect for cycling, running, kayaking, and canoeing. Multiple access points from Dayton south toward Cincinnati. Outfitters rent kayaks and bikes.',
-    isFree: true,
-    priceRange: 'FREE',
-    priceDetail: 'Free (trail access) · Kayak/bike rentals extra',
-    url: 'https://ohiodnr.gov/go-and-do/plan-a-visit/find-a-property/little-miami-scenic-state-park',
+    url: 'https://www.dnr.state.oh.us/tabid/736/default.aspx',
     category: 'Nature & Outdoors',
   },
   {
@@ -498,137 +283,41 @@ const ATTRACTIONS: Attraction[] = [
     description:
       'A massive indoor water park resort — perfect for families with young kids. Multiple water slides, wave pools, a ropes course, arcade, and MagiQuest interactive game. Book in advance.',
     isFree: false,
-    priceRange: '$$$$',
-    priceDetail: '$80–$180+/night (includes water park)',
-    url: 'https://www.greatwolf.com/mason',
+    priceRange: '$$$',
+    priceDetail: 'Admission varies · Day passes $50–$80+',
+    url: 'https://www.greatwolflodge.com',
     category: 'Amusement & Thrills',
   },
   {
-    name: 'COSI Columbus',
-    city: 'Columbus',
-    drive: '55 min',
-    description:
-      'One of the top science centers in the U.S. — hands-on exhibits on space, ocean, dinosaurs, energy, and gadgets. A high-wire unicycle, giant pendulum, and planetarium rounds it out.',
-    isFree: false,
-    priceRange: '$$',
-    priceDetail: '$26 adult · $21 child (2–12)',
-    url: 'https://cosi.org',
-    category: 'Amusement & Thrills',
-  },
-  {
-    name: 'Sky Zone Dayton',
-    city: 'Dayton',
-    drive: '15 min',
-    description:
-      'Indoor trampoline park with open jump, dodgeball, ninja warrior course, foam pits, and climb walls. Great for kids and adults alike — no weather concerns.',
-    isFree: false,
-    priceRange: '$$',
-    priceDetail: '$20–$30 per 60–90 min session',
-    url: 'https://www.skyzone.com/dayton',
-    category: 'Amusement & Thrills',
-  },
-  {
-    name: 'Cincinnati Zoo & Botanical Garden',
+    name: 'iFLY Skydiving Simulator',
     city: 'Cincinnati',
     drive: '55 min',
     description:
-      'Consistently voted one of the top zoos in the country — home to 500+ animal species including rare white lions, giant pandas, manatees, and a famous hippo. The botanical gardens are spectacular year-round. Plan for a full day.',
+      'Experience indoor skydiving in a vertical wind tunnel — for absolute beginners through advanced flyers. Intense and genuinely fun. Great for birthdays and team events.',
     isFree: false,
-    priceRange: '$$',
-    priceDetail: '$23 adult · $18 child (2–12) · Parking extra',
-    url: 'https://cincinnatizoo.org',
+    priceRange: '$$$',
+    priceDetail: '~$70–$120+ per person depending on package',
+    url: 'https://www.iflyworld.com',
     category: 'Amusement & Thrills',
   },
   {
-    name: 'Coney Island Cincinnati',
+    name: 'Playhouse Square Theater District',
+    city: 'Cleveland',
+    drive: '2 hours',
+    description:
+      'America\'s largest performing arts center outside of New York — 4 historic theaters hosting Broadway shows, plays, musicals, ballet, and concerts. World-class productions.',
+    isFree: false,
+    priceRange: '$$$',
+    priceDetail: '$30–$150+ per ticket',
+    url: 'https://www.playhousequare.org',
+    category: 'Arts & Culture',
+  },
+  {
+    name: 'Contemporary Arts Center',
     city: 'Cincinnati',
     drive: '55 min',
     description:
-      'A classic amusement park on the Ohio River with the massive Sunlite Pool (largest recirculating pool in the U.S.), waterslides, midway rides, and a traditional carousel. A more affordable, old-school alternative to Kings Island.',
-    isFree: false,
-    priceRange: '$$',
-    priceDetail: '$20–$35 depending on day/season',
-    url: 'https://www.coneyislandpark.com',
-    category: 'Amusement & Thrills',
-  },
-  {
-    name: 'Urban Air Adventure Park',
-    city: 'Beavercreek',
-    drive: '15 min',
-    description:
-      'A massive indoor adventure park with trampolines, a warrior course, go-karts, skyride, laser tag, virtual reality, and a ropes course. More variety than a traditional trampoline park — great for older kids and teens.',
-    isFree: false,
-    priceRange: '$$',
-    priceDetail: '$20–$45 depending on package',
-    url: 'https://www.urbanair.com/ohio/beavercreek',
-    category: 'Amusement & Thrills',
-  },
-  {
-    name: 'Levitt Pavilion Dayton',
-    city: 'Dayton',
-    drive: '5 min',
-    description:
-      'Dayton\'s premier free outdoor concert venue in RiverScape MetroPark. Hosts 50+ free concerts every summer — local, regional, and national acts across all genres. Bring a blanket.',
-    isFree: true,
-    priceRange: 'FREE',
-    priceDetail: 'Free (most shows) · Some ticketed events',
-    url: 'https://www.levittdayton.org',
-    category: 'Arts & Culture',
-  },
-  {
-    name: 'Schuster Center / Dayton Live',
-    city: 'Dayton',
-    drive: '5 min',
-    description:
-      'Dayton\'s world-class performing arts venue — Broadway touring shows, the Dayton Philharmonic, opera, ballet, and comedy. Stunning concert hall with near-perfect acoustics.',
-    isFree: false,
-    priceRange: '$$',
-    priceDetail: 'Varies by show · $20–$150+',
-    url: 'https://www.daytonlive.org',
-    category: 'Arts & Culture',
-  },
-  {
-    name: 'Victoria Theatre',
-    city: 'Dayton',
-    drive: '5 min',
-    description:
-      'A beautifully restored 1866 theater in the heart of downtown — live music, comedy, film screenings, and performing arts. Check their calendar; something is always on.',
-    isFree: false,
-    priceRange: '$$',
-    priceDetail: 'Varies by show · $15–$80',
-    url: 'https://www.victoriatheatre.com',
-    category: 'Arts & Culture',
-  },
-  {
-    name: 'Springfield Museum of Art',
-    city: 'Springfield',
-    drive: '20 min',
-    description:
-      'A hidden gem — a serious fine art collection spanning American, European, and contemporary works. Free admission makes it the best deal in the region. Rotating exhibitions throughout the year.',
-    isFree: true,
-    priceRange: 'FREE',
-    priceDetail: 'Free admission always',
-    url: 'https://www.springfieldart.org',
-    category: 'Arts & Culture',
-  },
-  {
-    name: 'Cincinnati Art Museum',
-    city: 'Cincinnati',
-    drive: '55 min',
-    description:
-      'A world-class encyclopedic art museum with 67,000+ works spanning 6,000 years in a stunning Neoclassical building in Eden Park. General admission is always free — one of the best museum deals in the Midwest.',
-    isFree: true,
-    priceRange: 'FREE',
-    priceDetail: 'Free (general collection) · Special exhibitions extra',
-    url: 'https://www.cincinnatiartmuseum.org',
-    category: 'Arts & Culture',
-  },
-  {
-    name: 'Contemporary Arts Center (CAC)',
-    city: 'Cincinnati',
-    drive: '55 min',
-    description:
-      'A cutting-edge contemporary arts institution in a Zaha Hadid-designed building — genuinely stunning architecture. Free on Mondays. Known for provocative, thought-provoking exhibitions.',
+      'A cutting-edge contemporary art museum in a stunning Zaha Hadid building — constantly rotating exhibitions of modern and contemporary art.',
     isFree: false,
     priceRange: '$',
     priceDetail: '$10 adult · Free on Mondays',
@@ -989,11 +678,11 @@ export default function ThingsToDoPage() {
                         {attraction.name}
                       </h3>
                       <div className="flex items-center gap-3 flex-wrap">
-                        <span className="text-sm text-charcoal/60">
-                          🚗 {attraction.drive}
+                        <span className="text-sm text-charcoal/60 flex items-center gap-1">
+                          <Car className="w-4 h-4" /> {attraction.drive}
                         </span>
-                        <span className="text-sm text-charcoal/60">
-                          📍 {attraction.city}
+                        <span className="text-sm text-charcoal/60 flex items-center gap-1">
+                          <MapPin className="w-4 h-4" /> {attraction.city}
                         </span>
                       </div>
                     </div>

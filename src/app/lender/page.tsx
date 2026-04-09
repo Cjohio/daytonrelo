@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Medal, Zap, Home, Hammer, Award, TrendingUp, Briefcase } from "lucide-react";
 import LenderCards from "./LenderCards";
 
 export const metadata: Metadata = {
@@ -32,9 +33,9 @@ export const LENDERS = [
       { label: "Cash-Out Refinance",   note: "Access your equity for any purpose" },
     ],
     why: [
-      { icon: "🎖️", title: "VA Specialist",  body: "Add detail about VA loan expertise and track record with military buyers." },
-      { icon: "⚡",  title: "Fast Closings",  body: "Add detail about turnaround speed and pre-approval process." },
-      { icon: "🏠",  title: "Local Expert",   body: "Add context about knowledge of the Dayton/WPAFB market." },
+      { icon: Medal, title: "VA Specialist",  body: "Add detail about VA loan expertise and track record with military buyers." },
+      { icon: Zap,  title: "Fast Closings",  body: "Add detail about turnaround speed and pre-approval process." },
+      { icon: Home,  title: "Local Expert",   body: "Add context about knowledge of the Dayton/WPAFB market." },
     ],
   },
   {
@@ -59,9 +60,9 @@ export const LENDERS = [
       { label: "USDA Rural Loan",      note: "0% down for eligible Ohio properties" },
     ],
     why: [
-      { icon: "🏠",  title: "First-Time Buyer Focus", body: "Add detail about approach to guiding first-time buyers." },
-      { icon: "🔨",  title: "Renovation Expert",      body: "Add context about 203k and renovation lending experience." },
-      { icon: "🏆",  title: "Award / Credential",     body: "Add any relevant credentials, volume stats, or recognitions." },
+      { icon: Home,  title: "First-Time Buyer Focus", body: "Add detail about approach to guiding first-time buyers." },
+      { icon: Hammer,  title: "Renovation Expert",      body: "Add context about 203k and renovation lending experience." },
+      { icon: Award,  title: "Award / Credential",     body: "Add any relevant credentials, volume stats, or recognitions." },
     ],
   },
   {
@@ -86,9 +87,9 @@ export const LENDERS = [
       { label: "Cash-Out Refinance",   note: "Access equity for any purpose" },
     ],
     why: [
-      { icon: "📈",  title: "Investment Specialist", body: "Add detail about experience with investment and multi-unit properties." },
-      { icon: "💼",  title: "High-Volume Closer",    body: "Add context about closing volume and complex transactions." },
-      { icon: "🏆",  title: "Award / Credential",    body: "Add any relevant credentials, awards, or volume stats." },
+      { icon: TrendingUp,  title: "Investment Specialist", body: "Add detail about experience with investment and multi-unit properties." },
+      { icon: Briefcase,  title: "High-Volume Closer",    body: "Add context about closing volume and complex transactions." },
+      { icon: Award,  title: "Award / Credential",    body: "Add any relevant credentials, awards, or volume stats." },
     ],
   },
 ];

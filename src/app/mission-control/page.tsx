@@ -2,6 +2,7 @@
 
 import { useMemo } from 'react'
 import Link from 'next/link'
+import { Palette, PenSquare, Film } from 'lucide-react'
 import { useContentItems } from '@/lib/mission-control/use-content'
 import type { Platform, ContentStatus } from '@/lib/mission-control/types'
 import { PLATFORM_CONFIG, STATUS_CONFIG, CONTENT_TYPE_CONFIG } from '@/lib/mission-control/types'
@@ -28,7 +29,7 @@ const QUICK_CREATE = [
     type: 'brand_template' as const,
     title: 'Brand Template',
     desc: 'Graphic post with DR branding',
-    emoji: '🎨',
+    icon: <Palette className="w-6 h-6" />,
     color: 'from-[#C9A84C]/20 to-[#C9A84C]/5 border-[#C9A84C]/30',
     textColor: 'text-[#C9A84C]',
   },
@@ -36,7 +37,7 @@ const QUICK_CREATE = [
     type: 'long_form' as const,
     title: 'Long-Form Post',
     desc: 'In-depth caption + multi-platform',
-    emoji: '📝',
+    icon: <PenSquare className="w-6 h-6" />,
     color: 'from-blue-900/30 to-blue-900/10 border-blue-700/40',
     textColor: 'text-blue-300',
   },
@@ -44,7 +45,7 @@ const QUICK_CREATE = [
     type: 'story_video' as const,
     title: 'Story Video',
     desc: 'Short-form reel / TikTok / YouTube',
-    emoji: '🎬',
+    icon: <Film className="w-6 h-6" />,
     color: 'from-pink-900/30 to-pink-900/10 border-pink-700/40',
     textColor: 'text-pink-300',
   },
@@ -156,7 +157,7 @@ export default function DashboardPage() {
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-1">
                           <span className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-semibold border ${typeCfg.color}`}>
-                            {typeCfg.emoji} {typeCfg.label}
+                            {typeCfg.icon} {typeCfg.label}
                           </span>
                           <span className={`inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold border ${statusCfg.color} ${statusCfg.borderColor} ${statusCfg.textColor}`}>
                             {statusCfg.label}
@@ -185,13 +186,13 @@ export default function DashboardPage() {
           <div>
             <h2 className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3">Quick Create</h2>
             <div className="space-y-2">
-              {QUICK_CREATE.map(({ type, title, desc, emoji, color, textColor }) => (
+              {QUICK_CREATE.map(({ type, title, desc, icon, color, textColor }) => (
                 <Link
                   key={type}
                   href={`/mission-control/create?type=${type}`}
                   className={`flex items-center gap-3 p-3 bg-gradient-to-r ${color} border rounded-xl hover:brightness-110 transition-all`}
                 >
-                  <span className="text-2xl">{emoji}</span>
+                  <div className="text-[#C9A84C]">{icon}</div>
                   <div>
                     <div className={`text-sm font-bold ${textColor}`}>{title}</div>
                     <div className="text-[11px] text-gray-500">{desc}</div>
@@ -246,7 +247,7 @@ export default function DashboardPage() {
               const statusCfg = STATUS_CONFIG[item.status]
               return (
                 <div key={item.id} className="flex items-center gap-4 px-4 py-3 hover:bg-white/[0.03] transition-colors">
-                  <div className="flex-shrink-0 text-xl">{typeCfg.emoji}</div>
+                  <div className="flex-shrink-0">{typeCfg.icon}</div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm text-white font-medium truncate">{item.title}</p>
                     <p className="text-[11px] text-gray-500">{item.content_id} · {new Date(item.created_at).toLocaleDateString()}</p>

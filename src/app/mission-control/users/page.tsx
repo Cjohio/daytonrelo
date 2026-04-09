@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState, useCallback } from 'react'
+import { Users, Sunrise, Target, Bell, Flame, Zap, Eye, Sprout, Moon, Wrench, ClipboardList, AlertTriangle, Lightbulb, Mail } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 
 // ── Types ──────────────────────────────────────────────────────────────────────
@@ -79,18 +80,18 @@ function engagementColor(events: number): string {
   return 'text-gray-600'
 }
 
-function engagementLabel(events: number): { label: string; color: string; bg: string } {
-  if (events >= 20) return { label: '🔥 Hot',    color: 'text-red-300',    bg: 'bg-red-900/30 border-red-700/40' }
-  if (events >= 10) return { label: '⚡ Active',  color: 'text-orange-300', bg: 'bg-orange-900/30 border-orange-700/40' }
-  if (events >= 5)  return { label: '👀 Warm',    color: 'text-yellow-300', bg: 'bg-yellow-900/30 border-yellow-700/40' }
-  if (events >= 1)  return { label: '🌱 New',     color: 'text-blue-300',   bg: 'bg-blue-900/30 border-blue-700/40' }
-  return               { label: '😴 Inactive', color: 'text-gray-500',   bg: 'bg-gray-800/30 border-gray-700/40' }
+function engagementLabel(events: number): { label: string; icon: React.ReactNode; color: string; bg: string } {
+  if (events >= 20) return { label: 'Hot',    icon: <Flame className="w-3 h-3" />, color: 'text-red-300',    bg: 'bg-red-900/30 border-red-700/40' }
+  if (events >= 10) return { label: 'Active',  icon: <Zap className="w-3 h-3" />, color: 'text-orange-300', bg: 'bg-orange-900/30 border-orange-700/40' }
+  if (events >= 5)  return { label: 'Warm',    icon: <Eye className="w-3 h-3" />, color: 'text-yellow-300', bg: 'bg-yellow-900/30 border-yellow-700/40' }
+  if (events >= 1)  return { label: 'New',     icon: <Sprout className="w-3 h-3" />, color: 'text-blue-300',   bg: 'bg-blue-900/30 border-blue-700/40' }
+  return               { label: 'Inactive', icon: <Moon className="w-3 h-3" />, color: 'text-gray-500',   bg: 'bg-gray-800/30 border-gray-700/40' }
 }
 
 // ── Stat Card ─────────────────────────────────────────────────────────────────
 
 function StatCard({ label, value, sub, color, icon }: {
-  label: string; value: string | number; sub?: string; color?: string; icon: string
+  label: string; value: string | number; sub?: string; color?: string; icon: React.ReactNode
 }) {
   return (
     <div className="bg-[#0C1A32] border border-white/[0.07] rounded-xl p-5 flex flex-col gap-2">
@@ -185,8 +186,9 @@ export default function UsersPage() {
 
       {/* ── Error ── */}
       {error && (
-        <div className="bg-red-900/20 border border-red-700/40 rounded-xl px-5 py-4 text-red-300 text-sm">
-          ⚠️ {error}
+        <div className="bg-red-900/20 border border-red-700/40 rounded-xl px-5 py-4 text-red-300 text-sm flex items-center gap-2">
+          <AlertTriangle className="w-4 h-4 flex-shrink-0" />
+          {error}
         </div>
       )}
 
@@ -199,10 +201,10 @@ export default function UsersPage() {
         </div>
       ) : stats && (
         <div className="grid grid-cols-4 gap-4">
-          <StatCard label="Total Users"    value={stats.total_users}    icon="👥" color="text-white"        sub={`+${stats.new_this_month} this month`} />
-          <StatCard label="New Today"      value={stats.new_today}      icon="🌅" color="text-[#C9A84C]"   sub={`+${stats.new_this_week} this week`} />
-          <StatCard label="Total Leads"    value={stats.total_leads}    icon="🎯" color="text-emerald-400" sub={`+${stats.leads_this_week} this week`} />
-          <StatCard label="Leads Today"    value={stats.leads_today}    icon="🔔" color="text-blue-400"    sub="New inbound inquiries" />
+          <StatCard label="Total Users"    value={stats.total_users}    icon={<Users className="w-5 h-5" />} color="text-white"        sub={`+${stats.new_this_month} this month`} />
+          <StatCard label="New Today"      value={stats.new_today}      icon={<Sunrise className="w-5 h-5" />} color="text-[#C9A84C]"   sub={`+${stats.new_this_week} this week`} />
+          <StatCard label="Total Leads"    value={stats.total_leads}    icon={<Target className="w-5 h-5" />} color="text-emerald-400" sub={`+${stats.leads_this_week} this week`} />
+          <StatCard label="Leads Today"    value={stats.leads_today}    icon={<Bell className="w-5 h-5" />} color="text-blue-400"    sub="New inbound inquiries" />
         </div>
       )}
 
@@ -210,7 +212,7 @@ export default function UsersPage() {
       {!loading && users.filter(u => u.total_events >= 10).length > 0 && (
         <div className="bg-gradient-to-r from-red-900/30 to-orange-900/20 border border-red-700/40 rounded-xl px-5 py-4">
           <div className="flex items-center gap-3">
-            <span className="text-2xl">🔥</span>
+            <Flame className="w-6 h-6 flex-shrink-0 text-red-400" />
             <div>
               <p className="text-white font-semibold text-sm">
                 {users.filter(u => u.total_events >= 10).length} hot {users.filter(u => u.total_events >= 10).length === 1 ? 'user' : 'users'} right now
@@ -237,15 +239,30 @@ export default function UsersPage() {
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2 ${
               activeTab === tab
                 ? 'bg-[#C9A84C] text-[#070F1E]'
                 : 'text-gray-400 hover:text-white'
             }`}
           >
-            {tab === 'users' ? `👥 Users (${users.length})` :
-             tab === 'tools' ? `🛠 Tool Usage` :
-             `📋 Leads (${leads.length})`}
+            {tab === 'users' ? (
+              <>
+                <Users className="w-4 h-4" />
+                Users ({users.length})
+              </>
+            ) :
+             tab === 'tools' ? (
+              <>
+                <Wrench className="w-4 h-4" />
+                Tool Usage
+              </>
+            ) :
+             (
+              <>
+                <ClipboardList className="w-4 h-4" />
+                Leads ({leads.length})
+              </>
+            )}
           </button>
         ))}
       </div>
@@ -272,13 +289,13 @@ export default function UsersPage() {
                 <button
                   key={f}
                   onClick={() => setFilter(f)}
-                  className={`px-3 py-2 text-xs font-semibold rounded-lg border transition-all ${
+                  className={`px-3 py-2 text-xs font-semibold rounded-lg border transition-all flex items-center gap-1 ${
                     filter === f
                       ? 'bg-[#C9A84C]/20 text-[#C9A84C] border-[#C9A84C]/40'
                       : 'bg-transparent text-gray-500 border-white/10 hover:text-white'
                   }`}
                 >
-                  {f === 'all' ? 'All' : f === 'hot' ? '🔥 Hot (20+)' : f === 'active' ? '⚡ Active (5+)' : '🌱 New'}
+                  {f === 'all' ? 'All' : f === 'hot' ? (<><Flame className="w-3 h-3" /> Hot (20+)</>) : f === 'active' ? (<><Zap className="w-3 h-3" /> Active (5+)</>) : (<><Sprout className="w-3 h-3" /> New</>)}
                 </button>
               ))}
             </div>
@@ -325,7 +342,8 @@ export default function UsersPage() {
                       <div className="text-sm text-gray-400 font-mono">{u.chat_count}</div>
                       {/* Status badge */}
                       <div>
-                        <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold border ${badge.bg} ${badge.color}`}>
+                        <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold border ${badge.bg} ${badge.color}`}>
+                          {badge.icon}
                           {badge.label}
                         </span>
                       </div>
@@ -335,10 +353,11 @@ export default function UsersPage() {
                       <div className="flex gap-2">
                         <a
                           href={`mailto:${u.email}?subject=Following up on your Dayton Relo inquiry&body=Hi there,%0D%0A%0D%0AI noticed you've been exploring the Dayton Relo app and wanted to personally reach out...`}
-                          className="px-3 py-1.5 text-[11px] font-semibold text-[#C9A84C] bg-[#C9A84C]/10 border border-[#C9A84C]/25 rounded-lg hover:bg-[#C9A84C]/20 transition-colors whitespace-nowrap"
+                          className="px-3 py-1.5 text-[11px] font-semibold text-[#C9A84C] bg-[#C9A84C]/10 border border-[#C9A84C]/25 rounded-lg hover:bg-[#C9A84C]/20 transition-colors whitespace-nowrap flex items-center gap-1"
                           title="Send email"
                         >
-                          ✉ Reach Out
+                          <Mail className="w-3 h-3" />
+                          Reach Out
                         </a>
                       </div>
                     </div>
@@ -392,8 +411,9 @@ export default function UsersPage() {
 
           {/* No-data hint */}
           {tools.length === 0 && !loading && (
-            <div className="bg-[#C9A84C]/10 border border-[#C9A84C]/25 rounded-xl px-5 py-4 text-sm text-[#C9A84C]">
-              💡 Tool usage populates automatically as users open the app. DaytonBot chat events are already tracked.
+            <div className="bg-[#C9A84C]/10 border border-[#C9A84C]/25 rounded-xl px-5 py-4 text-sm text-[#C9A84C] flex items-center gap-2">
+              <Lightbulb className="w-4 h-4 flex-shrink-0" />
+              Tool usage populates automatically as users open the app. DaytonBot chat events are already tracked.
               Calculator and screen events will appear after the next app build.
             </div>
           )}

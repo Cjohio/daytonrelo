@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { Pin, MessageCircle } from "lucide-react";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface Post {
@@ -366,7 +367,7 @@ export default function CommunityBoard() {
         {/* Pinned posts */}
         {pinned.length > 0 && (
           <div className="mb-6">
-            <p className="text-xs font-bold text-gray-400 uppercase tracking-wide mb-3">📌 Pinned</p>
+            <p className="text-xs font-bold text-gray-400 uppercase tracking-wide mb-3 flex items-center gap-2"><Pin className="w-4 h-4" /> Pinned</p>
             <div className="flex flex-col gap-3">
               {pinned.map(post => (
                 <PostRow key={post.id} post={post} onClick={() => setActivePost(post)} />
@@ -384,7 +385,7 @@ export default function CommunityBoard() {
 
         {filtered.length === 0 && (
           <div className="text-center py-14 bg-cream rounded-2xl">
-            <p className="text-3xl mb-3">💬</p>
+            <div className="flex justify-center mb-3"><MessageCircle className="w-8 h-8" /></div>
             <h3 className="font-black mb-2">No posts in this category yet</h3>
             <p className="text-gray-500 text-sm mb-4">Be the first to ask!</p>
             <button onClick={() => setShowNewPost(true)} className="btn-gold">Ask a Question</button>
@@ -420,7 +421,7 @@ function PostRow({ post, onClick }: { post: Post; onClick: () => void }) {
       <div className="flex-1 min-w-0">
         <div className="flex flex-wrap items-center gap-2 mb-1.5">
           <span className="text-xs font-bold text-gold">{post.category}</span>
-          {post.pinned && <span className="text-xs text-gray-400">📌</span>}
+          {post.pinned && <Pin className="w-3 h-3 text-gray-400" />}
           {hasChrisReply && (
             <span className="text-xs bg-gold/10 text-gold font-bold px-2 py-0.5 rounded-full">
               Chris replied

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import { Award } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: "VA Loan Guide for WPAFB: Everything You Need to Know Before Your PCS | Dayton Relo",
@@ -264,7 +265,9 @@ export default function VALoanGuidePage() {
       {/* Bottom CTA */}
       <section className="bg-charcoal text-white py-16">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 text-center">
-          <div className="text-4xl mb-4">🎖️</div>
+          <div className="flex justify-center mb-4">
+            <Award className="w-10 h-10 text-gold" />
+          </div>
           <h2 className="text-2xl font-black mb-3">Questions About Your VA Loan?</h2>
           <p className="text-gray-300 mb-8">
             Chris is a U.S. Army Iraq War veteran and licensed Ohio Realtor. He can walk you

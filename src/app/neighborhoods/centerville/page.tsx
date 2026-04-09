@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import { Phone, Check } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: "Centerville Homes for Sale | Centerville OH Real Estate | Dayton Relo",
@@ -131,11 +132,11 @@ export default function CentervillePage() {
                 Why Buyers Choose Centerville
               </h3>
               <ul className="space-y-2 text-sm text-gray-600">
-                <li>✓ Top-rated school district in Ohio and nation</li>
-                <li>✓ Safe, well-maintained neighborhoods</li>
-                <li>✓ Newer homes (1985+) with quality construction</li>
-                <li>✓ Strong community spirit and civic engagement</li>
-                <li>✓ Excellent parks, recreation, and amenities</li>
+                <li className="flex items-center gap-2"><Check className="w-4 h-4" /> Top-rated school district in Ohio and nation</li>
+                <li className="flex items-center gap-2"><Check className="w-4 h-4" /> Safe, well-maintained neighborhoods</li>
+                <li className="flex items-center gap-2"><Check className="w-4 h-4" /> Newer homes (1985+) with quality construction</li>
+                <li className="flex items-center gap-2"><Check className="w-4 h-4" /> Strong community spirit and civic engagement</li>
+                <li className="flex items-center gap-2"><Check className="w-4 h-4" /> Excellent parks, recreation, and amenities</li>
               </ul>
             </div>
             <div className="bg-gray-50 rounded-xl p-5">
@@ -170,9 +171,9 @@ export default function CentervillePage() {
             </Link>
             <a
               href="tel:+19372413484"
-              className="inline-block border-2 border-gray-500 text-white font-black px-6 py-3 rounded-lg hover:border-gold transition"
+              className="inline-block border-2 border-gray-500 text-white font-black px-6 py-3 rounded-lg hover:border-gold transition flex items-center gap-2"
             >
-              📞 (937) 241-3484
+              <Phone className="w-4 h-4" /> (937) 241-3484
             </a>
           </div>
         </div>

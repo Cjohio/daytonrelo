@@ -1,6 +1,7 @@
 "use client";
 import { useState, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
+import { Home } from "lucide-react";
 import PropertyCard from "@/components/PropertyCard";
 import SearchBar from "@/components/SearchBar";
 import type { MLSListing } from "@/lib/trestle";
@@ -189,7 +190,7 @@ export default function ListingsClient({ initialListings }: Props) {
         </div>
       ) : (
         <div className="text-center py-16 bg-cream rounded-2xl">
-          <p className="text-4xl mb-3">🏠</p>
+          <div className="flex justify-center mb-3"><Home className="w-12 h-12 text-charcoal" /></div>
           <h3 className="text-lg font-black mb-2">No listings match your filters</h3>
           <p className="text-gray-500 text-sm mb-4">Try adjusting your search criteria, or contact Chris for off-market options.</p>
           <a href="tel:+19372413484" className="btn-gold">Call Chris Directly</a>

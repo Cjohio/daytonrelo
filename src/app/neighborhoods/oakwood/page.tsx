@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import { Phone, Check } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: "Oakwood Homes for Sale | Oakwood OH Real Estate | Dayton Relo",
@@ -131,11 +132,11 @@ export default function OakwoodPage() {
                 Why Buyers Choose Oakwood
               </h3>
               <ul className="space-y-2 text-sm text-gray-600">
-                <li>✓ Most prestigious address in Dayton area</li>
-                <li>✓ Historic architecture and character (Tudor, Colonial)</li>
-                <li>✓ Walkable village center with shops and dining</li>
-                <li>✓ Highly-rated schools in small, selective district</li>
-                <li>✓ Strong sense of community and belonging</li>
+                <li className="flex items-center gap-2"><Check className="w-4 h-4" /> Most prestigious address in Dayton area</li>
+                <li className="flex items-center gap-2"><Check className="w-4 h-4" /> Historic architecture and character (Tudor, Colonial)</li>
+                <li className="flex items-center gap-2"><Check className="w-4 h-4" /> Walkable village center with shops and dining</li>
+                <li className="flex items-center gap-2"><Check className="w-4 h-4" /> Highly-rated schools in small, selective district</li>
+                <li className="flex items-center gap-2"><Check className="w-4 h-4" /> Strong sense of community and belonging</li>
               </ul>
             </div>
             <div className="bg-gray-50 rounded-xl p-5">
@@ -170,9 +171,9 @@ export default function OakwoodPage() {
             </Link>
             <a
               href="tel:+19372413484"
-              className="inline-block border-2 border-gray-500 text-white font-black px-6 py-3 rounded-lg hover:border-gold transition"
+              className="inline-block border-2 border-gray-500 text-white font-black px-6 py-3 rounded-lg hover:border-gold transition flex items-center gap-2"
             >
-              📞 (937) 241-3484
+              <Phone className="w-4 h-4" /> (937) 241-3484
             </a>
           </div>
         </div>

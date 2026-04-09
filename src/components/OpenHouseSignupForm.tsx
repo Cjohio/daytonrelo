@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { Bell } from "lucide-react";
 
 const AREAS = [
   "Beavercreek", "Centerville", "Fairborn", "Huber Heights",
@@ -113,9 +114,9 @@ export default function OpenHouseSignupForm() {
         <button
           type="submit"
           disabled={status === "sending"}
-          className="btn-gold w-full justify-center"
+          className="btn-gold w-full justify-center flex items-center gap-2"
         >
-          {status === "sending" ? "Signing up…" : "🔔 Alert Me"}
+          <Bell className="w-4 h-4" /> {status === "sending" ? "Signing up…" : "Alert Me"}
         </button>
         {status === "error" && (
           <p className="text-red-500 text-xs text-center">Something went wrong. Try again or call Chris directly.</p>

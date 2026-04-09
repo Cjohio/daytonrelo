@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { User, Globe } from "lucide-react";
 import { LENDERS } from "./page";
 
 type Lender = typeof LENDERS[0];
@@ -35,7 +36,7 @@ function LenderCard({ lender }: { lender: Lender }) {
               />
             ) : (
               <div className="w-16 h-16 rounded-full bg-charcoal border-2 border-gold flex items-center justify-center">
-                <span className="text-2xl text-gold">👤</span>
+                <User className="w-8 h-8 text-gold" />
               </div>
             )}
           </div>
@@ -73,9 +74,9 @@ function LenderCard({ lender }: { lender: Lender }) {
             href={lender.website}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 text-center border-2 border-gold text-gold font-bold text-sm py-2.5 px-4 rounded-lg hover:bg-gold hover:text-white transition-colors"
+            className="flex-1 text-center border-2 border-gold text-gold font-bold text-sm py-2.5 px-4 rounded-lg hover:bg-gold hover:text-white transition-colors flex items-center justify-center gap-2"
           >
-            🌐 Website
+            <Globe className="w-4 h-4" /> Website
           </a>
         </div>
       </div>
