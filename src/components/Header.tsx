@@ -25,6 +25,7 @@ const NAV = [
         {
           title: "Military & PCS",
           items: [
+            { label: "Military Home Buying Benefits", href: "/military-benefits" },
             { label: "PCS Timeline", href: "/tools/pcs-timeline" },
             { label: "On-Base vs Off-Base", href: "/tools/on-base-vs-off" },
             { label: "DITY Calculator", href: "/tools/dity-calculator" },
@@ -62,6 +63,7 @@ const NAV = [
   },
   { label: "Military PCS", href: "/military" },
   { label: "Neighborhoods", href: "/neighborhoods" },
+  { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
 ];
 
