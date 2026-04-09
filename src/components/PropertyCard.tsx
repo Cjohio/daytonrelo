@@ -20,6 +20,7 @@ interface Props {
 
 export default function PropertyCard({ listing, showSave = true }: Props) {
   const [saved, setSaved] = useState(false);
+  const [imgError, setImgError] = useState(false);
 
   useEffect(() => {
     try {
@@ -51,13 +52,23 @@ export default function PropertyCard({ listing, showSave = true }: Props) {
     >
       {/* Photo */}
       <div className="relative h-48 bg-gray-100 overflow-hidden">
-        <Image
-          src={getPhoto(listing)}
-          alt={address}
-          fill
-          className="object-cover group-hover:scale-105 transition-transform duration-300"
-          sizes="(max-width: 768px) 100vw, 400px"
-        />
+        {imgError ? (
+          <div className="absolute inset-0 bg-gradient-to-br from-charcoal via-gray-800 to-gray-900 flex flex-col items-center justify-center gap-2">
+            <svg className="w-10 h-10 text-gold/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+            <span className="text-gold/70 text-sm font-bold">{listing.City}, OH</span>
+          </div>
+        ) : (
+          <Image
+            src={getPhoto(listing)}
+            alt={address}
+            fill
+            className="object-cover group-hover:scale-105 transition-transform duration-300"
+            sizes="(max-width: 768px) 100vw, 400px"
+            onError={() => setImgError(true)}
+          />
+        )}
 
         {/* Badges */}
         <div className="absolute top-3 left-3 flex gap-2">

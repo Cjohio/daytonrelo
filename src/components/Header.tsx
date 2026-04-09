@@ -90,7 +90,7 @@ export default function Header() {
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden lg:flex items-center gap-1">
+        <nav className="hidden lg:flex flex-1 items-center justify-center gap-1">
           {NAV.map(({ label, href, dropdown }) => (
             <div
               key={href}
@@ -147,16 +147,10 @@ export default function Header() {
         </nav>
 
         {/* CTA */}
-        <div className="hidden lg:flex items-center gap-3">
-          <Link href="/saved" className="flex items-center gap-1.5 text-sm font-semibold text-gray-300 hover:text-gold transition-colors px-2 py-2">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-            </svg>
-            Saved
-          </Link>
+        <div className="hidden lg:flex items-center gap-4 flex-shrink-0">
           <AuthButton />
-          <a href="tel:+19372413484" className="btn-gold text-sm py-2 px-4">
-            (937) 241-3484
+          <a href="tel:+19372413484" className="btn-gold text-sm py-2 px-5 whitespace-nowrap">
+            📞 (937) 241-3484
           </a>
         </div>
 

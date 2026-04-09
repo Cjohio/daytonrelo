@@ -69,20 +69,12 @@ export default function AuthButton() {
 
   if (!user) {
     return (
-      <div className="flex items-center gap-3">
-        <Link
-          href="/auth/login"
-          className="px-4 py-2 text-white hover:text-amber-400 transition text-sm"
-        >
-          Sign In
-        </Link>
-        <Link
-          href="/auth/signup"
-          className="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg transition text-sm"
-        >
-          Sign Up
-        </Link>
-      </div>
+      <Link
+        href="/auth/login"
+        className="text-sm font-semibold text-gray-300 hover:text-gold transition-colors px-2 py-2"
+      >
+        Sign In
+      </Link>
     )
   }
 

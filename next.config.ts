@@ -38,7 +38,7 @@ const securityHeaders = [
       // Styles: self + inline styles (Next.js CSS-in-JS)
       "style-src 'self' 'unsafe-inline'",
       // Images: self + data URIs + YouTube thumbnails + CloudFront + placeholder
-      "img-src 'self' data: blob: https://img.youtube.com https://*.cloudfront.net https://placehold.co",
+      "img-src 'self' data: blob: https://img.youtube.com https://*.cloudfront.net https://placehold.co https://images.unsplash.com",
       // Fonts: self only
       "font-src 'self'",
       // API calls: Supabase + YouTube embed
@@ -69,6 +69,7 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "img.youtube.com" },
       { protocol: "https", hostname: "**.cloudfront.net" },
       { protocol: "https", hostname: "placehold.co" },
+      { protocol: "https", hostname: "images.unsplash.com" },
     ],
   },
 };
