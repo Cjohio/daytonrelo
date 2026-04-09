@@ -116,22 +116,22 @@ export default function Header() {
 
               {/* Desktop dropdown */}
               {dropdown && desktopDropdown === label && (
-                <div className="absolute left-0 mt-0 w-max bg-charcoal border border-white/10 rounded-xl shadow-xl py-6 px-8 z-50">
+                <div className="absolute left-0 mt-0 w-max bg-charcoal border border-white/10 rounded-2xl shadow-2xl py-8 px-10 z-50">
                   {/* Arrow indicator */}
                   <div className="absolute -top-2 left-6 w-4 h-4 bg-charcoal border-t border-l border-white/10 rotate-45" />
 
-                  <div className="grid gap-8" style={{ gridTemplateColumns: `repeat(${dropdown.columns.length}, minmax(200px, auto))` }}>
+                  <div className="grid gap-10" style={{ gridTemplateColumns: `repeat(${dropdown.columns.length}, minmax(230px, auto))` }}>
                     {dropdown.columns.map((col, idx) => (
                       <div key={idx}>
                         {'title' in col && col.title && (
-                          <p className="text-gold text-xs font-bold uppercase tracking-widest mb-3">{col.title}</p>
+                          <p className="text-gold text-xs font-bold uppercase tracking-widest mb-4">{col.title}</p>
                         )}
-                        <div className="flex flex-col gap-2">
+                        <div className="flex flex-col gap-0.5">
                           {col.items.map((item) => (
                             <Link
                               key={item.href}
                               href={item.href}
-                              className="text-sm text-gray-300 hover:text-gold transition-colors"
+                              className="text-base text-gray-300 hover:text-gold hover:bg-white/5 transition-colors px-3 py-2 rounded-lg block"
                             >
                               {item.label}
                             </Link>

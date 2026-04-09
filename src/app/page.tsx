@@ -14,29 +14,7 @@ export const metadata: Metadata = {
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
-const MISSION_FEATURES = [
-  { icon: "🔍", label: "Live MLS Search" },
-  { icon: "💰", label: "Free Calculators" },
-  { icon: "🎖️", label: "Military PCS Tools" },
-  { icon: "🏘️", label: "Neighborhood Guides" },
-  { icon: "📅", label: "Open House Alerts" },
-  { icon: "🍺", label: "Explore Dayton" },
-  { icon: "💬", label: "Community Board" },
-  { icon: "📱", label: "Free Mobile App" },
-];
-
 const SITE_FEATURES = [
-  {
-    icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-      </svg>
-    ),
-    title: "Live MLS Search",
-    desc: "Full Dayton-area IDX listings updated every 15 minutes directly from the MLS. Filter by price, beds, neighborhood, and more.",
-    href: "/listings",
-    cta: "Search Homes",
-  },
   {
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -44,7 +22,7 @@ const SITE_FEATURES = [
       </svg>
     ),
     title: "25+ Free Tools",
-    desc: "Mortgage calculator, BAH rates, closing cost estimator, PCS timeline, DITY calculator, neighborhood quiz, commute finder, and more.",
+    desc: "Mortgage calculator, BAH rates, closing cost estimator, PCS timeline, DITY calculator, neighborhood quiz, and more.",
     href: "/tools",
     cta: "Explore Tools",
   },
@@ -55,7 +33,7 @@ const SITE_FEATURES = [
       </svg>
     ),
     title: "Neighborhood Guides",
-    desc: "Side-by-side neighborhood comparisons, school ratings, commute times to WPAFB and major employers, and insider tips on every pocket of Dayton.",
+    desc: "Side-by-side comparisons, school ratings, commute times to WPAFB, and insider tips on every pocket of Dayton.",
     href: "/neighborhoods",
     cta: "Compare Neighborhoods",
   },
@@ -66,7 +44,7 @@ const SITE_FEATURES = [
       </svg>
     ),
     title: "Open House Alerts",
-    desc: "Sign up once, get notified every time a new open house is scheduled in your target neighborhoods. Never miss a showing.",
+    desc: "Get notified the moment a new open house is scheduled in your target neighborhoods. Set it once, we handle the rest.",
     href: "/open-houses",
     cta: "Get Alerts",
   },
@@ -77,7 +55,7 @@ const SITE_FEATURES = [
       </svg>
     ),
     title: "Explore Dayton",
-    desc: "19 breweries, 13 golf courses, 41 parks, 73 things to do, and 8 day trip destinations — everything to love about your new city.",
+    desc: "19 breweries, 13 golf courses, 41 parks, and 73 things to do — everything you need to love your new city from day one.",
     href: "/explore",
     cta: "Explore the City",
   },
@@ -88,20 +66,9 @@ const SITE_FEATURES = [
       </svg>
     ),
     title: "Community Board",
-    desc: "Ask questions, get answers from people who've made the same move. PCS tips, school reviews, neighborhood advice — Chris monitors personally.",
+    desc: "Ask questions, get answers from people who've made the same move. Chris monitors personally and responds to every thread.",
     href: "/community",
     cta: "Join the Conversation",
-  },
-  {
-    icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-      </svg>
-    ),
-    title: "Save Your Favorites",
-    desc: "Heart listings, save tools and guides — your account works on both the website and the free Dayton Relo mobile app.",
-    href: "/saved",
-    cta: "View Saved",
   },
   {
     icon: (
@@ -110,7 +77,7 @@ const SITE_FEATURES = [
       </svg>
     ),
     title: "Free Mobile App",
-    desc: "Take everything with you. The Dayton Relo app has all the same tools, search, and guides — available on iOS and Android.",
+    desc: "Take everything with you. Full MLS search, all the tools, and neighborhood guides — on iOS and Android.",
     href: "/contact",
     cta: "Get the App",
   },
@@ -130,7 +97,7 @@ const PATHS = [
     title: "Corporate Relocation",
     sub: "Job Move · Relo Package",
     desc: "Relocating for work? Get settled fast with a realtor who understands your timeline, your budget, and your needs.",
-    href: "/relocation",
+    href: "/contact",
     cta: "Relocation Guide →",
   },
   {
@@ -159,7 +126,7 @@ const STATS = [
   { value: "100%", label: "Hands-On Approach" },
 ];
 
-const FEATURED    = MOCK_LISTINGS.slice(0, 4);
+const FEATURED    = MOCK_LISTINGS.slice(0, 6);
 const OPEN_HOUSES = MOCK_LISTINGS.filter(l => l.OpenHouseDate);
 
 // ─── Page ────────────────────────────────────────────────────────────────────
@@ -168,100 +135,48 @@ export default function HomePage() {
   return (
     <>
       {/* ═══════════════════════════════════════════════════════════════════════
-          HERO — Brand / Logo First
+          HERO — Search First
       ═══════════════════════════════════════════════════════════════════════ */}
       <section className="relative bg-charcoal text-white overflow-hidden">
-        {/* Subtle radial glow behind logo */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(201,168,76,0.12),transparent)] pointer-events-none" />
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gold/40" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(201,168,76,0.10),transparent)] pointer-events-none" />
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gold/30" />
 
-        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 pt-20 pb-16 text-center">
+        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 pt-16 pb-0 text-center">
 
-          {/* Logo — the star */}
-          <div className="flex justify-center mb-8">
+          {/* Logo */}
+          <div className="flex justify-center mb-6">
             <Image
               src="/logo.png"
               alt="Dayton Relo"
-              width={280}
-              height={80}
-              className="h-16 md:h-20 w-auto object-contain"
+              width={240}
+              height={70}
+              className="h-14 md:h-16 w-auto object-contain"
               priority
             />
           </div>
 
-          {/* Brand tagline */}
-          <h1 className="text-4xl md:text-6xl font-black leading-tight tracking-tight mb-5">
-            Dayton, Ohio Real Estate —<br />
-            <span className="text-gold">Done Right.</span>
+          {/* Headline */}
+          <h1 className="text-4xl md:text-5xl font-black leading-tight tracking-tight mb-3">
+            Find Your Next Home in Dayton, Ohio
           </h1>
-
-          {/* Mission statement */}
-          <p className="text-gray-300 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-4">
-            The only Dayton relocation platform built for how people actually move.
-            Free tools, live MLS search, neighborhood guides, and a licensed local agent
-            — all in one place.
-          </p>
-          <p className="text-gold/80 text-sm font-semibold tracking-wide mb-10">
-            For Military PCS · Corporate Relocation · Local Home Buyers
+          <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto mb-10">
+            Live MLS listings · VA loan specialists · Free relocation tools · Local expert who picks up the phone
           </p>
 
-          {/* Feature pills */}
-          <div className="flex flex-wrap gap-2 justify-center mb-10">
-            {MISSION_FEATURES.map(({ icon, label }) => (
-              <span
-                key={label}
-                className="inline-flex items-center gap-1.5 bg-white/5 border border-white/10 text-gray-300 text-xs font-semibold px-3 py-1.5 rounded-full"
-              >
-                <span>{icon}</span>
-                {label}
-              </span>
-            ))}
+          {/* Search box — hero focal point */}
+          <div className="max-w-4xl mx-auto">
+            <SearchBar />
           </div>
 
-          {/* CTAs */}
-          <div className="flex flex-wrap gap-4 justify-center">
-            <Link href="/listings" className="btn-gold text-base px-8 py-3">
-              Search Homes
-            </Link>
-            <Link href="/tools" className="btn-outline text-base px-8 py-3">
-              Free Tools →
-            </Link>
-            <a href="tel:+19372413484" className="inline-flex items-center gap-2 text-gray-300 hover:text-gold font-semibold transition-colors text-base py-3">
-              📞 (937) 241-3484
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════════════
-          SITE FEATURES — What this platform does
-      ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12">
-            <p className="section-label mb-3">Everything in One Place</p>
-            <h2 className="text-3xl md:text-4xl font-black mb-4">
-              More than a home search.
-            </h2>
-            <p className="text-gray-500 max-w-2xl mx-auto text-lg leading-relaxed">
-              Dayton Relo is a full relocation platform — free tools, local knowledge,
-              and a real agent who picks up the phone.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {SITE_FEATURES.map(({ icon, title, desc, href, cta }) => (
+          {/* Quick city links */}
+          <div className="flex flex-wrap gap-2 justify-center py-8">
+            {["Beavercreek", "Centerville", "Kettering", "Fairborn", "Springboro", "Oakwood", "Huber Heights"].map(city => (
               <Link
-                key={href}
-                href={href}
-                className="group card hover:border-gold hover:shadow-md transition-all duration-200 flex flex-col"
+                key={city}
+                href={`/listings?city=${city}`}
+                className="text-xs font-semibold text-gray-400 hover:text-gold transition-colors border border-white/10 hover:border-gold/40 bg-white/5 hover:bg-white/10 px-4 py-2 rounded-full"
               >
-                <div className="w-11 h-11 rounded-xl bg-gold/10 text-gold flex items-center justify-center mb-4 group-hover:bg-gold group-hover:text-white transition-colors flex-shrink-0">
-                  {icon}
-                </div>
-                <h3 className="text-base font-black mb-2 group-hover:text-gold transition-colors">{title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed flex-1">{desc}</p>
-                <span className="text-gold text-sm font-bold mt-4 inline-block">{cta} →</span>
+                {city}
               </Link>
             ))}
           </div>
@@ -269,92 +184,38 @@ export default function HomePage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          CHRIS + HOME SEARCH
+          FEATURED LISTINGS — Right below the search
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="bg-charcoal py-16">
+      <section className="py-14 bg-gray-50 border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="flex flex-col lg:flex-row items-center gap-12 mb-14">
-
-            {/* Chris */}
-            <div className="flex-shrink-0 text-center lg:text-left">
-              <div className="relative inline-block">
-                <div className="w-52 h-64 md:w-60 md:h-72 rounded-2xl overflow-hidden border-4 border-gold shadow-2xl shadow-gold/20">
-                  <Image
-                    src="/headshot.jpg"
-                    alt="Chris Jurgens – Dayton Realtor"
-                    width={240}
-                    height={288}
-                    className="object-cover w-full h-full"
-                    priority
-                  />
-                </div>
-                <div className="absolute -bottom-4 -right-4 bg-gold text-charcoal text-xs font-black px-4 py-2 rounded-lg shadow-lg whitespace-nowrap">
-                  Team Flory · eXp Realty
-                </div>
-              </div>
+          <div className="flex items-end justify-between mb-8">
+            <div>
+              <p className="section-label mb-1">Fresh on the Market</p>
+              <h2 className="text-3xl md:text-4xl font-black">Featured Listings</h2>
+              <p className="text-gray-500 mt-1 text-sm">Updated directly from the Dayton-area MLS</p>
             </div>
-
-            {/* Bio */}
-            <div className="flex-1 text-white">
-              <p className="text-gold text-xs font-bold uppercase tracking-widest mb-3">Your Agent</p>
-              <h2 className="text-3xl md:text-4xl font-black mb-4">
-                Chris Jurgens
-              </h2>
-              <p className="text-gray-300 text-lg leading-relaxed mb-6 max-w-xl">
-                Dayton-based Realtor. U.S. Army Iraq War veteran. 15 years of real estate.
-                I built this platform because relocating is hard — and most agents don&apos;t
-                take it seriously enough. I do.
-              </p>
-
-              {/* Stats */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
-                {STATS.map(({ value, label }) => (
-                  <div key={label} className="bg-white/5 border border-white/10 rounded-xl p-4 text-center">
-                    <p className="text-gold text-2xl font-black">{value}</p>
-                    <p className="text-gray-400 text-xs mt-1 leading-tight">{label}</p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="flex flex-wrap gap-3">
-                <a href="tel:+19372413484" className="btn-gold">
-                  📞 Call or Text Chris
-                </a>
-                <Link href="/about" className="btn-outline text-white border-white/30 hover:bg-white hover:text-charcoal">
-                  My Story →
-                </Link>
-              </div>
-            </div>
+            <Link href="/listings" className="btn-gold text-sm py-2.5 hidden sm:inline-flex">
+              View All Listings →
+            </Link>
           </div>
 
-          {/* MLS Search — below Chris */}
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8">
-            <p className="text-gold text-xs font-bold uppercase tracking-widest mb-2 text-center">
-              Live MLS Listings
-            </p>
-            <h3 className="text-white text-xl font-black text-center mb-6">
-              Search Dayton Area Homes
-            </h3>
-            <SearchBar />
-            <div className="flex flex-wrap gap-3 justify-center mt-5">
-              {["Beavercreek", "Centerville", "Kettering", "Fairborn", "Springboro", "Oakwood"].map(city => (
-                <Link
-                  key={city}
-                  href={`/listings?city=${city}`}
-                  className="text-xs font-semibold text-gray-400 hover:text-gold transition-colors border border-white/10 hover:border-gold/40 px-3 py-1.5 rounded-full"
-                >
-                  {city}
-                </Link>
-              ))}
-            </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-6">
+            {FEATURED.map(listing => (
+              <PropertyCard key={listing.ListingKey} listing={listing} />
+            ))}
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-3 items-center justify-center mt-6">
+            <Link href="/listings" className="btn-gold px-8">Browse All Homes →</Link>
+            <Link href="/open-houses" className="btn-outline px-8">Upcoming Open Houses</Link>
           </div>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          WHO I HELP
+          WHO I HELP — Self-identify your path
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="bg-cream py-16">
+      <section className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-10">
             <p className="section-label mb-2">Who I Work With</p>
@@ -363,14 +224,14 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {PATHS.map(({ icon, title, sub, desc, href, cta }) => (
               <Link
-                key={href}
+                key={href + title}
                 href={href}
-                className="group bg-charcoal border border-white/10 hover:border-gold rounded-2xl p-6 transition-all duration-200"
+                className="group bg-charcoal border border-white/10 hover:border-gold rounded-2xl p-7 transition-all duration-200"
               >
                 <div className="text-4xl mb-4">{icon}</div>
-                <h3 className="text-lg font-black text-white mb-1 group-hover:text-gold transition-colors">{title}</h3>
+                <h3 className="text-xl font-black text-white mb-1 group-hover:text-gold transition-colors">{title}</h3>
                 <p className="text-gold text-xs font-bold mb-3">{sub}</p>
-                <p className="text-gray-400 text-sm leading-relaxed mb-4">{desc}</p>
+                <p className="text-gray-400 text-sm leading-relaxed mb-5">{desc}</p>
                 <span className="text-gold text-sm font-bold">{cta}</span>
               </Link>
             ))}
@@ -379,32 +240,7 @@ export default function HomePage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          FEATURED LISTINGS
-      ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="flex items-end justify-between mb-8">
-            <div>
-              <p className="section-label mb-2">Fresh on the Market</p>
-              <h2 className="text-3xl md:text-4xl font-black">Featured Listings</h2>
-            </div>
-            <Link href="/listings" className="btn-outline text-sm py-2 hidden sm:inline-flex">
-              View All Listings →
-            </Link>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
-            {FEATURED.map(listing => (
-              <PropertyCard key={listing.ListingKey} listing={listing} />
-            ))}
-          </div>
-          <div className="text-center sm:hidden">
-            <Link href="/listings" className="btn-outline">View All Listings →</Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════════════════════════
-          OPEN HOUSE ALERTS
+          OPEN HOUSE ALERTS — Soft lead capture
       ═══════════════════════════════════════════════════════════════════════ */}
       <section className="bg-cream py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -453,9 +289,9 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-10">
             <p className="section-label mb-2">Explore the Area</p>
-            <h2 className="text-3xl md:text-4xl font-black">Dayton Area Neighborhoods</h2>
+            <h2 className="text-3xl md:text-4xl font-black">Shop by Neighborhood</h2>
             <p className="text-gray-500 mt-3 max-w-xl mx-auto">
-              From WPAFB-close suburbs to top-rated school districts — Chris knows every pocket of the Dayton market.
+              From WPAFB-close suburbs to top-rated school districts — click any neighborhood to see active listings.
             </p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
@@ -463,22 +299,105 @@ export default function HomePage() {
               <Link
                 key={name}
                 href={`/listings?city=${name}`}
-                className="group bg-white rounded-2xl p-5 border border-gray-100 hover:border-gold hover:shadow-md transition-all duration-200"
+                className="group bg-white rounded-2xl p-6 border border-gray-100 hover:border-gold hover:shadow-md transition-all duration-200"
               >
-                <div className="text-2xl mb-2">{icon}</div>
+                <div className="text-3xl mb-3">{icon}</div>
                 <h3 className="font-black text-base group-hover:text-gold transition-colors mb-1">{name}</h3>
                 <p className="text-gray-400 text-xs">{tag}</p>
+                <p className="text-gold text-xs font-bold mt-3">View listings →</p>
               </Link>
             ))}
           </div>
           <div className="text-center">
-            <Link href="/neighborhoods" className="btn-outline">View All Neighborhoods →</Link>
+            <Link href="/neighborhoods" className="btn-outline">Full Neighborhood Guides →</Link>
           </div>
         </div>
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          EXPLORE DAYTON STRIP
+          CHRIS — Trust / Credibility strip
+      ═══════════════════════════════════════════════════════════════════════ */}
+      <section className="bg-charcoal py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="flex flex-col lg:flex-row items-center gap-12">
+
+            <div className="flex-shrink-0 text-center lg:text-left">
+              <div className="relative inline-block">
+                <div className="w-52 h-64 md:w-60 md:h-72 rounded-2xl overflow-hidden border-4 border-gold shadow-2xl shadow-gold/20">
+                  <Image
+                    src="/headshot.jpg"
+                    alt="Chris Jurgens – Dayton Realtor"
+                    width={240}
+                    height={288}
+                    className="object-cover w-full h-full"
+                  />
+                </div>
+                <div className="absolute -bottom-4 -right-4 bg-gold text-charcoal text-xs font-black px-4 py-2 rounded-lg shadow-lg whitespace-nowrap">
+                  Team Flory · eXp Realty
+                </div>
+              </div>
+            </div>
+
+            <div className="flex-1 text-white">
+              <p className="text-gold text-xs font-bold uppercase tracking-widest mb-3">Your Agent</p>
+              <h2 className="text-3xl md:text-4xl font-black mb-4">Chris Jurgens</h2>
+              <p className="text-gray-300 text-lg leading-relaxed mb-6 max-w-xl">
+                Dayton-based Realtor. U.S. Army Iraq War veteran. 15 years of real estate experience.
+                I built this platform because relocating is hard — and most agents don&apos;t
+                take it seriously enough. I do.
+              </p>
+
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+                {STATS.map(({ value, label }) => (
+                  <div key={label} className="bg-white/5 border border-white/10 rounded-xl p-4 text-center">
+                    <p className="text-gold text-2xl font-black">{value}</p>
+                    <p className="text-gray-400 text-xs mt-1 leading-tight">{label}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex flex-wrap gap-3">
+                <a href="tel:+19372413484" className="btn-gold">📞 Call or Text Chris</a>
+                <Link href="/about" className="btn-outline text-white border-white/30 hover:bg-white hover:text-charcoal">My Story →</Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════════════
+          PLATFORM TOOLS
+      ═══════════════════════════════════════════════════════════════════════ */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12">
+            <p className="section-label mb-3">Everything in One Place</p>
+            <h2 className="text-3xl md:text-4xl font-black mb-3">More than a home search.</h2>
+            <p className="text-gray-500 max-w-2xl mx-auto text-lg leading-relaxed">
+              Free tools, local knowledge, and a real agent who picks up the phone.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {SITE_FEATURES.map(({ icon, title, desc, href, cta }) => (
+              <Link
+                key={href + title}
+                href={href}
+                className="group card hover:border-gold hover:shadow-md transition-all duration-200 flex flex-col"
+              >
+                <div className="w-11 h-11 rounded-xl bg-gold/10 text-gold flex items-center justify-center mb-4 group-hover:bg-gold group-hover:text-white transition-colors flex-shrink-0">
+                  {icon}
+                </div>
+                <h3 className="text-base font-black mb-2 group-hover:text-gold transition-colors">{title}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed flex-1">{desc}</p>
+                <span className="text-gold text-sm font-bold mt-4 inline-block">{cta} →</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════════════
+          EXPLORE DAYTON
       ═══════════════════════════════════════════════════════════════════════ */}
       <section className="bg-charcoal py-14">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
@@ -494,11 +413,12 @@ export default function HomePage() {
               { label: "🌳 Parks", href: "/explore/parks" },
               { label: "🗺️ Things To Do", href: "/explore/things-to-do" },
               { label: "🚗 Day Trips", href: "/explore/day-trips" },
+              { label: "🍽 Restaurants", href: "/explore/restaurants" },
             ].map(({ label, href }) => (
               <Link
                 key={href}
                 href={href}
-                className="bg-white/5 border border-white/10 text-white font-bold px-5 py-2.5 rounded-full hover:bg-gold hover:text-charcoal hover:border-gold transition-colors text-sm"
+                className="bg-white/5 border border-white/10 text-white font-bold px-6 py-3 rounded-full hover:bg-gold hover:text-charcoal hover:border-gold transition-colors text-sm"
               >
                 {label}
               </Link>
@@ -540,9 +460,9 @@ export default function HomePage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════════
-          LEAD FORM
+          LEAD FORM — Final CTA
       ═══════════════════════════════════════════════════════════════════════ */}
-      <section className="bg-charcoal py-16">
+      <section className="bg-charcoal py-16 border-t border-white/10">
         <div className="max-w-2xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-8">
             <p className="section-label mb-2">Ready to Start?</p>
