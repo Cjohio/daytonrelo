@@ -141,6 +141,12 @@ export default function ListingsClient({ initialListings }: Props) {
               <option value={300000}>$300k</option>
               <option value={400000}>$400k</option>
               <option value={500000}>$500k</option>
+              <option value={600000}>$600k</option>
+              <option value={700000}>$700k</option>
+              <option value={800000}>$800k</option>
+              <option value={1000000}>$1M</option>
+              <option value={1500000}>$1.5M</option>
+              <option value={2000000}>$2M</option>
             </select>
           </div>
           <div>
@@ -155,8 +161,14 @@ export default function ListingsClient({ initialListings }: Props) {
               <option value={300000}>$300k</option>
               <option value={400000}>$400k</option>
               <option value={500000}>$500k</option>
+              <option value={600000}>$600k</option>
               <option value={700000}>$700k</option>
+              <option value={800000}>$800k</option>
               <option value={1000000}>$1M</option>
+              <option value={1500000}>$1.5M</option>
+              <option value={2000000}>$2M</option>
+              <option value={2500000}>$2.5M</option>
+              <option value={3000000}>$3M</option>
             </select>
           </div>
         </div>

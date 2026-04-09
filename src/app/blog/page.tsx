@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Blog | Dayton Relo",
@@ -16,7 +17,7 @@ export const POSTS = [
     readTime: "9 min read",
     category: "VA Loans",
     categoryColor: "bg-gold/10 text-gold-dark",
-    hero: null as string | null,
+    hero: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=900&h=500&fit=crop&auto=format",
   },
   {
     slug: "spring-market-dayton-2025",
@@ -26,7 +27,7 @@ export const POSTS = [
     readTime: "6 min read",
     category: "Market Update",
     categoryColor: "bg-blue-50 text-blue-700",
-    hero: null as string | null,
+    hero: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&h=500&fit=crop&auto=format",
   },
 ];
 
@@ -60,7 +61,18 @@ export default function BlogPage() {
               key={post.slug}
               className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow"
             >
-              <div className="h-1 bg-gold" />
+              {post.hero && (
+                <div className="relative h-52 w-full overflow-hidden">
+                  <Image
+                    src={post.hero}
+                    alt={post.title}
+                    fill
+                    className="object-cover hover:scale-105 transition-transform duration-300"
+                    sizes="(max-width: 768px) 100vw, 800px"
+                  />
+                </div>
+              )}
+              {!post.hero && <div className="h-1 bg-gold" />}
               <div className="p-7">
                 {/* Category + meta */}
                 <div className="flex flex-wrap items-center gap-3 mb-4">

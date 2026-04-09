@@ -8,13 +8,19 @@ const CITIES = [
 ];
 
 const PRICE_RANGES = [
-  { label: "Any Price",    min: 0,      max: 0       },
-  { label: "Under $200k",  min: 0,      max: 200000  },
-  { label: "$200k–$300k",  min: 200000, max: 300000  },
-  { label: "$300k–$400k",  min: 300000, max: 400000  },
-  { label: "$400k–$500k",  min: 400000, max: 500000  },
-  { label: "$500k–$700k",  min: 500000, max: 700000  },
-  { label: "$700k+",       min: 700000, max: 0       },
+  { label: "Any Price",      min: 0,       max: 0        },
+  { label: "Under $200k",    min: 0,       max: 200000   },
+  { label: "$200k–$300k",    min: 200000,  max: 300000   },
+  { label: "$300k–$400k",    min: 300000,  max: 400000   },
+  { label: "$400k–$500k",    min: 400000,  max: 500000   },
+  { label: "$500k–$600k",    min: 500000,  max: 600000   },
+  { label: "$600k–$700k",    min: 600000,  max: 700000   },
+  { label: "$700k–$800k",    min: 700000,  max: 800000   },
+  { label: "$800k–$1M",      min: 800000,  max: 1000000  },
+  { label: "$1M–$1.5M",      min: 1000000, max: 1500000  },
+  { label: "$1.5M–$2M",      min: 1500000, max: 2000000  },
+  { label: "$2M–$3M",        min: 2000000, max: 3000000  },
+  { label: "$3M+",           min: 3000000, max: 0        },
 ];
 
 interface Props {

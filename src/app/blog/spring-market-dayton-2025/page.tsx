@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Spring 2025 Market Update: Dayton Inventory Up — What It Means for Buyers | Dayton Relo",
@@ -28,6 +29,19 @@ export default function SpringMarketUpdatePage() {
           </p>
         </div>
       </section>
+
+      {/* Hero image */}
+      <div className="relative h-72 md:h-96 w-full overflow-hidden bg-gray-900">
+        <Image
+          src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=600&fit=crop&auto=format"
+          alt="Dayton Ohio spring housing market 2025"
+          fill
+          className="object-cover opacity-80"
+          priority
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+      </div>
 
       {/* Article body */}
       <div className="bg-white">
