@@ -1,107 +1,189 @@
-# Supabase Authentication Setup
+# Dayton Relo Website — Supabase Auth Setup
+> Last updated: April 9, 2026 — all setup confirmed complete
 
-The authentication system for Dayton Relo website has been configured to work seamlessly with the mobile app using the same Supabase project.
+---
 
-## Installation
+## Status: Fully Installed ✅
 
-To enable authentication, run the following command in the website directory:
+Authentication and database are live. No installation steps required for a fresh clone — just run `npm install` and `npm run dev`.
 
-```bash
-npm install @supabase/supabase-js @supabase/ssr
-```
+---
 
-Then restart the development server:
+## Supabase Project
 
-```bash
-npm run dev
-```
+- **Project name:** `dayton-relo`
+- **URL:** `https://balotlqhkvyulcarezkg.supabase.co`
+- **Region:** us-east-1
+- **Status:** ACTIVE_HEALTHY
+- **Dashboard:** https://supabase.com/dashboard/project/balotlqhkvyulcarezkg
 
-## Configuration
+---
 
-The following environment variables are already configured in `.env.local`:
+## Environment Variables
+
+Already configured in `.env.local` (website) and Vercel:
 
 ```
 NEXT_PUBLIC_SUPABASE_URL=https://balotlqhkvyulcarezkg.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_th8-FmvK2OWJrPapm747hQ_FGnZOUOb
 ```
 
-## Features
+---
 
-### Authentication Pages
-- **Sign Up** (`/auth/signup`): Create a new account with email, password, phone, move timeline, and persona selection
-- **Sign In** (`/auth/login`): Log in with email and password, or use magic link
-- **Forgot Password** (`/auth/forgot-password`): Reset password via email
-- **Reset Password** (`/auth/reset-password`): Set a new password after receiving reset link
-- **Verify Email** (`/auth/verify`): Confirmation page after signup
-- **Auth Error** (`/auth/error`): Error handling page
+## Auth Features Live
 
-### User Profile
-- **Profile Page** (`/profile`): View and edit user information including name, phone, move timeline, and persona
-- Shows saved items from the `saved_items` table
-- Option to change password
-- Sign out functionality
-- Links to download the mobile app
+| Feature | Route | Status |
+|---|---|---|
+| Sign Up | `/auth/signup` | ✅ |
+| Sign In | `/auth/login` | ✅ |
+| Magic Link | `/auth/login` | ✅ |
+| Forgot Password | `/auth/forgot-password` | ✅ |
+| Reset Password | `/auth/reset-password` | ✅ |
+| Email Verify | `/auth/verify` | ✅ |
+| Auth Error | `/auth/error` | ✅ |
+| User Profile | `/profile` | ✅ |
+| Edit Profile | `/profile` (inline edit) | ✅ |
+| Auth Header | All pages | ✅ |
+| Protected Routes | `/profile`, `/mission-control` | ✅ |
 
-### Header Integration
-- **AuthButton Component** (`src/components/AuthButton.tsx`):
-  - Shows user initials and name when logged in
-  - Dropdown menu with profile link and sign out
-  - Sign In / Sign Up buttons when logged out
-  - Integrated into the header for easy access
+---
 
-## Database Tables
+## Database Tables (all confirmed live, RLS enabled — April 9, 2026)
 
-The Supabase project includes two tables for authentication:
+### `profiles`
+Synced with Supabase auth.users via trigger on signup.
 
-### profiles
-- `id` (uuid): User ID from auth.users
-- `full_name` (text): User's full name
-- `email` (text): User's email
-- `phone` (text): User's phone number
-- `move_timeline` (text): When the user plans to move
-- `persona` (text): User type - 'military', 'relocation', or 'discover'
-- `created_at` (timestamptz): Account creation timestamp
+| Column | Type | Notes |
+|---|---|---|
+| `id` | uuid | FK → auth.users |
+| `full_name` | text | |
+| `email` | text | |
+| `phone` | text | nullable |
+| `move_timeline` | text | default '3-6 months' |
+| `persona` | text | 'military', 'relocation', or 'discover' |
+| `community_display_name` | text | nullable — chosen on first community post |
+| `created_at` | timestamptz | |
 
-### saved_items
-- `id` (uuid): Item ID
-- `user_id` (uuid): References auth.users
-- `item_type` (text): Type of item - 'listing', 'tool', or 'page'
-- `item_id` (text): ID of the saved item
-- `title` (text): Item title
-- `subtitle` (text): Item subtitle
-- `route` (text): URL path to the item
-- `metadata` (jsonb): Additional data as JSON
-- `created_at` (timestamptz): When item was saved
+### `saved_items`
+App bookmarks (website uses localStorage instead of this table).
 
-## Account Sync
+| Column | Type | Notes |
+|---|---|---|
+| `id` | uuid | |
+| `user_id` | uuid | FK → auth.users |
+| `item_type` | text | 'listing', 'tool', 'page' |
+| `item_id` | text | |
+| `title` | text | |
+| `subtitle` | text | nullable |
+| `route` | text | nullable |
+| `metadata` | jsonb | nullable |
+| `created_at` | timestamptz | |
 
-Users who sign up on the website will automatically be able to log in on the mobile app with the same credentials. Both the website and mobile app share the same Supabase authentication project, enabling:
+### `community_posts`
+App's real-time community board.
 
-- Single sign-on across platforms
-- Unified user profiles
-- Cross-platform saved items (if integrated)
-- Synchronized user data
+| Column | Type | Notes |
+|---|---|---|
+| `id` | uuid | |
+| `user_id` | uuid | FK → profiles |
+| `display_name` | text | |
+| `category` | text | general, pcs, neighborhoods, schools, events, restaurants, feedback |
+| `title` | text | |
+| `body` | text | |
+| `is_pinned` | boolean | default false |
+| `upvote_count` | integer | auto-updated by trigger |
+| `reply_count` | integer | auto-updated by trigger |
+| `created_at` | timestamptz | |
 
-## Authentication Flow
+### `community_replies`
+| Column | Type |
+|---|---|
+| `id` | uuid |
+| `post_id` | uuid (FK → community_posts) |
+| `user_id` | uuid (FK → profiles) |
+| `display_name` | text |
+| `body` | text |
+| `created_at` | timestamptz |
 
-1. User signs up or logs in on the website
-2. Credentials are validated with Supabase Auth
-3. Session token is stored in secure HTTP-only cookies
-4. User profile data is stored in the `profiles` table
-5. Auth middleware checks session on every request
-6. Session is automatically refreshed when needed
+### `post_upvotes`
+One row per user per post (unique constraint enforced).
 
-## Security Notes
+| Column | Type |
+|---|---|
+| `id` | uuid |
+| `post_id` | uuid (FK → community_posts) |
+| `user_id` | uuid (FK → profiles) |
+| `created_at` | timestamptz |
 
-- All authentication is handled by Supabase Auth
-- Passwords are never stored or exposed
-- Session tokens are secure HTTP-only cookies
-- The anon key is publishable and can be used in client-side code
-- Row-level security (RLS) policies should be enabled in Supabase for production
+### `leads`
+Created April 9, 2026. Captures every contact form submission from the app.
 
-## Next Steps
+| Column | Type | Notes |
+|---|---|---|
+| `id` | uuid | |
+| `name` | text | |
+| `email` | text | indexed |
+| `phone` | text | nullable |
+| `move_timeline` | text | nullable |
+| `employer` | text | nullable |
+| `message` | text | nullable |
+| `source` | text | default 'Dayton Relo App' |
+| `submitted_at` | timestamptz | indexed desc |
+| `created_at` | timestamptz | |
 
-1. Ensure Supabase RLS policies are configured for `profiles` and `saved_items` tables
-2. Set up email templates in Supabase for verification and password reset emails
-3. Test authentication flow on both website and mobile app
-4. Configure redirect URLs in Supabase settings if deploying to a custom domain
+### `local_services` / `temp_housing`
+Reference tables seeded with Dayton-area data. RLS enabled (read-only for public).
+
+### Social media tables (`content_items`, `content_versions`, etc.)
+Used by `/mission-control` dashboard. All RLS enabled.
+
+---
+
+## Database Triggers
+
+| Trigger | Table | Function |
+|---|---|---|
+| `trg_reply_count` | community_replies | `update_reply_count()` — keeps reply_count in sync |
+| `trg_upvote_count` | post_upvotes | `update_upvote_count()` — keeps upvote_count in sync |
+
+---
+
+## Auth Flow (how it works)
+
+1. User signs up or logs in
+2. Supabase Auth validates credentials
+3. Session stored in secure HTTP-only cookies (managed by `@supabase/ssr`)
+4. Middleware at `src/middleware.ts` checks + refreshes session on every request
+5. Profile data stored/read from `profiles` table
+6. RLS policies ensure users can only read/write their own data
+
+---
+
+## Cross-Platform Sync
+
+Website and app share the same Supabase project:
+- A user who signs up on the website can log in on the app with the same credentials
+- Profile, persona, and saved items are shared
+- Community board (app only — uses Supabase realtime)
+
+---
+
+## Pending Setup (not yet configured)
+
+- **Email templates** — Customize verification and password reset emails in Supabase → Project Settings → Auth → Email Templates
+- **SMTP provider** — Set up SendGrid or similar in Supabase for reliable email delivery in production
+- **Redirect URLs** — Confirm `https://daytonrelo.com/**` is in Supabase → Auth → URL Configuration → Redirect URLs
+
+---
+
+## Re-running Migrations (if needed)
+
+All migrations are safe to re-run (use `CREATE TABLE IF NOT EXISTS`, `ADD COLUMN IF NOT EXISTS`, etc.).
+
+SQL files:
+- `dayton-relo-app/supabase/community_schema.sql`
+- `dayton-relo-app/supabase/leads_schema.sql`
+- `dayton-relo-app/supabase-setup.sql`
+- `dayton-relo-app/supabase-new-tables.sql`
+
+Run in: Supabase Dashboard → SQL Editor → paste and execute.
