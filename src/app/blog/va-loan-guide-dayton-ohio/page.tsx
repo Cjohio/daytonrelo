@@ -47,6 +47,37 @@ export default function VALoanGuidePage() {
       <div className="bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 py-14 space-y-10">
 
+          {/* JSON-LD Schema */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "BlogPosting",
+                "headline": "VA Loan Guide for WPAFB: Everything You Need to Know Before Your PCS",
+                "description": "Complete VA home loan guide for service members PCSing to Wright-Patterson AFB. Certificate of Eligibility, funding fee waiver, entitlement, and Dayton-area tips.",
+                "image": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&h=600&fit=crop&auto=format",
+                "author": {
+                  "@type": "Person",
+                  "name": "Chris Jurgens",
+                  "url": "https://daytonrelo.com/about"
+                },
+                "publisher": {
+                  "@type": "Organization",
+                  "name": "Dayton Relo",
+                  "url": "https://daytonrelo.com"
+                },
+                "datePublished": "2025-04-01",
+                "dateModified": "2026-04-09",
+                "mainEntityOfPage": {
+                  "@type": "WebPage",
+                  "@id": "https://daytonrelo.com/blog/va-loan-guide-dayton-ohio"
+                },
+                "keywords": ["VA loan", "WPAFB", "PCS", "Dayton Ohio", "VA home loan", "military relocation"]
+              }),
+            }}
+          />
+
           {/* Intro */}
           <section>
             <p className="text-gray-700 text-lg leading-relaxed">
@@ -197,6 +228,21 @@ export default function VALoanGuidePage() {
               routinely. The Dayton market rewards prepared buyers.
             </p>
           </section>
+
+          {/* Author bio */}
+          <div className="border-t border-gray-100 pt-8">
+            <div className="flex items-start gap-4 bg-gray-50 rounded-2xl p-6">
+              <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 border-2 border-gold">
+                <img src="/headshot.jpg" alt="Chris Jurgens" className="w-full h-full object-cover" />
+              </div>
+              <div>
+                <p className="text-xs font-bold text-gold uppercase tracking-widest mb-1">Written by</p>
+                <p className="font-black text-charcoal text-lg leading-tight">Chris Jurgens</p>
+                <p className="text-sm text-gray-500 mb-2">Licensed Ohio Realtor · U.S. Army Iraq War Veteran · Team Flory · eXp Realty</p>
+                <p className="text-sm text-gray-600 leading-relaxed">Chris has 15 years of real estate experience in the Dayton area and specializes in military PCS moves and VA loan transactions. He served 9 years in the U.S. Army, including a deployment to Iraq, and brings firsthand understanding of the military relocation process to every client.</p>
+              </div>
+            </div>
+          </div>
 
         </div>
       </div>

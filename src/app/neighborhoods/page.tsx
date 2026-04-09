@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import LeadForm from "@/components/LeadForm";
 
 export const metadata: Metadata = {
@@ -96,28 +97,51 @@ export default function NeighborhoodsPage() {
       {/* Neighborhood cards */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {HOODS.map(({ name, highlight, commute, priceRange, vibe, best }) => (
-            <div key={name} className="card hover:border-gold hover:shadow-md transition-all duration-200">
-              <div className="flex items-start justify-between mb-3">
-                <div>
-                  <h2 className="text-xl font-black">{name}</h2>
-                  <p className="text-gold text-xs font-bold">{highlight}</p>
+          {HOODS.map(({ name, highlight, commute, priceRange, vibe, best }) => {
+            const slugs: Record<string, string> = {
+              "Beavercreek": "beavercreek",
+              "Fairborn": "fairborn",
+              "Centerville": "centerville",
+              "Kettering": "kettering",
+              "Springboro": "springboro",
+              "Oakwood": "oakwood",
+            };
+            const slug = slugs[name];
+            const href = slug ? `/neighborhoods/${slug}` : "#";
+
+            const CardContent = (
+              <div className="card hover:border-gold hover:shadow-md transition-all duration-200">
+                <div className="flex items-start justify-between mb-3">
+                  <div>
+                    <h2 className="text-xl font-black">{name}</h2>
+                    <p className="text-gold text-xs font-bold">{highlight}</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-xs text-gray-400 font-semibold">{priceRange}</p>
+                  </div>
                 </div>
-                <div className="text-right">
-                  <p className="text-xs text-gray-400 font-semibold">{priceRange}</p>
+                <p className="text-gray-500 text-sm leading-relaxed mb-4">{vibe}</p>
+                <div className="flex flex-col gap-2 pt-3 border-t border-gray-100">
+                  <p className="text-xs text-gray-400">📍 {commute}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {best.map(b => (
+                      <span key={b} className="text-xs bg-gold/10 text-gold-dark font-semibold px-2 py-1 rounded-full">{b}</span>
+                    ))}
+                  </div>
                 </div>
               </div>
-              <p className="text-gray-500 text-sm leading-relaxed mb-4">{vibe}</p>
-              <div className="flex flex-col gap-2 pt-3 border-t border-gray-100">
-                <p className="text-xs text-gray-400">📍 {commute}</p>
-                <div className="flex flex-wrap gap-2">
-                  {best.map(b => (
-                    <span key={b} className="text-xs bg-gold/10 text-gold-dark font-semibold px-2 py-1 rounded-full">{b}</span>
-                  ))}
-                </div>
+            );
+
+            return slug ? (
+              <Link key={name} href={href}>
+                {CardContent}
+              </Link>
+            ) : (
+              <div key={name}>
+                {CardContent}
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 

@@ -1,54 +1,279 @@
-import { MetadataRoute } from 'next'
+import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://daytonrelo.com'
-  const lastModified = new Date()
+  const baseUrl = "https://daytonrelo.com";
+  const lastModified = new Date();
 
-  // Static pages with priority
-  const staticPages = [
-    { url: baseUrl, priority: 1.0, changeFrequency: 'weekly' },
-    { url: `${baseUrl}/listings`, priority: 0.9, changeFrequency: 'daily' },
-    { url: `${baseUrl}/military`, priority: 0.9, changeFrequency: 'weekly' },
-    { url: `${baseUrl}/relocation`, priority: 0.9, changeFrequency: 'weekly' },
-    { url: `${baseUrl}/open-houses`, priority: 0.9, changeFrequency: 'daily' },
-    { url: `${baseUrl}/contact`, priority: 0.8, changeFrequency: 'monthly' },
-    { url: `${baseUrl}/neighborhoods`, priority: 0.8, changeFrequency: 'weekly' },
-    { url: `${baseUrl}/about`, priority: 0.7, changeFrequency: 'monthly' },
-    { url: `${baseUrl}/community`, priority: 0.7, changeFrequency: 'daily' },
-    { url: `${baseUrl}/tools`, priority: 0.8, changeFrequency: 'monthly' },
-    // Tools
-    { url: `${baseUrl}/tools/mortgage-calculator`, priority: 0.8, changeFrequency: 'monthly' },
-    { url: `${baseUrl}/tools/bah-calculator`, priority: 0.8, changeFrequency: 'monthly' },
-    { url: `${baseUrl}/tools/closing-costs`, priority: 0.7, changeFrequency: 'monthly' },
-    { url: `${baseUrl}/tools/rent-vs-buy`, priority: 0.7, changeFrequency: 'monthly' },
-    { url: `${baseUrl}/tools/cost-of-living`, priority: 0.7, changeFrequency: 'monthly' },
-    { url: `${baseUrl}/tools/pcs-timeline`, priority: 0.8, changeFrequency: 'monthly' },
-    { url: `${baseUrl}/tools/on-base-vs-off`, priority: 0.7, changeFrequency: 'monthly' },
-    { url: `${baseUrl}/tools/dity-calculator`, priority: 0.7, changeFrequency: 'monthly' },
-    { url: `${baseUrl}/tools/tle-calculator`, priority: 0.7, changeFrequency: 'monthly' },
-    { url: `${baseUrl}/tools/first-30-days`, priority: 0.7, changeFrequency: 'monthly' },
-    { url: `${baseUrl}/tools/neighborhood-compare`, priority: 0.7, changeFrequency: 'monthly' },
-    { url: `${baseUrl}/tools/neighborhood-quiz`, priority: 0.7, changeFrequency: 'monthly' },
-    { url: `${baseUrl}/tools/schools`, priority: 0.7, changeFrequency: 'monthly' },
-    { url: `${baseUrl}/tools/commute-finder`, priority: 0.7, changeFrequency: 'monthly' },
-    { url: `${baseUrl}/tools/employer-map`, priority: 0.6, changeFrequency: 'monthly' },
-    { url: `${baseUrl}/tools/relo-package`, priority: 0.6, changeFrequency: 'monthly' },
-    { url: `${baseUrl}/tools/temp-housing`, priority: 0.6, changeFrequency: 'monthly' },
-    { url: `${baseUrl}/tools/local-services`, priority: 0.6, changeFrequency: 'monthly' },
-    { url: `${baseUrl}/lender`, priority: 0.6, changeFrequency: 'monthly' },
-    // Explore
-    { url: `${baseUrl}/explore`, priority: 0.7, changeFrequency: 'monthly' },
-    { url: `${baseUrl}/explore/parks`, priority: 0.6, changeFrequency: 'monthly' },
-    { url: `${baseUrl}/explore/breweries`, priority: 0.6, changeFrequency: 'monthly' },
-    { url: `${baseUrl}/explore/golf`, priority: 0.6, changeFrequency: 'monthly' },
-    { url: `${baseUrl}/explore/things-to-do`, priority: 0.6, changeFrequency: 'monthly' },
-    { url: `${baseUrl}/explore/day-trips`, priority: 0.6, changeFrequency: 'monthly' },
-  ]
-
-  return staticPages.map(page => ({
-    url: page.url,
-    lastModified,
-    changeFrequency: page.changeFrequency as any,
-    priority: page.priority,
-  }))
+  return [
+    {
+      url: `${baseUrl}/`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 1.0,
+    },
+    {
+      url: `${baseUrl}/listings`,
+      lastModified,
+      changeFrequency: "daily",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/military`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/military-benefits`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/lender`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/blog`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/contact`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/neighborhoods`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/about`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/relocation`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/open-houses`,
+      lastModified,
+      changeFrequency: "daily",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/blog/va-loan-guide-dayton-ohio`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/blog/spring-market-dayton-2025`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/lender/1`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/lender/2`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/lender/3`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/tools`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/explore`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/community`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/tools/mortgage-calculator`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/tools/bah-calculator`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/tools/closing-costs`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/tools/rent-vs-buy`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/tools/cost-of-living`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/tools/pcs-timeline`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/tools/on-base-vs-off`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/tools/dity-calculator`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/tools/tle-calculator`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/tools/first-30-days`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/tools/neighborhood-compare`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/tools/neighborhood-quiz`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/tools/schools`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/tools/commute-finder`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/explore/breweries`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.5,
+    },
+    {
+      url: `${baseUrl}/explore/golf`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.5,
+    },
+    {
+      url: `${baseUrl}/explore/parks`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.5,
+    },
+    {
+      url: `${baseUrl}/explore/restaurants`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.5,
+    },
+    {
+      url: `${baseUrl}/explore/things-to-do`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.5,
+    },
+    {
+      url: `${baseUrl}/explore/day-trips`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.5,
+    },
+    {
+      url: `${baseUrl}/neighborhoods/beavercreek`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/neighborhoods/fairborn`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/neighborhoods/centerville`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/neighborhoods/kettering`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/neighborhoods/springboro`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/neighborhoods/oakwood`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+  ];
 }
