@@ -50,6 +50,7 @@ const NAV = [
       columns: [
         {
           items: [
+            { label: "Neighborhoods", href: "/neighborhoods" },
             { label: "Parks & Recreation", href: "/explore/parks" },
             { label: "Local Restaurants", href: "/explore/restaurants" },
             { label: "Local Breweries", href: "/explore/breweries" },
@@ -62,7 +63,6 @@ const NAV = [
     },
   },
   { label: "Military PCS", href: "/military" },
-  { label: "Neighborhoods", href: "/neighborhoods" },
   { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
 ];
