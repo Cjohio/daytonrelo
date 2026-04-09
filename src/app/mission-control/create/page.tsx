@@ -225,7 +225,7 @@ function CreateContentInner() {
             <h2 className="text-lg font-bold text-white mb-1">Tell us about this post</h2>
             {selectedType && (
               <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border text-sm font-semibold ${CONTENT_TYPE_CONFIG[selectedType].color}`}>
-                {CONTENT_TYPE_CONFIG[selectedType].emoji} {CONTENT_TYPE_CONFIG[selectedType].label}
+                {CONTENT_TYPE_CONFIG[selectedType].icon} {CONTENT_TYPE_CONFIG[selectedType].label}
               </div>
             )}
 
@@ -374,7 +374,7 @@ function CreateContentInner() {
               <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider">Summary</h3>
               {selectedType && (
                 <div className="flex items-center gap-2">
-                  <span className="text-xl">{CONTENT_TYPE_CONFIG[selectedType].emoji}</span>
+                  <span className="text-xl">{CONTENT_TYPE_CONFIG[selectedType].icon}</span>
                   <span className={`text-xs font-semibold px-2 py-0.5 rounded border ${CONTENT_TYPE_CONFIG[selectedType].color}`}>
                     {CONTENT_TYPE_CONFIG[selectedType].label}
                   </span>

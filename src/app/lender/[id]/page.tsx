@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { User, Phone, MessageCircle, Mail, Globe, CheckCircle } from "lucide-react";
-import { LENDERS } from "../page";
+import { LENDERS } from "../data";
 
 export function generateStaticParams() {
   return LENDERS.map(l => ({ id: l.id }));

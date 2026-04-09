@@ -53,7 +53,7 @@ function KanbanCard({
         <div className="flex flex-col gap-1">
           <span className="text-[10px] font-mono text-gray-500">{item.content_id}</span>
           <span className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-semibold border ${typeCfg.color} w-fit`}>
-            {typeCfg.emoji} {typeCfg.label}
+            {typeCfg.icon} {typeCfg.label}
           </span>
         </div>
         {/* Move menu */}

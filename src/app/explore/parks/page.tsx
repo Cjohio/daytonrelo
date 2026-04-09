@@ -4,8 +4,8 @@ import { useState } from 'react';
 import Link from 'next/link';
 import {
   Drill,
-  Tennis,
-  TableTennis,
+  Circle,
+
   Droplets,
   Footprints,
   Fish,
@@ -19,7 +19,7 @@ import {
   Tent,
   Snowflake as IceSkate,
   VolleyballIcon,
-  Boat,
+  Sailboat,
   MapPin,
   Lightbulb,
 } from 'lucide-react';
@@ -57,8 +57,8 @@ const AMENITY_CONFIG: Record<
   { label: string; color: string; icon: React.ReactNode }
 > = {
   playground: { label: 'Playground', color: '#F59E0B', icon: <Drill className="w-4 h-4" /> },
-  tennis: { label: 'Tennis', color: '#10B981', icon: <Tennis className="w-4 h-4" /> },
-  pickleball: { label: 'Pickleball', color: '#6366F1', icon: <TableTennis className="w-4 h-4" /> },
+  tennis: { label: 'Tennis', color: '#10B981', icon: <Circle className="w-4 h-4" /> },
+  pickleball: { label: 'Pickleball', color: '#6366F1', icon: <Circle className="w-4 h-4" /> },
   splash_pad: { label: 'Splash Pad', color: '#0EA5E9', icon: <Droplets className="w-4 h-4" /> },
   trails: { label: 'Trails', color: '#84CC16', icon: <Footprints className="w-4 h-4" /> },
   fishing: { label: 'Fishing', color: '#06B6D4', icon: <Fish className="w-4 h-4" /> },
@@ -76,7 +76,7 @@ const AMENITY_CONFIG: Record<
   camping: { label: 'Camping', color: '#92400E', icon: <Tent className="w-4 h-4" /> },
   ice_skating: { label: 'Ice Skating', color: '#BAE6FD', icon: <IceSkate className="w-4 h-4" /> },
   volleyball: { label: 'Volleyball', color: '#F59E0B', icon: <VolleyballIcon className="w-4 h-4" /> },
-  boat_launch: { label: 'Boat Launch', color: '#1D4ED8', icon: <Boat className="w-4 h-4" /> },
+  boat_launch: { label: 'Boat Launch', color: '#1D4ED8', icon: <Sailboat className="w-4 h-4" /> },
 };
 
 const ALL_PARKS: Park[] = [

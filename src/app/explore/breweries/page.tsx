@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { UtensilsCrossed, Truck, PartyPopper, Sun, Landmark, Handshake, Bike, Wine, Coffee } from 'lucide-react';
-import { Dog, Music } from 'lucide-react';
+import { Dog, Music, MapPin, Lightbulb, AlertCircle } from 'lucide-react';
 
 type FoodType = 'full_kitchen' | 'food_trucks' | 'snacks' | 'no_food';
 type Feature =
@@ -423,7 +423,7 @@ export default function BreweriesPage() {
                   {brewery.tip && (
                     <div className="bg-yellow-50 border-l-4 border-gold p-3 mb-4 rounded">
                       <p className="text-sm text-yellow-900">
-                        <span className="font-semibold"><LightbulbIcon className="w-4 h-4 inline mr-1" />Pro tip:</span>{' '}
+                        <span className="font-semibold"><Lightbulb className="w-4 h-4 inline mr-1" />Pro tip:</span>{' '}
                         {brewery.tip}
                       </p>
                     </div>

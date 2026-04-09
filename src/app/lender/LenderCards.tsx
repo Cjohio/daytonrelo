@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { User, Globe } from "lucide-react";
-import { LENDERS } from "./page";
+import { LENDERS } from "./data";
 
 type Lender = typeof LENDERS[0];
 
@@ -19,21 +19,13 @@ function SpecialtyPill({ label }: { label: string }) {
 function LenderCard({ lender }: { lender: Lender }) {
   return (
     <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow">
-      {/* Top gold accent */}
       <div className="h-1 bg-gold" />
-
       <div className="p-6">
-        {/* Photo + name */}
         <div className="flex items-start gap-4 mb-4">
           <div className="flex-shrink-0">
             {lender.photo ? (
-              <Image
-                src={lender.photo}
-                alt={lender.name}
-                width={72}
-                height={72}
-                className="w-18 h-18 rounded-full border-2 border-gold object-cover"
-              />
+              <Image src={lender.photo} alt={lender.name} width={72} height={72}
+                className="w-18 h-18 rounded-full border-2 border-gold object-cover" />
             ) : (
               <div className="w-16 h-16 rounded-full bg-charcoal border-2 border-gold flex items-center justify-center">
                 <User className="w-8 h-8 text-gold" />
@@ -47,35 +39,19 @@ function LenderCard({ lender }: { lender: Lender }) {
             <p className="text-gray-400 text-xs mt-0.5">{lender.nmls}</p>
           </div>
         </div>
-
-        {/* Tagline */}
         <p className="text-gold-dark text-sm italic mb-3">&ldquo;{lender.tagline}&rdquo;</p>
-
-        {/* Short bio */}
         <p className="text-gray-600 text-sm leading-relaxed mb-4">{lender.shortBio}</p>
-
-        {/* Specialty pills */}
         <div className="flex flex-wrap gap-2 mb-5">
           {lender.specialties.map(s => <SpecialtyPill key={s} label={s} />)}
         </div>
-
-        {/* Divider */}
         <div className="border-t border-gray-100 mb-5" />
-
-        {/* Action buttons */}
         <div className="flex gap-3">
-          <Link
-            href={`/lender/${lender.id}`}
-            className="flex-1 text-center bg-gold text-white font-bold text-sm py-2.5 px-4 rounded-lg hover:bg-gold-dark transition-colors"
-          >
+          <Link href={`/lender/${lender.id}`}
+            className="flex-1 text-center bg-gold text-white font-bold text-sm py-2.5 px-4 rounded-lg hover:bg-gold-dark transition-colors">
             View Profile
           </Link>
-          <a
-            href={lender.website}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-1 text-center border-2 border-gold text-gold font-bold text-sm py-2.5 px-4 rounded-lg hover:bg-gold hover:text-white transition-colors flex items-center justify-center gap-2"
-          >
+          <a href={lender.website} target="_blank" rel="noopener noreferrer"
+            className="flex-1 text-center border-2 border-gold text-gold font-bold text-sm py-2.5 px-4 rounded-lg hover:bg-gold hover:text-white transition-colors flex items-center justify-center gap-2">
             <Globe className="w-4 h-4" /> Website
           </a>
         </div>
@@ -84,10 +60,9 @@ function LenderCard({ lender }: { lender: Lender }) {
   );
 }
 
-export default function LenderCards({ lenders }: { lenders: Lender[] }) {
-  // Shuffle once on mount — new random order every page load
+export default function LenderCards() {
   const [shuffled] = useState<Lender[]>(() =>
-    [...lenders].sort(() => Math.random() - 0.5)
+    [...LENDERS].sort(() => Math.random() - 0.5)
   );
 
   return (

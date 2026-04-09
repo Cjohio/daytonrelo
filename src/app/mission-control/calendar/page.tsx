@@ -229,7 +229,7 @@ export default function CalendarPage() {
                         <div key={item.id} className="px-4 py-3 space-y-2">
                           {t && <p className="text-xs text-[#C9A84C] font-semibold">{t}</p>}
                           <div className="flex items-start gap-2">
-                            <span className="text-lg flex-shrink-0">{typeCfg.emoji}</span>
+                            <span className="text-lg flex-shrink-0">{typeCfg.icon}</span>
                             <div>
                               <p className="text-sm text-white font-medium leading-snug">{item.title}</p>
                               <p className="text-[11px] text-gray-500 font-mono mt-0.5">{item.content_id}</p>

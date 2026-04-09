@@ -3,10 +3,6 @@
 import { useState } from 'react';
 import { Phone, Globe, Star } from 'lucide-react';
 
-export const metadata = {
-  title: 'Local Services Directory | Dayton Relocation',
-  description: 'Chris-curated local services for new Dayton residents: movers, plumbing, electrical, HVAC, and more.',
-};
 
 interface Service {
   id: string;
