@@ -117,10 +117,12 @@ function formatDate(iso: string) {
 }
 
 export default function BlogPage() {
+  const [featured, ...rest] = POSTS;
+
   return (
     <main className="min-h-screen">
       <section className="bg-charcoal text-white py-16 border-b-4 border-gold">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <p className="section-label mb-4">Dayton Relo Blog</p>
           <h1 className="text-4xl md:text-5xl font-black mb-4">
             Real Estate Insights<br />
@@ -134,32 +136,62 @@ export default function BlogPage() {
       </section>
 
       <div className="bg-gray-50 py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 space-y-8">
-          {POSTS.map((post) => (
-            <article key={post.slug} className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow">
-              {post.hero && (
-                <div className="relative h-52 w-full overflow-hidden">
-                  <Image src={post.hero} alt={post.title} fill className="object-cover hover:scale-105 transition-transform duration-300" sizes="(max-width: 768px) 100vw, 800px" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+
+          {/* Featured post — full-width hero card */}
+          <Link href={`/blog/${featured.slug}`} className="group block mb-10">
+            <article className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-lg transition-shadow flex flex-col md:flex-row">
+              {featured.hero && (
+                <div className="relative h-64 md:h-auto md:w-1/2 flex-shrink-0 overflow-hidden">
+                  <Image src={featured.hero} alt={featured.title} fill className="object-cover group-hover:scale-105 transition-transform duration-300" sizes="(max-width: 768px) 100vw, 50vw" />
                 </div>
               )}
-              {!post.hero && <div className="h-1 bg-gold" />}
-              <div className="p-7">
+              <div className="p-8 flex flex-col justify-center md:w-1/2">
                 <div className="flex flex-wrap items-center gap-3 mb-4">
-                  <span className={`text-xs font-bold px-2.5 py-1 rounded-md ${post.categoryColor}`}>{post.category}</span>
-                  <span className="text-gray-400 text-sm">{formatDate(post.date)}</span>
-                  <span className="text-gray-400 text-sm">· {post.readTime}</span>
+                  <span className={`text-xs font-bold px-2.5 py-1 rounded-md ${featured.categoryColor}`}>{featured.category}</span>
+                  <span className="text-gray-400 text-sm">{formatDate(featured.date)}</span>
+                  <span className="text-gray-400 text-sm">· {featured.readTime}</span>
                 </div>
-                <h2 className="text-xl md:text-2xl font-black text-charcoal mb-3 leading-snug">{post.title}</h2>
-                <p className="text-gray-600 text-base leading-relaxed mb-5">{post.excerpt}</p>
-                <Link href={`/blog/${post.slug}`} className="inline-flex items-center gap-2 text-gold font-bold hover:text-gold-dark transition-colors">
+                <h2 className="text-2xl md:text-3xl font-black text-charcoal mb-3 leading-snug group-hover:text-gold transition-colors">{featured.title}</h2>
+                <p className="text-gray-600 leading-relaxed mb-5">{featured.excerpt}</p>
+                <span className="inline-flex items-center gap-2 text-gold font-bold">
                   Read Article
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
-                </Link>
+                </span>
               </div>
             </article>
-          ))}
+          </Link>
+
+          {/* Remaining posts — 3-column grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {rest.map((post) => (
+              <Link href={`/blog/${post.slug}`} key={post.slug} className="group block">
+                <article className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-md transition-shadow h-full flex flex-col">
+                  {post.hero && (
+                    <div className="relative h-44 w-full overflow-hidden flex-shrink-0">
+                      <Image src={post.hero} alt={post.title} fill className="object-cover group-hover:scale-105 transition-transform duration-300" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
+                    </div>
+                  )}
+                  <div className="p-5 flex flex-col flex-1">
+                    <div className="flex flex-wrap items-center gap-2 mb-3">
+                      <span className={`text-xs font-bold px-2 py-0.5 rounded-md ${post.categoryColor}`}>{post.category}</span>
+                      <span className="text-gray-400 text-xs">{post.readTime}</span>
+                    </div>
+                    <h2 className="text-base font-black text-charcoal mb-2 leading-snug group-hover:text-gold transition-colors line-clamp-3">{post.title}</h2>
+                    <p className="text-gray-500 text-sm leading-relaxed mb-4 line-clamp-2 flex-1">{post.excerpt}</p>
+                    <span className="inline-flex items-center gap-1.5 text-gold text-sm font-bold mt-auto">
+                      Read Article
+                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                      </svg>
+                    </span>
+                  </div>
+                </article>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
 
