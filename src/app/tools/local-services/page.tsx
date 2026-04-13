@@ -144,7 +144,7 @@ export default function LocalServicesPage() {
         <div className="bg-yellow-50 border border-gold/40 rounded-xl p-5 mb-10 flex gap-4 items-start">
           <Star className="w-5 h-5 text-gold flex-shrink-0 mt-0.5" />
           <p className="text-charcoal text-sm leading-relaxed">
-            <strong className="text-charcoal">From Chris:</strong> I don&apos;t get paid to recommend these — they&apos;re on this list because I&apos;ve either worked with them directly or had multiple clients vouch for them. When you&apos;re new to Dayton, the last thing you need is to roll the dice on a contractor.
+            <strong className="text-charcoal">From Chris:</strong> Every business on this list has been personally vetted or comes highly recommended by clients. When you&apos;re new to Dayton, the last thing you need is to roll the dice on a contractor.
           </p>
         </div>
 
