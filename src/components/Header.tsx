@@ -63,6 +63,28 @@ const NAV = [
       ],
     },
   },
+  {
+    label: "Local Businesses",
+    href: "/tools/local-services",
+    dropdown: {
+      columns: [
+        {
+          title: "Eats & Drinks",
+          items: [
+            { label: "Local Restaurants", href: "/explore/restaurants" },
+            { label: "Local Breweries", href: "/explore/breweries" },
+          ],
+        },
+        {
+          title: "Services & Pros",
+          items: [
+            { label: "Local Services", href: "/tools/local-services" },
+            { label: "Recommended Lenders", href: "/lender" },
+          ],
+        },
+      ],
+    },
+  },
   { label: "Military PCS", href: "/military" },
   { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
