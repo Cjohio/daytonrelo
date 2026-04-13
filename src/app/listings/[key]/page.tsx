@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Home, Calendar, Bed, Bath, Ruler, Car } from "lucide-react";
+import { Home, Calendar, Bed, Bath, Ruler, Car, ShieldCheck } from "lucide-react";
 import { MOCK_LISTINGS } from "@/lib/trestle";
 import LeadForm from "@/components/LeadForm";
 
@@ -177,6 +177,28 @@ export default async function ListingDetailPage({ params }: Props) {
               <a href="tel:+19372413484" className="btn-gold w-full justify-center">
                 (937) 241-3484
               </a>
+            </div>
+
+            {/* Pre-Approval CTA */}
+            <div className="rounded-2xl border-2 border-gold/40 bg-yellow-50 p-5">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 rounded-full bg-gold/15 flex items-center justify-center flex-shrink-0">
+                  <ShieldCheck className="w-5 h-5 text-gold" />
+                </div>
+                <div>
+                  <p className="font-black text-charcoal text-sm">Get Pre-Approved Today</p>
+                  <p className="text-xs text-gray-500">Know your budget before you fall in love</p>
+                </div>
+              </div>
+              <p className="text-sm text-gray-600 leading-relaxed mb-4">
+                Chris works with a hand-picked group of local VA and conventional lenders who know the Dayton market. Getting pre-approved puts you ahead of other buyers and shows sellers you&apos;re serious.
+              </p>
+              <Link
+                href="/lender"
+                className="btn-gold w-full justify-center text-sm"
+              >
+                View Recommended Lenders
+              </Link>
             </div>
           </div>
         </div>
