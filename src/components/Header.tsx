@@ -69,13 +69,6 @@ const NAV = [
     dropdown: {
       columns: [
         {
-          title: "Eats & Drinks",
-          items: [
-            { label: "Local Restaurants", href: "/explore/restaurants" },
-            { label: "Local Breweries", href: "/explore/breweries" },
-          ],
-        },
-        {
           title: "Services & Pros",
           items: [
             { label: "Local Services", href: "/tools/local-services" },
