@@ -58,6 +58,7 @@ const NAV = [
             { label: "Golf Courses", href: "/explore/golf" },
             { label: "Things To Do", href: "/explore/things-to-do" },
             { label: "Day Trips", href: "/explore/day-trips" },
+            { label: "Events & Entertainment", href: "/explore/events" },
           ],
         },
       ],
