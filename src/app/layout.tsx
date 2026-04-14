@@ -31,15 +31,15 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website", locale: "en_US", url: "https://daytonrelo.com",
     siteName: "Dayton Relo",
-    title: "Dayton Relo | Chris Jurgens – Dayton Ohio Realtor",
+    title: "All things Dayton Ohio",
     description: "Military PCS, corporate relocation, or buying local — Chris Jurgens is Dayton's go-to realtor. Free tools, neighborhood guides, and MLS search.",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Dayton Relo – Chris Jurgens, Dayton Ohio Realtor" }],
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Dayton Relo — All things Dayton Ohio" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dayton Relo | Chris Jurgens – Dayton Ohio Realtor",
+    title: "All things Dayton Ohio",
     description: "Military PCS, corporate relocation, or buying local in Dayton Ohio. Free tools, neighborhood guides, MLS search.",
-    images: ["/og-image.png"],
+    images: ["/opengraph-image"],
   },
   verification: {
     google: "GOOGLE_VERIFICATION_TOKEN",
