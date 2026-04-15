@@ -27,26 +27,24 @@ export default function LeadForm({
     e.preventDefault();
     setStatus("sending");
     try {
+      // Always send via the server-side API route (calls Resend)
+      const res = await fetch("/api/notify-lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, source, submittedAt: new Date().toISOString() }),
+      });
+      if (!res.ok) throw new Error(`API error ${res.status}`);
+
+      // Also send to Zapier → Lofty CRM if webhook is configured
       const webhookURL = process.env.NEXT_PUBLIC_CRM_WEBHOOK_URL;
       if (webhookURL) {
-        // Send to Zapier → Lofty CRM when webhook is configured
-        await fetch(webhookURL, {
+        fetch(webhookURL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ ...form, source, submittedAt: new Date().toISOString() }),
-        });
-      } else {
-        // Fallback: open a pre-filled email to Chris so the lead isn't lost
-        const subject = encodeURIComponent(
-          source.startsWith("showing-")
-            ? `Showing Request – ${source.replace("showing-", "MLS #")}`
-            : `Website Inquiry – ${source}`
-        );
-        const body = encodeURIComponent(
-          `Name: ${form.name}\nPhone: ${form.phone}\nEmail: ${form.email}\nTimeline: ${form.timeline}\nMessage: ${form.message || "(none)"}\n\nSubmitted: ${new Date().toLocaleString()}`
-        );
-        window.open(`mailto:chris@cjohio.com?subject=${subject}&body=${body}`, "_blank");
+        }).catch(() => {}); // fire-and-forget, non-blocking
       }
+
       setStatus("sent");
     } catch {
       setStatus("error");
