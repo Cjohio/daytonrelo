@@ -41,8 +41,8 @@ const securityHeaders = [
       "img-src 'self' data: blob: https://img.youtube.com https://*.cloudfront.net https://placehold.co https://images.unsplash.com",
       // Fonts: self only
       "font-src 'self'",
-      // API calls: Supabase + YouTube embed
-      "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://www.youtube.com",
+      // API calls: Supabase + YouTube embed + Zapier webhooks (for lead forms)
+      "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://www.youtube.com https://hooks.zapier.com",
       // iframes: YouTube embeds only
       "frame-src https://www.youtube.com https://youtube.com",
       // Everything else: self only

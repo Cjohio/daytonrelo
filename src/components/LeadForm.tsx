@@ -29,11 +29,23 @@ export default function LeadForm({
     try {
       const webhookURL = process.env.NEXT_PUBLIC_CRM_WEBHOOK_URL;
       if (webhookURL) {
+        // Send to Zapier → Lofty CRM when webhook is configured
         await fetch(webhookURL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ ...form, source, submittedAt: new Date().toISOString() }),
         });
+      } else {
+        // Fallback: open a pre-filled email to Chris so the lead isn't lost
+        const subject = encodeURIComponent(
+          source.startsWith("showing-")
+            ? `Showing Request – ${source.replace("showing-", "MLS #")}`
+            : `Website Inquiry – ${source}`
+        );
+        const body = encodeURIComponent(
+          `Name: ${form.name}\nPhone: ${form.phone}\nEmail: ${form.email}\nTimeline: ${form.timeline}\nMessage: ${form.message || "(none)"}\n\nSubmitted: ${new Date().toLocaleString()}`
+        );
+        window.open(`mailto:chris@cjohio.com?subject=${subject}&body=${body}`, "_blank");
       }
       setStatus("sent");
     } catch {
@@ -49,8 +61,8 @@ export default function LeadForm({
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="text-lg font-bold mb-1">Message Received!</h3>
-        <p className={`text-sm ${dark ? "text-gray-300" : "text-gray-500"}`}>Chris will be in touch within 24 hours.</p>
+        <h3 className="text-lg font-bold mb-1">Message Sent!</h3>
+        <p className={`text-sm ${dark ? "text-gray-300" : "text-gray-500"}`}>Chris will be in touch within the hour. You can also reach him directly at (937) 241-3484.</p>
       </div>
     );
   }

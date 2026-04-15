@@ -8,8 +8,9 @@ export function generateStaticParams() {
   return LENDERS.map(l => ({ id: l.id }));
 }
 
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
-  const lender = LENDERS.find(l => l.id === params.id);
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params;
+  const lender = LENDERS.find(l => l.id === id);
   if (!lender) return {};
   return {
     title: `${lender.name} | Preferred Lender | Dayton Relo`,
@@ -17,8 +18,9 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   };
 }
 
-export default function LenderDetailPage({ params }: { params: { id: string } }) {
-  const lender = LENDERS.find(l => l.id === params.id);
+export default async function LenderDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const lender = LENDERS.find(l => l.id === id);
   if (!lender) notFound();
 
   return (
