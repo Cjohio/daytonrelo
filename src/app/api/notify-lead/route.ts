@@ -92,7 +92,7 @@ export async function POST(req: NextRequest) {
         "Content-Type":  "application/json",
       },
       body: JSON.stringify({
-        from:     "Dayton Relo Website <leads@daytonrelo.com>",
+        from:     "Dayton Relo <onboarding@resend.dev>",  // TODO: switch to leads@daytonrelo.com once domain verified in Resend
         to:       [agentEmail],
         reply_to: body.email,
         subject:  `🏠 ${subjectLabel}: ${body.name ?? "Unknown"}`,
