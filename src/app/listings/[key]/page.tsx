@@ -166,6 +166,7 @@ export default async function ListingDetailPage({ params }: Props) {
                 source={`showing-${listing.ListingKey}`}
                 title=""
                 subtitle=""
+                mode="showing"
               />
             </div>
 

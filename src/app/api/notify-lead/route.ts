@@ -51,6 +51,10 @@ export async function POST(req: NextRequest) {
                 <p style="margin:0 0 4px;color:#888;font-size:11px;text-transform:uppercase;letter-spacing:1px;">Email</p>
                 <p style="margin:0;color:#C9A84C;font-size:15px;font-weight:600;">${body.email ?? "—"}</p>
               </td></tr>
+              ${body.preferredDate ? `<tr><td style="padding:16px 0;border-top:1px solid #333;">
+                <p style="margin:0 0 4px;color:#888;font-size:11px;text-transform:uppercase;letter-spacing:1px;">Requested Showing</p>
+                <p style="margin:0;color:#C9A84C;font-size:16px;font-weight:800;">${body.preferredDate}${body.preferredTime ? ` at ${body.preferredTime}` : ""}</p>
+              </td></tr>` : ""}
               ${body.timeline ? `<tr><td style="padding:16px 0;border-top:1px solid #333;">
                 <p style="margin:0 0 4px;color:#888;font-size:11px;text-transform:uppercase;letter-spacing:1px;">Timeline</p>
                 <p style="margin:0;color:#fff;font-size:15px;font-weight:600;">${body.timeline}</p>
