@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Phone, Globe, Star, Truck, Wrench, Wind, Sparkles, Zap, Shield } from 'lucide-react';
+import { Phone, Globe, Star, Truck, Wrench, Wind, Sparkles, Zap, Shield, Hammer } from 'lucide-react';
 
 interface Service {
   id: string;
@@ -20,6 +20,7 @@ const CATEGORY_ICONS: Record<string, React.ReactNode> = {
   HVAC:       <Wind className="w-5 h-5" />,
   Cleaning:   <Sparkles className="w-5 h-5" />,
   Electrical: <Zap className="w-5 h-5" />,
+  Contractor: <Hammer className="w-5 h-5" />,
   Insurance:  <Shield className="w-5 h-5" />,
 };
 
@@ -44,6 +45,17 @@ const SERVICES: Service[] = [
     neighborhood: 'Citywide',
     description:
       'Family-owned and operated for over 30 years, with deep roots in the Dayton community. They specialize in military and corporate relocations and understand the unique pressures of a PCS move. Clients consistently praise their care with valuables and their no-surprise pricing.',
+    featured: true,
+  },
+  {
+    id: '7',
+    name: 'Bluebird Construction',
+    category: 'Contractor',
+    phone: '(937) 315-1532',
+    website: 'https://bluebirdohio.com',
+    neighborhood: 'New Carlisle / Dayton area',
+    description:
+      'Residential remodeling and construction with 18+ years of experience. Full-service from roofing, siding, and decks to kitchens, baths, and basements. Known for quality craftsmanship and on-time delivery. A trusted pick for buyers who want renovation work done right after closing.',
     featured: true,
   },
   {
@@ -92,7 +104,7 @@ const SERVICES: Service[] = [
   },
 ];
 
-const CATEGORIES = ['All', 'Movers', 'Plumbing', 'HVAC', 'Cleaning', 'Electrical'];
+const CATEGORIES = ['All', 'Movers', 'Contractor', 'Plumbing', 'HVAC', 'Cleaning', 'Electrical'];
 
 export default function LocalServicesPage() {
   const [activeCategory, setActiveCategory] = useState('All');
