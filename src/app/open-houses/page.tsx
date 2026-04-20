@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PropertyCard from "@/components/PropertyCard";
 import OpenHouseSignupForm from "@/components/OpenHouseSignupForm";
-import { MOCK_LISTINGS } from "@/lib/trestle";
+import { getOpenHouses, searchListings, MOCK_LISTINGS } from "@/lib/trestle";
 import { Zap, MapPin, DollarSign, Award, Calendar } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -10,8 +10,7 @@ export const metadata: Metadata = {
   description: "Find upcoming open houses in Dayton, Beavercreek, Centerville, Fairborn and more. Sign up for real-time email alerts when new open houses are scheduled.",
 };
 
-const OPEN_HOUSES = MOCK_LISTINGS.filter(l => l.OpenHouseDate);
-const ALL_UPCOMING = MOCK_LISTINGS; // In production: filter by OpenHouseDate >= today
+export const revalidate = 300;
 
 const BENEFITS = [
   {
@@ -36,7 +35,17 @@ const BENEFITS = [
   },
 ];
 
-export default function OpenHousesPage() {
+export default async function OpenHousesPage() {
+  let allListings = MOCK_LISTINGS;
+  try {
+    const results = await searchListings({ limit: 50 });
+    if (results.length > 0) allListings = results;
+  } catch {
+    // Credentials not set or API unavailable — fall back to mock data
+  }
+  const OPEN_HOUSES   = allListings.filter(l => l.OpenHouseDate);
+  const ALL_UPCOMING  = allListings;
+
   return (
     <>
       {/* Hero */}

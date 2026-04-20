@@ -2,14 +2,24 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import Link from "next/link";
 import ListingsClient from "./ListingsClient";
-import { MOCK_LISTINGS } from "@/lib/trestle";
+import { searchListings, MOCK_LISTINGS } from "@/lib/trestle";
 
 export const metadata: Metadata = {
   title: "Search Dayton Homes for Sale | Dayton Relo",
   description: "Browse all Dayton Ohio MLS listings — Beavercreek, Centerville, Fairborn, Kettering, Springboro, Oakwood and more. Updated daily from DABR MLS.",
 };
 
-export default function ListingsPage() {
+export const revalidate = 300; // re-fetch every 5 minutes
+
+export default async function ListingsPage() {
+  let listings = MOCK_LISTINGS;
+  try {
+    const results = await searchListings({ limit: 50 });
+    if (results.length > 0) listings = results;
+  } catch {
+    // Credentials not set or API unavailable — fall back to mock data
+  }
+
   return (
     <>
       {/* Hero */}
@@ -23,7 +33,7 @@ export default function ListingsPage() {
 
       {/* Listings with client-side filters */}
       <Suspense fallback={<div className="max-w-7xl mx-auto px-4 sm:px-6 py-16 text-center text-gray-400">Loading listings…</div>}>
-        <ListingsClient initialListings={MOCK_LISTINGS} />
+        <ListingsClient initialListings={listings} />
       </Suspense>
 
       {/* CTA Strip */}
