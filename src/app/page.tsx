@@ -140,8 +140,8 @@ export default async function HomePage() {
     if (results.length > 0) featured = results;
     const ohResults = await getOpenHouses();
     if (ohResults.length > 0) openHouses = ohResults;
-  } catch {
-    // credentials not yet set — use mock fallback
+  } catch (err) {
+    console.error("[Homepage] Trestle API error — using mock fallback:", err);
   }
 
   const FEATURED    = featured;

@@ -69,7 +69,10 @@ async function getAccessToken(): Promise<string> {
   const clientId     = process.env.TRESTLE_CLIENT_ID;
   const clientSecret = process.env.TRESTLE_CLIENT_SECRET;
 
+  console.log("[Trestle] clientId present:", !!clientId, "| clientSecret present:", !!clientSecret);
+
   if (!clientId || !clientSecret) {
+    console.error("[Trestle] Missing credentials — TRESTLE_CLIENT_ID or TRESTLE_CLIENT_SECRET not set");
     throw new Error("Trestle credentials not configured. Set TRESTLE_CLIENT_ID and TRESTLE_CLIENT_SECRET in .env.local");
   }
 
@@ -84,7 +87,11 @@ async function getAccessToken(): Promise<string> {
     }),
   });
 
-  if (!res.ok) throw new Error(`Trestle auth failed: ${res.status}`);
+  if (!res.ok) {
+    const body = await res.text();
+    console.error("[Trestle] Auth failed:", res.status, body);
+    throw new Error(`Trestle auth failed: ${res.status} ${body}`);
+  }
   const data = await res.json();
   cachedToken = data.access_token;
   tokenExpiry = Date.now() + (data.expires_in - 60) * 1000;

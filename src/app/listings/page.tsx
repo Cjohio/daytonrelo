@@ -38,8 +38,8 @@ export default async function ListingsPage({ searchParams }: PageProps) {
       city, minPrice, maxPrice, beds, baths, listingType, limit: 100,
     });
     if (results.length > 0) listings = results;
-  } catch {
-    // Credentials not set or API unavailable — fall back to mock data
+  } catch (err) {
+    console.error("[Listings] Trestle API error — using mock fallback:", err);
   }
 
   return (
