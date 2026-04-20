@@ -114,7 +114,7 @@ export async function searchListings(params: SearchParams = {}): Promise<MLSList
 
   const res = await fetch(url.toString(), {
     headers: { Authorization: `Bearer ${token}` },
-    next: { revalidate: 300 }, // cache 5 min
+    cache: "no-store", // responses can exceed Next.js 2MB cache limit; rely on page-level ISR
   });
 
   if (!res.ok) throw new Error(`Trestle search failed: ${res.status}`);
@@ -128,7 +128,7 @@ export async function getListingByKey(key: string): Promise<MLSListing | null> {
 
   const res = await fetch(url, {
     headers: { Authorization: `Bearer ${token}` },
-    next: { revalidate: 300 },
+    cache: "no-store",
   });
 
   if (!res.ok) return null;

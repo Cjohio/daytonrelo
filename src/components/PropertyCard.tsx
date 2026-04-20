@@ -4,7 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import type { MLSListing } from "@/lib/trestle";
 
-function formatPrice(n: number) {
+function formatPrice(n: number | null | undefined) {
+  if (!n) return "Price on request";
   return "$" + n.toLocaleString("en-US");
 }
 
@@ -121,7 +122,7 @@ export default function PropertyCard({ listing, showSave = true }: Props) {
             </svg>
             {listing.BathroomsTotalInteger} ba
           </span>
-          <span>{listing.LivingArea.toLocaleString()} sqft</span>
+          {listing.LivingArea ? <span>{listing.LivingArea.toLocaleString()} sqft</span> : null}
           {listing.GarageSpaces ? <span>{listing.GarageSpaces}-car garage</span> : null}
         </div>
 
