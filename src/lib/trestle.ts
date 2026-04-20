@@ -37,18 +37,27 @@ export interface MLSListing {
 }
 
 export interface SearchParams {
-  city?:        string;
-  minPrice?:    number;
-  maxPrice?:    number;
-  beds?:        number;
-  baths?:       number;
-  minSqft?:     number;
-  maxSqft?:     number;
-  status?:      "Active" | "Pending" | "Closed";
-  limit?:       number;
-  offset?:      number;
-  openHouse?:   boolean;
+  city?:         string;
+  cities?:       string[];
+  minPrice?:     number;
+  maxPrice?:     number;
+  beds?:         number;
+  baths?:        number;
+  minSqft?:      number;
+  maxSqft?:      number;
+  status?:       "Active" | "Pending" | "Closed";
+  listingType?:  "buy" | "rent";
+  limit?:        number;
+  offset?:       number;
+  openHouse?:    boolean;
 }
+
+const DEFAULT_DAYTON_CITIES = [
+  "Dayton", "Beavercreek", "Fairborn", "Kettering",
+  "Centerville", "Miamisburg", "Springboro", "Oakwood",
+  "Huber Heights", "Trotwood", "Vandalia", "Englewood",
+  "Xenia", "Yellow Springs", "Bellbrook", "Sugarcreek Township",
+];
 
 // ─── Token cache ──────────────────────────────────────────────────────────────
 let cachedToken: string | null = null;
@@ -87,7 +96,16 @@ function buildFilter(params: SearchParams): string {
   const filters: string[] = [];
   filters.push(`StandardStatus eq '${params.status ?? "Active"}'`);
   filters.push(`MlsStatus ne 'Withdrawn'`);
-  if (params.city)     filters.push(`City eq '${params.city}'`);
+
+  // City filter — single city, explicit array, or default Dayton metro
+  if (params.city) {
+    filters.push(`City eq '${params.city}'`);
+  } else {
+    const cities = params.cities ?? DEFAULT_DAYTON_CITIES;
+    const cityFilter = cities.map(c => `City eq '${c}'`).join(" or ");
+    filters.push(`(${cityFilter})`);
+  }
+
   if (params.minPrice) filters.push(`ListPrice ge ${params.minPrice}`);
   if (params.maxPrice) filters.push(`ListPrice le ${params.maxPrice}`);
   if (params.beds)     filters.push(`BedroomsTotal ge ${params.beds}`);
@@ -95,6 +113,15 @@ function buildFilter(params: SearchParams): string {
   if (params.minSqft)  filters.push(`LivingArea ge ${params.minSqft}`);
   if (params.maxSqft)  filters.push(`LivingArea le ${params.maxSqft}`);
   if (params.openHouse) filters.push(`OpenHouseDate ne null`);
+
+  // Listing type: residential for-rent vs for-sale
+  if (params.listingType === "rent") {
+    filters.push(`PropertyType eq 'Residential Lease'`);
+  } else {
+    // Default: for-sale only — exclude lease listings
+    filters.push(`PropertyType ne 'Residential Lease'`);
+  }
+
   return filters.join(" and ");
 }
 

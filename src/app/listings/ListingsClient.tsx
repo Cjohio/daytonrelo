@@ -1,61 +1,75 @@
 "use client";
 import { useState, useMemo } from "react";
-import { useSearchParams } from "next/navigation";
 import { Home } from "lucide-react";
 import PropertyCard from "@/components/PropertyCard";
 import SearchBar from "@/components/SearchBar";
 import type { MLSListing } from "@/lib/trestle";
 
 interface Props {
-  initialListings: MLSListing[];
+  initialListings:    MLSListing[];
+  initialCity?:       string;
+  initialMinPrice?:   number;
+  initialMaxPrice?:   number;
+  initialBeds?:       number;
+  initialListingType?: "buy" | "rent";
 }
 
 const SORT_OPTIONS = [
-  { label: "Newest",         key: "newest" },
-  { label: "Price: Low–High", key: "price_asc" },
+  { label: "Newest",          key: "newest"     },
+  { label: "Price: Low–High", key: "price_asc"  },
   { label: "Price: High–Low", key: "price_desc" },
-  { label: "Sq Ft",          key: "sqft" },
+  { label: "Sq Ft",           key: "sqft"       },
 ];
 
 const STATUS_TABS = ["All", "Active", "Pending", "Open House"];
 
-export default function ListingsClient({ initialListings }: Props) {
-  const searchParams = useSearchParams();
-  const [sort,         setSort]         = useState("newest");
-  const [statusTab,    setStatusTab]    = useState("All");
-  const [showFilters,  setShowFilters]  = useState(false);
-  const [minBeds,      setMinBeds]      = useState<number>(0);
-  const [minBaths,     setMinBaths]     = useState<number>(0);
-  const [minPrice,     setMinPrice]     = useState<number>(0);
-  const [maxPrice,     setMaxPrice]     = useState<number>(0);
-
-  const cityParam = searchParams.get("city") ?? "";
+export default function ListingsClient({
+  initialListings,
+  initialCity       = "",
+  initialMinPrice   = 0,
+  initialMaxPrice   = 0,
+  initialBeds       = 0,
+  initialListingType = "buy",
+}: Props) {
+  const [sort,        setSort]       = useState("newest");
+  const [statusTab,   setStatusTab]  = useState("All");
+  const [showFilters, setShowFilters] = useState(false);
+  const [minBeds,     setMinBeds]    = useState<number>(initialBeds);
+  const [minBaths,    setMinBaths]   = useState<number>(0);
+  const [minPrice,    setMinPrice]   = useState<number>(initialMinPrice);
+  const [maxPrice,    setMaxPrice]   = useState<number>(initialMaxPrice);
 
   const filtered = useMemo(() => {
     let list = initialListings;
 
-    if (cityParam)          list = list.filter(l => l.City.toLowerCase() === cityParam.toLowerCase());
     if (statusTab === "Open House") list = list.filter(l => l.OpenHouseDate);
     else if (statusTab !== "All")   list = list.filter(l => l.StandardStatus === statusTab);
-    if (minBeds)            list = list.filter(l => l.BedroomsTotal >= minBeds);
-    if (minBaths)           list = list.filter(l => l.BathroomsTotalInteger >= minBaths);
-    if (minPrice)           list = list.filter(l => l.ListPrice >= minPrice);
-    if (maxPrice)           list = list.filter(l => l.ListPrice <= maxPrice);
+    if (minBeds)  list = list.filter(l => l.BedroomsTotal >= minBeds);
+    if (minBaths) list = list.filter(l => l.BathroomsTotalInteger >= minBaths);
+    if (minPrice) list = list.filter(l => l.ListPrice >= minPrice);
+    if (maxPrice) list = list.filter(l => l.ListPrice <= maxPrice);
 
     return [...list].sort((a, b) => {
       if (sort === "price_asc")  return a.ListPrice - b.ListPrice;
       if (sort === "price_desc") return b.ListPrice - a.ListPrice;
-      if (sort === "sqft")       return b.LivingArea - a.LivingArea;
+      if (sort === "sqft")       return (b.LivingArea ?? 0) - (a.LivingArea ?? 0);
       return new Date(b.ModificationTimestamp).getTime() - new Date(a.ModificationTimestamp).getTime();
     });
-  }, [initialListings, cityParam, statusTab, sort, minBeds, minBaths, minPrice, maxPrice]);
+  }, [initialListings, statusTab, sort, minBeds, minBaths, minPrice, maxPrice]);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
 
-      {/* Search bar */}
+      {/* Search bar — submits form → navigates to /listings?city=X&... → server re-fetches */}
       <div className="mb-6">
-        <SearchBar compact={false} initialCity={cityParam} />
+        <SearchBar
+          compact={false}
+          initialCity={initialCity}
+          initialMinPrice={initialMinPrice}
+          initialMaxPrice={initialMaxPrice}
+          initialBeds={initialBeds}
+          initialListingType={initialListingType}
+        />
       </div>
 
       {/* Controls row */}
@@ -142,12 +156,8 @@ export default function ListingsClient({ initialListings }: Props) {
               <option value={300000}>$300k</option>
               <option value={400000}>$400k</option>
               <option value={500000}>$500k</option>
-              <option value={600000}>$600k</option>
-              <option value={700000}>$700k</option>
-              <option value={800000}>$800k</option>
+              <option value={750000}>$750k</option>
               <option value={1000000}>$1M</option>
-              <option value={1500000}>$1.5M</option>
-              <option value={2000000}>$2M</option>
             </select>
           </div>
           <div>
@@ -162,14 +172,10 @@ export default function ListingsClient({ initialListings }: Props) {
               <option value={300000}>$300k</option>
               <option value={400000}>$400k</option>
               <option value={500000}>$500k</option>
-              <option value={600000}>$600k</option>
-              <option value={700000}>$700k</option>
-              <option value={800000}>$800k</option>
+              <option value={750000}>$750k</option>
               <option value={1000000}>$1M</option>
               <option value={1500000}>$1.5M</option>
-              <option value={2000000}>$2M</option>
-              <option value={2500000}>$2.5M</option>
-              <option value={3000000}>$3M</option>
+              <option value={2000000}>$2M+</option>
             </select>
           </div>
         </div>
@@ -178,7 +184,7 @@ export default function ListingsClient({ initialListings }: Props) {
       {/* Results count */}
       <p className="text-sm text-gray-500 mb-5">
         <span className="font-black text-charcoal">{filtered.length}</span> homes found
-        {cityParam && <> in <span className="font-bold text-charcoal">{cityParam}</span></>}
+        {initialCity && <> in <span className="font-bold text-charcoal">{initialCity}</span></>}
       </p>
 
       {/* Grid */}

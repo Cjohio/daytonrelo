@@ -23,21 +23,41 @@ const PRICE_RANGES = [
   { label: "$3M+",           min: 3000000, max: 0        },
 ];
 
-interface Props {
-  compact?: boolean;
-  initialCity?: string;
+function priceRangeLabel(min: number, max: number): string {
+  for (const r of PRICE_RANGES) {
+    if (r.min === min && r.max === max) return r.label;
+  }
+  return "Any Price";
 }
 
-export default function SearchBar({ compact = false, initialCity = "" }: Props) {
+interface Props {
+  compact?:            boolean;
+  initialCity?:        string;
+  initialMinPrice?:    number;
+  initialMaxPrice?:    number;
+  initialBeds?:        number;
+  initialListingType?: "buy" | "rent";
+}
+
+export default function SearchBar({
+  compact            = false,
+  initialCity        = "",
+  initialMinPrice    = 0,
+  initialMaxPrice    = 0,
+  initialBeds        = 0,
+  initialListingType = "buy",
+}: Props) {
   const router = useRouter();
-  const [city,       setCity]       = useState(initialCity || "All Areas");
-  const [priceRange, setPriceRange] = useState("Any Price");
-  const [beds,       setBeds]       = useState("Any");
-  const [keyword,    setKeyword]    = useState("");
+  const [listingType, setListingType] = useState<"buy" | "rent">(initialListingType);
+  const [city,        setCity]        = useState(initialCity || "All Areas");
+  const [priceRange,  setPriceRange]  = useState(priceRangeLabel(initialMinPrice, initialMaxPrice));
+  const [beds,        setBeds]        = useState(initialBeds > 0 ? `${initialBeds}+` : "Any");
+  const [keyword,     setKeyword]     = useState("");
 
   function handleSearch(e: React.FormEvent) {
     e.preventDefault();
     const params = new URLSearchParams();
+    params.set("type", listingType);
     if (city !== "All Areas") params.set("city", city);
     const range = PRICE_RANGES.find(r => r.label === priceRange);
     if (range?.min) params.set("minPrice", String(range.min));
@@ -69,6 +89,32 @@ export default function SearchBar({ compact = false, initialCity = "" }: Props) 
       onSubmit={handleSearch}
       className="bg-white rounded-2xl shadow-2xl p-4 sm:p-6 flex flex-col gap-4"
     >
+      {/* For Sale / For Rent toggle */}
+      <div className="flex gap-1 bg-gray-100 rounded-xl p-1 w-fit">
+        <button
+          type="button"
+          onClick={() => setListingType("buy")}
+          className={`text-sm font-bold px-5 py-2 rounded-lg transition-colors ${
+            listingType === "buy"
+              ? "bg-charcoal text-gold shadow-sm"
+              : "text-gray-500 hover:text-charcoal"
+          }`}
+        >
+          For Sale
+        </button>
+        <button
+          type="button"
+          onClick={() => setListingType("rent")}
+          className={`text-sm font-bold px-5 py-2 rounded-lg transition-colors ${
+            listingType === "rent"
+              ? "bg-charcoal text-gold shadow-sm"
+              : "text-gray-500 hover:text-charcoal"
+          }`}
+        >
+          For Rent
+        </button>
+      </div>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
         {/* Location */}
         <div className="flex flex-col gap-1">

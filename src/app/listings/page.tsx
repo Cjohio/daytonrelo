@@ -9,12 +9,34 @@ export const metadata: Metadata = {
   description: "Browse all Dayton Ohio MLS listings — Beavercreek, Centerville, Fairborn, Kettering, Springboro, Oakwood and more. Updated daily from DABR MLS.",
 };
 
-export const revalidate = 300; // re-fetch every 5 minutes
+// Don't cache — URL params change per request
+export const dynamic = "force-dynamic";
 
-export default async function ListingsPage() {
+interface PageProps {
+  searchParams: Promise<{
+    city?:        string;
+    minPrice?:    string;
+    maxPrice?:    string;
+    beds?:        string;
+    baths?:       string;
+    type?:        string;
+  }>;
+}
+
+export default async function ListingsPage({ searchParams }: PageProps) {
+  const sp = await searchParams;
+  const city        = sp.city     || undefined;
+  const minPrice    = sp.minPrice ? Number(sp.minPrice) : undefined;
+  const maxPrice    = sp.maxPrice ? Number(sp.maxPrice) : undefined;
+  const beds        = sp.beds     ? Number(sp.beds)     : undefined;
+  const baths       = sp.baths    ? Number(sp.baths)    : undefined;
+  const listingType = (sp.type === "rent" ? "rent" : "buy") as "buy" | "rent";
+
   let listings = MOCK_LISTINGS;
   try {
-    const results = await searchListings({ limit: 50 });
+    const results = await searchListings({
+      city, minPrice, maxPrice, beds, baths, listingType, limit: 50,
+    });
     if (results.length > 0) listings = results;
   } catch {
     // Credentials not set or API unavailable — fall back to mock data
@@ -33,7 +55,14 @@ export default async function ListingsPage() {
 
       {/* Listings with client-side filters */}
       <Suspense fallback={<div className="max-w-7xl mx-auto px-4 sm:px-6 py-16 text-center text-gray-400">Loading listings…</div>}>
-        <ListingsClient initialListings={listings} />
+        <ListingsClient
+          initialListings={listings}
+          initialCity={city ?? ""}
+          initialMinPrice={minPrice ?? 0}
+          initialMaxPrice={maxPrice ?? 0}
+          initialBeds={beds ?? 0}
+          initialListingType={listingType}
+        />
       </Suspense>
 
       {/* CTA Strip */}
