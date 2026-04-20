@@ -35,7 +35,7 @@ export default async function ListingsPage({ searchParams }: PageProps) {
   let listings = MOCK_LISTINGS;
   try {
     const results = await searchListings({
-      city, minPrice, maxPrice, beds, baths, listingType, limit: 50,
+      city, minPrice, maxPrice, beds, baths, listingType, limit: 100,
     });
     if (results.length > 0) listings = results;
   } catch {

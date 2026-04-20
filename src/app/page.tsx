@@ -136,7 +136,7 @@ export default async function HomePage() {
   let featured: MLSListing[] = MOCK_LISTINGS.slice(0, 6);
   let openHouses: MLSListing[] = [];
   try {
-    const results = await searchListings({ limit: 6 });
+    const results = await searchListings({ limit: 12 });
     if (results.length > 0) featured = results;
     const ohResults = await getOpenHouses();
     if (ohResults.length > 0) openHouses = ohResults;
