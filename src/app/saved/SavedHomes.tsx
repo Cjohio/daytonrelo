@@ -3,30 +3,37 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Phone, Search, Heart } from "lucide-react";
 import PropertyCard from "@/components/PropertyCard";
-import { MOCK_LISTINGS, type MLSListing } from "@/lib/trestle";
+import { type MLSListing } from "@/lib/trestle";
 
 export default function SavedHomes() {
-  const [savedKeys, setSavedKeys] = useState<string[]>([]);
-  const [loaded,    setLoaded]    = useState(false);
+  const [savedKeys,    setSavedKeys]    = useState<string[]>([]);
+  const [savedListings, setSavedListings] = useState<MLSListing[]>([]);
+  const [loaded,       setLoaded]       = useState(false);
 
   useEffect(() => {
     try {
       const stored: string[] = JSON.parse(localStorage.getItem("dr_saved") ?? "[]");
       setSavedKeys(stored);
+      // Fetch each saved listing from the API
+      Promise.all(
+        stored.map(key =>
+          fetch(`/api/listing/${encodeURIComponent(key)}`)
+            .then(r => r.ok ? r.json() as Promise<MLSListing> : null)
+            .catch(() => null)
+        )
+      ).then(results => {
+        setSavedListings(results.filter((l): l is MLSListing => l !== null));
+      });
     } catch {
       setSavedKeys([]);
     }
     setLoaded(true);
   }, []);
 
-  // In production: fetch from Trestle by key. For now use mock data.
-  const savedListings: MLSListing[] = MOCK_LISTINGS.filter(l =>
-    savedKeys.includes(l.ListingKey)
-  );
-
   function clearAll() {
     localStorage.removeItem("dr_saved");
     setSavedKeys([]);
+    setSavedListings([]);
   }
 
   if (!loaded) return null;

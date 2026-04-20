@@ -6,7 +6,7 @@ import SearchBar from "@/components/SearchBar";
 import PropertyCard from "@/components/PropertyCard";
 import LeadForm from "@/components/LeadForm";
 import OpenHouseSignupForm from "@/components/OpenHouseSignupForm";
-import { MOCK_LISTINGS } from "@/lib/trestle";
+import { searchListings, getOpenHouses, MOCK_LISTINGS, type MLSListing } from "@/lib/trestle";
 
 export const metadata: Metadata = {
   title: "Dayton Relo | Chris Jurgens – Dayton Ohio Realtor",
@@ -127,12 +127,26 @@ const STATS = [
   { value: "100%", label: "Hands-On Approach" },
 ];
 
-const FEATURED    = MOCK_LISTINGS.slice(0, 6);
-const OPEN_HOUSES = MOCK_LISTINGS.filter(l => l.OpenHouseDate);
+export const revalidate = 300; // re-fetch every 5 minutes
 
 // ─── Page ────────────────────────────────────────────────────────────────────
 
-export default function HomePage() {
+export default async function HomePage() {
+  // Fetch live listings; fall back to mock data if credentials not set
+  let featured: MLSListing[] = MOCK_LISTINGS.slice(0, 6);
+  let openHouses: MLSListing[] = [];
+  try {
+    const results = await searchListings({ limit: 6 });
+    if (results.length > 0) featured = results;
+    const ohResults = await getOpenHouses();
+    if (ohResults.length > 0) openHouses = ohResults;
+  } catch {
+    // credentials not yet set — use mock fallback
+  }
+
+  const FEATURED    = featured;
+  const OPEN_HOUSES = openHouses;
+
   return (
     <>
       {/* ═══════════════════════════════════════════════════════════════════════

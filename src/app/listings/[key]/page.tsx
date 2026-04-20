@@ -2,18 +2,14 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Home, Calendar, Bed, Bath, Ruler, Car, ShieldCheck } from "lucide-react";
-import { MOCK_LISTINGS } from "@/lib/trestle";
+import { getListingByKey } from "@/lib/trestle";
 import LeadForm from "@/components/LeadForm";
 
 interface Props { params: Promise<{ key: string }> }
 
-function getListing(key: string) {
-  return MOCK_LISTINGS.find(l => l.ListingKey === key) ?? null;
-}
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { key } = await params;
-  const listing = getListing(key);
+  const listing = await getListingByKey(key);
   if (!listing) return { title: "Listing Not Found | Dayton Relo" };
   return {
     title: `${listing.StreetNumber} ${listing.StreetName}, ${listing.City} | Dayton Relo`,
@@ -27,7 +23,7 @@ function formatPrice(n: number) {
 
 export default async function ListingDetailPage({ params }: Props) {
   const { key } = await params;
-  const listing = getListing(key);
+  const listing = await getListingByKey(key);
 
   if (!listing) {
     return (
@@ -127,7 +123,7 @@ export default async function ListingDetailPage({ params }: Props) {
                   { label: "Lot Size",      value: listing.LotSizeAcres ? `${listing.LotSizeAcres} acres` : "—" },
                   { label: "Pool",          value: listing.PoolPrivateYN ? "Yes" : "No" },
                   { label: "ZIP Code",      value: listing.PostalCode },
-                  { label: "MLS #",         value: listing.ListingKey.replace("mock-", "DY-") },
+                  { label: "MLS #",         value: listing.ListingKey },
                 ].map(({ label, value }) => (
                   <div key={label} className="flex justify-between border-b border-gray-100 pb-2">
                     <span className="text-gray-500">{label}</span>
