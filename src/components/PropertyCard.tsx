@@ -10,7 +10,9 @@ function formatPrice(n: number | null | undefined) {
 }
 
 function getPhoto(listing: MLSListing): string {
-  const photo = listing.Media?.find(m => m.Order === 0)?.MediaURL;
+  // Sort by Order ascending and take the first — Trestle may start Order at 0 or 1
+  const sorted = [...(listing.Media ?? [])].sort((a, b) => a.Order - b.Order);
+  const photo = sorted[0]?.MediaURL;
   return photo ?? `https://placehold.co/800x500/1A1A1A/C9A84C?text=${encodeURIComponent(listing.City)}`;
 }
 
