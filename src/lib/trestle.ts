@@ -1,9 +1,12 @@
 /**
  * Trestle MLS API integration
  * Credentials: set TRESTLE_CLIENT_ID and TRESTLE_CLIENT_SECRET in .env.local
- * Dayton Area Board of Realtors (DABR) MLS feed via Trestle
- * Docs: https://trestle.corelogic.com/
+ * Dayton Area Board of Realtors (DABR) MLS feed via Trestle (Cotality)
+ * Docs: https://api.trestle.io
  */
+
+const TRESTLE_TOKEN_URL = process.env.TRESTLE_TOKEN_URL ?? "https://api.trestle.io/oauth/token";
+const TRESTLE_BASE_URL  = process.env.TRESTLE_BASE_URL  ?? "https://api.trestle.io";
 
 export interface MLSListing {
   ListingKey:         string;
@@ -76,7 +79,8 @@ async function getAccessToken(): Promise<string> {
     throw new Error("Trestle credentials not configured. Set TRESTLE_CLIENT_ID and TRESTLE_CLIENT_SECRET in .env.local");
   }
 
-  const res = await fetch("https://api-prod.corelogic.com/trestle/oidc/connect/token", {
+  console.log("[Trestle] Token URL:", TRESTLE_TOKEN_URL);
+  const res = await fetch(TRESTLE_TOKEN_URL, {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: new URLSearchParams({
@@ -140,7 +144,7 @@ export async function searchListings(params: SearchParams = {}): Promise<MLSList
   const top    = params.limit  ?? 24;
   const skip   = params.offset ?? 0;
 
-  const url = new URL("https://api-prod.corelogic.com/trestle/odata/Property");
+  const url = new URL(`${TRESTLE_BASE_URL}/odata/Property`);
   url.searchParams.set("$filter",  filter);
   url.searchParams.set("$top",     String(top));
   url.searchParams.set("$skip",    String(skip));
@@ -165,7 +169,7 @@ export async function searchListings(params: SearchParams = {}): Promise<MLSList
 
 export async function getListingByKey(key: string): Promise<MLSListing | null> {
   const token = await getAccessToken();
-  const url = `https://api-prod.corelogic.com/trestle/odata/Property('${key}')?$expand=Media`;
+  const url = `${TRESTLE_BASE_URL}/odata/Property('${key}')?$expand=Media`;
 
   const res = await fetch(url, {
     headers: { Authorization: `Bearer ${token}` },
