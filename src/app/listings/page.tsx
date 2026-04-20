@@ -37,7 +37,12 @@ export default async function ListingsPage({ searchParams }: PageProps) {
     const results = await searchListings({
       city, minPrice, maxPrice, beds, baths, listingType, limit: 100,
     });
-    if (results.length > 0) listings = results;
+    console.log("[Listings page] Got", results.length, "results from Trestle");
+    if (results.length > 0) {
+      listings = results;
+    } else {
+      console.warn("[Listings page] 0 results — falling back to mock data");
+    }
   } catch (err) {
     console.error("[Listings] Trestle API error — using mock fallback:", err);
   }

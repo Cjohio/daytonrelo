@@ -95,6 +95,7 @@ async function getAccessToken(): Promise<string> {
   const data = await res.json();
   cachedToken = data.access_token;
   tokenExpiry = Date.now() + (data.expires_in - 60) * 1000;
+  console.log("[Trestle] Auth token obtained successfully, expires in", data.expires_in, "s");
   return cachedToken!;
 }
 
@@ -151,9 +152,15 @@ export async function searchListings(params: SearchParams = {}): Promise<MLSList
     cache: "no-store", // responses can exceed Next.js 2MB cache limit; rely on page-level ISR
   });
 
-  if (!res.ok) throw new Error(`Trestle search failed: ${res.status}`);
+  if (!res.ok) {
+    const body = await res.text();
+    console.error("[Trestle] Search failed:", res.status, body.slice(0, 300));
+    throw new Error(`Trestle search failed: ${res.status} ${body.slice(0, 200)}`);
+  }
   const data = await res.json();
-  return data.value ?? [];
+  const results = data.value ?? [];
+  console.log("[Trestle] Search returned", results.length, "listings | filter:", filter.slice(0, 120));
+  return results;
 }
 
 export async function getListingByKey(key: string): Promise<MLSListing | null> {
