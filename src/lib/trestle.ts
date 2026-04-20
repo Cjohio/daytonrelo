@@ -129,7 +129,7 @@ function buildFilter(params: SearchParams): string {
   // Listing type: residential for-rent vs for-sale
   // PropertyType is an OData enum — use eq with valid enum values only
   if (params.listingType === "rent") {
-    filters.push(`PropertyType eq 'Residential Lease'`);
+    filters.push(`PropertyType eq 'ResidentialLease'`);
   } else {
     // For-sale: standard residential properties only
     filters.push(`PropertyType eq 'Residential'`);
