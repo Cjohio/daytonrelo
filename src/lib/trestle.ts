@@ -5,8 +5,8 @@
  * Docs: https://api.trestle.io
  */
 
-const TRESTLE_TOKEN_URL = process.env.TRESTLE_TOKEN_URL ?? "https://api.trestle.io/oauth/token";
-const TRESTLE_BASE_URL  = process.env.TRESTLE_BASE_URL  ?? "https://api.trestle.io";
+const TRESTLE_TOKEN_URL = process.env.TRESTLE_TOKEN_URL ?? "https://api-prod.corelogic.com/trestle/oidc/connect/token";
+const TRESTLE_BASE_URL  = process.env.TRESTLE_BASE_URL  ?? "https://api-prod.corelogic.com/trestle";
 
 export interface MLSListing {
   ListingKey:         string;
@@ -127,11 +127,12 @@ function buildFilter(params: SearchParams): string {
   if (params.openHouse) filters.push(`OpenHouseDate ne null`);
 
   // Listing type: residential for-rent vs for-sale
+  // PropertyType is an OData enum — use eq with valid enum values only
   if (params.listingType === "rent") {
     filters.push(`PropertyType eq 'Residential Lease'`);
   } else {
-    // Default: for-sale only — exclude lease listings
-    filters.push(`PropertyType ne 'Residential Lease'`);
+    // For-sale: standard residential properties only
+    filters.push(`PropertyType eq 'Residential'`);
   }
 
   return filters.join(" and ");
