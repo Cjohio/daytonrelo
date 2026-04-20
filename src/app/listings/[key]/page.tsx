@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { Home, Calendar, Bed, Bath, Ruler, Car, ShieldCheck } from "lucide-react";
 import { getListingByKey } from "@/lib/trestle";
 import LeadForm from "@/components/LeadForm";
+import PhotoGallery from "@/components/PhotoGallery";
 
 interface Props { params: Promise<{ key: string }> }
 
@@ -36,8 +36,9 @@ export default async function ListingDetailPage({ params }: Props) {
     );
   }
 
-  const photo = listing.Media?.[0]?.MediaURL
-    ?? `https://placehold.co/1200x600/1A1A1A/C9A84C?text=${encodeURIComponent(listing.City)}`;
+  const sorted = [...(listing.Media ?? [])].sort((a, b) => a.Order - b.Order);
+  const photos = sorted.map(m => m.MediaURL).filter(Boolean) as string[];
+  if (photos.length === 0) photos.push(`https://placehold.co/1200x600/1A1A1A/C9A84C?text=${encodeURIComponent(listing.City)}`);
   const address = `${listing.StreetNumber} ${listing.StreetName}, ${listing.City}, ${listing.StateOrProvince} ${listing.PostalCode}`;
 
   return (
@@ -58,23 +59,16 @@ export default async function ListingDetailPage({ params }: Props) {
 
           {/* LEFT: Photo + details */}
           <div className="flex-1 min-w-0">
-            {/* Photo */}
-            <div className="relative h-72 md:h-96 rounded-2xl overflow-hidden mb-6 bg-gray-100">
-              <Image
-                src={photo}
-                alt={address}
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 65vw"
-                priority
-              />
+            {/* Photo gallery */}
+            <div className="relative">
+              <PhotoGallery photos={photos} alt={address} />
               {listing.OpenHouseDate && (
-                <div className="absolute top-4 left-4 bg-gold text-white text-sm font-black px-4 py-2 rounded-full shadow-lg flex items-center gap-2">
+                <div className="absolute top-4 left-4 z-10 bg-gold text-white text-sm font-black px-4 py-2 rounded-full shadow-lg flex items-center gap-2">
                   <Calendar className="w-4 h-4" /> Open House: {listing.OpenHouseDate} · {listing.OpenHouseStartTime}–{listing.OpenHouseEndTime}
                 </div>
               )}
               {listing.StandardStatus === "Pending" && (
-                <div className="absolute top-4 left-4 bg-orange-500 text-white text-sm font-black px-4 py-2 rounded-full shadow-lg">
+                <div className="absolute top-4 left-4 z-10 bg-orange-500 text-white text-sm font-black px-4 py-2 rounded-full shadow-lg">
                   Under Contract
                 </div>
               )}
