@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Terms of Service | Dayton Relo",
+  title: "Terms of Service",
   description:
     "Terms of Service for the Dayton Relo app and website. By using the service you agree to these terms.",
 };

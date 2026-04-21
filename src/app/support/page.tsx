@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Mail, Phone, Clock, HelpCircle, Smartphone, Shield } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Support | Dayton Relo",
+  title: "Support",
   description:
     "Help center for the Dayton Relo app and website. Contact Chris Jurgens, Licensed Ohio Realtor, for app questions, account help, and real-estate support.",
 };

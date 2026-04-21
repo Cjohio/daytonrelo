@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Dayton Relo",
+  title: "Privacy Policy",
   description:
     "Privacy policy for the Dayton Relo app and website — what information is collected, how it is used, and your rights.",
 };
